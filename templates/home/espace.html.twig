@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}A Propos{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+    <link rel="stylesheet" href="{{ asset ('../assets/styles/styles.css') }}">
+	<link rel="stylesheet" href="{{ asset ('../assets/styles/courses.css') }}">
+
+{% endblock %}
+
+{% block body %}
+
+<body>
+
+    <h1>Home</h1>
+
+    
+
+        <p>Hello <?= htmlspecialchars($user["name"]) ?></p>
+        <p><a href="logout.php">Log Out</a></p>
+
+
+    
+           <p><a href="login.php">login</a> or <a href="signUp.html">signup</a></p> 
+    
+    
+
+
+
+</body>
+
+
+
+{% endblock %}
