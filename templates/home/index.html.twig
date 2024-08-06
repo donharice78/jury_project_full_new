@@ -92,7 +92,7 @@
 
 			<div class="row">
 				<div class="campus-col">
-					<img src="/img/london.png" alt="">
+					<img src="{{ asset ('../assets/img/Tour_eff.jpg') }}" alt="">
 					<div class="layer">
 						<h3>PARIS</h3>
 
@@ -102,7 +102,7 @@
 				</div>
 
 				<div class="campus-col">
-					<img src="/img//newyork.png" alt="">
+					<img src="{{ asset ('../assets/img/lyon_eff.jpg') }}" alt="">
 					<div class="layer">
 						<h3>LYON</h3>
 
@@ -112,7 +112,7 @@
 				</div>
 
 				<div class="campus-col">
-					<img src="/img/washington.png" alt="">
+					<img src="{{ asset ('../assets/img/lille_eff.jpg') }}" alt="">
 					<div class="layer">
 						<h3>LILLE</h3>
 
@@ -136,7 +136,7 @@
 
 			<div class="row">
 				<div class="facilities-col">
-					<img src="/img/library.png" alt="">
+					<img src="{{asset ('../assets/img/library.png')}}" alt="">
 					<h3>World Class Library</h3>
 					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
 						                    Nemo rerum.
@@ -145,7 +145,7 @@
 				</div>
 
 				<div class="facilities-col">
-					<img src="/img/basketball.png" alt="">
+					<img src="{{asset ('../assets/img/basketball.png')}}" alt="">
 					<h3>Largest Play Ground</h3>
 					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
 						                    Nemo rerum.
@@ -154,7 +154,7 @@
 				</div>
 
 				<div class="facilities-col">
-					<img src="/img/cafeteria.png" alt="">
+					<img src="{{asset ('../assets/img/cafeteria.png')}}" alt="">
 					<h3>tasty and Healthy Food</h3>
 					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
 						                    Nemo rerum.
@@ -176,7 +176,7 @@
 
 			<div class="test-row">
 				<div class="testimonial-col">
-					<img src="/img/user1.jpg" alt="">
+					<img src="{{asset ('../assets/img/user1.jpg')}}" alt="">
 					<div>
 						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
 							                        Nemo rerum.Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -194,7 +194,7 @@
 				</div>
 
 				<div class="testimonial-col">
-					<img src="/img/user2.jpg" alt="">
+					<img src="{{asset ('../assets/img/user2.jpg')}}" alt="">
 					<div>
 						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
 							                        Nemo rerum.Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -210,7 +210,7 @@
 				</div>
 
 				<div class="testimonial-col">
-					<img src="/img/user2.jpg" alt="">
+					<img src="{{asset ('../assets/img/user2.jpg')}}" alt="">
 					<div>
 						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
 							                        Nemo rerum.Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -237,8 +237,8 @@
 					<div class="footer-col">
 						<h4>DHN Studies</h4>
 						<ul>
-							<li><a href="/contact.html">Contact us</a></li>
-							<li><a href="#">about us</a></li>
+							<li><a href="{{path('app_contact')}}">Contact us</a></li>
+							<li><a href="{{path('app_about')}}">about us</a></li>
 							<li><a href="#">privacy policy</a></li>
 							<li><a href="#">affiliate program</a></li>
 						</ul>
@@ -290,5 +290,5 @@
 {% endblock %}
 
 {% block javascripts %}
-<script src="{{ asset ('/assets/js/index.js') }}"></script>
+
 {% endblock %}
