@@ -1,0 +1,133 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Course Index{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('../assets/styles/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('../assets/styles/courses.css') }}">
+{% endblock %}
+
+{% block body %}
+    <!-- Header Section -->
+    <section class="courses-header">
+        <nav>
+            <!-- Logo and Navigation Links -->
+            <a href="{{ path('app_home') }}">
+                <img src="{{ asset('../assets/img/logo.png') }}" alt="Logo">
+            </a>
+            <div class="nav-links" id="navLinks">
+                <i class="bi bi-x" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="{{ path('app_home') }}">HOME</a></li>
+                    <li><a href="{{ path('app_about') }}">ABOUT</a></li>
+                    <li><a href="{{ path('app_courses') }}">COURSES</a></li>
+                    <li><a href="{{ path('app_blogs_index') }}">BLOG</a></li>
+                    <li><a href="{{ path('app_contact') }}">CONTACT</a></li>
+                    <li><a href="{{ path('app_espace') }}">LOGIN</a></li>
+                </ul>
+            </div>
+            <i class="bi bi-list" onclick="showMenu()"></i>
+        </nav>
+    </section>
+
+    <!-- Main Content Section -->
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Course Index</h1>
+
+        <!-- Course Cards -->
+        <div class="row">
+            {% for course in courses %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <!-- Course Image -->
+                        <img
+                            src="{{ course.image }}"
+                            class="card-img-top"
+                            alt="{{ course.title }}"
+                            style="height: 200px; object-fit: cover;"
+                        />
+                        <div class="card-body">
+                            <!-- Course Title -->
+                            <h5 class="card-title">
+                                {{ course.title|slice(0, 30) ~ (course.title|length > 30 ? '...' : '') }}
+                            </h5>
+                            <!-- Course Description -->
+                            <p class="card-text">
+                                {{ course.description|slice(0, 90) ~ (course.description|length > 90 ? '...' : '') }}
+                            </p>
+                            <!-- Course Details -->
+                            <ul class="list-unstyled">
+                                <li><strong>Duration:</strong> {{ course.duration }}</li>
+                                <li><strong>Start Date:</strong> {{ course.startDate ? course.startDate|date('Y-m-d') : 'N/A' }}</li>
+                                <li><strong>Format:</strong> {{ course.courseFormat }}</li>
+                                <li><strong>Prerequisites:</strong> {{ course.prerequisities }}</li>
+                                <li><strong>Fee:</strong> {{ course.courseFee }}</li>
+                            </ul>
+                            <!-- Action Buttons -->
+                            <a href="{{ path('app_course_show', {'id': course.id}) }}" class="btn btn-primary">Show</a>
+                            <a href="{{ path('app_course_edit', {'id': course.id}) }}" class="btn btn-secondary">Edit</a>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <!-- No Courses Found Message -->
+                <div class="col-12">
+                    <div class="alert alert-info">No records found</div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Create New Course Button -->
+        <a href="{{ path('app_course_new') }}" class="btn btn-success mt-4">Create New</a>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer mt-5">
+        <div class="footer-container">
+            <div class="footer-row">
+                <!-- Footer Column 1 -->
+                <div class="footer-col">
+                    <h4>DHN Studies</h4>
+                    <ul>
+                        <li><a href="{{ path('app_contact') }}">Contact Us</a></li>
+                        <li><a href="{{ path('app_about') }}">About Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Affiliate Program</a></li>
+                    </ul>
+                </div>
+                <!-- Footer Column 2 -->
+                <div class="footer-col">
+                    <h4>Get Help</h4>
+                    <ul>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Order Status</a></li>
+                        <li><a href="#">Payment Options</a></li>
+                    </ul>
+                </div>
+                <!-- Footer Column 3 -->
+                <div class="footer-col">
+                    <h4>Online Shop</h4>
+                    <ul>
+                        <li><a href="#">Watches</a></li>
+                        <li><a href="#">Bags</a></li>
+                        <li><a href="#">Shoes</a></li>
+                        <li><a href="#">Dresses</a></li>
+                    </ul>
+                </div>
+                <!-- Footer Column 4 -->
+                <div class="footer-col">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+{% endblock %}

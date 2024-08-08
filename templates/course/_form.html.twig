@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ app.request.attributes.get('_route') == 'app_blogs_edit' ? 'Edit Blog' : 'Create New Blog' }}{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <!-- Form Header -->
+        <h1 class="text-center mb-4">{{ app.request.attributes.get('_route') == 'app_blogs_edit' ? 'Edit Blog' : 'Create New Blog' }}</h1>
+
+        <!-- Form Container -->
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                {{ form_start(form, {'attr': {'class': 'form'}}) }}
+                
+                <!-- Form Fields -->
+                <div class="mb-4">
+                    {% for field in form %}
+                        {% if field.vars.name != '_token' %} <!-- Exclude token field -->
+                            <div class="mb-3">
+                                {{ form_label(field, null, {'attr': {'class': 'form-label'}}) }}
+                                {{ form_widget(field, {'attr': {'class': 'form-control form-control-lg'}}) }}
+                                {{ form_errors(field) }}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg">{{ button_label|default('Save') }}</button>
+                </div>
+
+                <!-- Back to List Button -->
+                <div class="text-center mt-3">
+                    <a href="{{ path('app_blogs_index') }}" class="btn btn-secondary btn-lg">Back to List</a>
+                </div>
+                
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+    
+    {% block javascripts %}
+    <script src="{{ asset('js/images.js') }}"></script>
+    {% endblock %}
+{% endblock %}
