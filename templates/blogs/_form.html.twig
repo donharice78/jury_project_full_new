@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Blog{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <!-- Form Header -->
+        <h1 class="text-center mb-4">{{ app.request.attributes.get('_route') == 'app_blogs_edit' ? 'Edit Blog' : 'Create New Blog' }}</h1>
+
+        <!-- Form Container -->
+        <div class="row justify-content-center">
+            <div class="col-md-9 col-lg-9">
+                {{ form_start(form, {'attr': {'class': 'form-control-lg'}}) }}
+                <div class="mb-4">
+                    {% for field in form %}
+                        <div class="mb-3">
+                            {{ form_label(field, null, {'attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(field, {'attr': {'class': 'form-control form-control-lg'}}) }}
+                            {{ form_errors(field) }}
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Display Blog Images if Editing -->
+                {% if app.request.attributes.get('_route') == 'app_blogs_edit' %}
+                    <h2 class="text-center mb-4">Edit Blog Images</h2>
+                    <div class="row">
+                        {% for image in blog.images %}
+                            <div class="col-md-4 mb-3">
+                                
+                                   <div class="card-body text-center">
+                                       <img src="{{ asset('uploads/' ~ image.name) }}" class="card-img-top" alt="Image" style="height: 300px ; width: 100%; object-fit: cover;">
+                                       <a href="{{ path('app_blogs_delete_image', {id: image.id}) }}"
+                                           class="btn btn-danger"
+                                           data-delete
+                                           data-token="{{ csrf_token('delete' ~ image.id) }}">Delete Image</a>
+                                    </div>
+                                
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <!-- Submit Button -->
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary btn-lg">{{ button_label|default('Save') }}</button>
+                </div>
+
+                <!-- Back to List Button -->
+                <div class="text-center mt-3">
+                    <a href="{{ path('app_blogs_index') }}" class="btn btn-secondary btn-lg">Back to List</a>
+                </div>
+                
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+    
+    {% block javascripts %}
+    <script src="{{ asset('js/images.js') }}"></script>
+    {% endblock %}
+{% endblock %}

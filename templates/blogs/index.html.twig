@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Info {% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+    <link rel="stylesheet" href="{{ asset ('../assets/styles/styles.css') }}">
+	<link rel="stylesheet" href="{{ asset ('../assets/styles/courses.css') }}">
+
+{% endblock %}
+
+{% block body %}
+
+<body>  
+
+<section class="courses-header">
+        <nav>
+            <a href="index.html"><img src="img/logo.png" alt="" /></a>
+            <div class="nav-links" id="navLinks">
+                <i class="bi bi-x" onclick="hideMenu()"></i>
+                <ul>
+                        <li><a href="{{path('app_home')}}">HOME</a></li>
+						<li><a href="{{path('app_about')}}">ABOUT</a></li>
+						<li><a href="{{path('app_courses')}}">COURSE</a></li>
+						<li><a href="{{path('app_blogs_index')}}">BLOG</a></li>
+						<li><a href="{{path('app_contact')}}">CONTACT</a></li>
+						<li><a href="{{path('app_espace')}}">LOGIN</a></li>
+                </ul>
+            </div>
+            <i class="bi bi-list" onclick="showMenu()"></i>
+        </nav>
+
+       
+    </section>
+
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">Info</h1>
+
+        <div class="row">
+            {% for blog in blogs %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        {% if blog.images|length > 0 %}
+                            <img src="{{ asset('uploads/' ~ blog.images[0].name) }}" class="card-img-top" alt="Blog Image" style="height: 200px; object-fit: cover;">
+                        {% else %}
+                            <div class="card-img-top d-flex align-items-center justify-content-center" style="height: 200px; background-color: #f8f9fa;">
+                                <span>No image</span>
+                            </div>
+                        {% endif %}
+                        <div class="card-body justify-items-center d-flex flex-column text-center">
+                            <h5 class="card-title justify-content-center">{{ blog.title|slice(0, 30) }}</h5>
+                            <p class="card-text">{{ blog.content|slice(0, 90) ~ (blog.content|length > 90 ? '...' : '') }}</p>
+                            <p class="card-text"><small class="text-muted">Created at: {{ blog.createdAt|date('Y-m-d H:i') }}</small></p>
+                            <a href="{{ path('app_blogs_show', {'id': blog.id}) }}" class="btn btn-info btn-sm">Show</a>
+                            <a href="{{ path('app_blogs_edit', {'id': blog.id}) }}" class="btn btn-warning btn-sm">Edit</a>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="col-12">
+                    <div class="alert alert-info" role="alert">
+                        No records found.
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="{{ path('app_blogs_new') }}" class="btn btn-primary">Create new</a>
+        </div>
+    </div>
+
+
+
+</body>
+{% endblock %}

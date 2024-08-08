@@ -1,0 +1,137 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Blog Details{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+    <link rel="stylesheet" href="{{ asset ('../assets/styles/styles.css') }}">
+	<link rel="stylesheet" href="{{ asset ('../assets/styles/courses.css') }}">
+
+        <style>
+        .img-thumbnail {
+            width: 100%;
+            height: 200px; /* Adjust as needed */
+            object-fit: cover;
+            margin: 2px; /* Add 2px margin between images */
+        }
+
+        .row {
+            margin-left: -2px; /* Adjust to offset the added margin on the left side */
+            margin-right: -2px; /* Adjust to offset the added margin on the right side */
+        }
+
+        .col-md-4 {
+            padding-left: 2px; /* Add padding to compensate for the margin */
+            padding-right: 2px; /* Add padding to compensate for the margin */
+        }
+    </style>
+
+
+
+{% endblock %}
+
+{% block body %}
+
+
+<body>
+
+<section class="courses-header">
+        <nav>
+            <a href="index.html"><img src="img/logo.png" alt="" /></a>
+            <div class="nav-links" id="navLinks">
+                <i class="bi bi-x" onclick="hideMenu()"></i>
+                <ul>
+                        <li><a href="{{path('app_home')}}">HOME</a></li>
+						<li><a href="{{path('app_about')}}">ABOUT</a></li>
+						<li><a href="{{path('app_courses')}}">COURSE</a></li>
+						<li><a href="{{path('app_blogs_index')}}">BLOG</a></li>
+						<li><a href="{{path('app_contact')}}">CONTACT</a></li>
+						<li><a href="{{path('app_espace')}}">LOGIN</a></li>
+                </ul>
+            </div>
+            <i class="bi bi-list" onclick="showMenu()"></i>
+        </nav>
+
+       
+    </section>
+
+    <div class="container mt-4">
+        <!-- Blog Title and Date -->
+        <div class="text-center mb-4">
+            <h1>{{ blog.title }}</h1>
+            <p class="text-muted">{{ blog.createdAt|date('Y-m-d H:i') }}</p>
+        </div>
+
+        <!-- Blog Content -->
+        <div class="mb-4">
+            <p>{{ blog.content }}</p>
+        </div>
+
+        <!-- Image Gallery with Carousel -->
+        <div class="container mt-4">
+            <h3 class="text-center mb-4">Image Gallery</h3>
+            {% if blog.images|length > 0 %}
+                <!-- Thumbnails -->
+                <div class="row">
+                    {% for image in blog.images %}
+                        <div class="col-md-4 mb-2">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#carouselModal" data-bs-slide-to="{{ loop.index0 }}">
+                                <img src="{{ asset('uploads/' ~ image.name) }}" class="img-thumbnail" alt="Blog Image">
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Carousel Modal -->
+                <div class="modal fade" id="carouselModal" tabindex="-1" aria-labelledby="carouselModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="carouselModalLabel">Image Gallery</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div id="carouselIndicators" class="carousel slide">
+                                    <div class="carousel-inner">
+                                        {% for image in blog.images %}
+                                            <div class="carousel-item {% if loop.first %}active{% endif %}">
+                                                <img src="{{ asset('uploads/' ~ image.name) }}" class="d-block w-100" alt="Blog Image">
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselIndicators" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselIndicators" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <div class="alert alert-info" role="alert">
+                    No images available.
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="{{ path('app_blogs_index') }}" class="btn btn-secondary">Back to list</a>
+            <a href="{{ path('app_blogs_edit', {'id': blog.id}) }}" class="btn btn-warning">Edit</a>
+        </div>
+
+        {{ include('blogs/_delete_form.html.twig') }}
+    </div>
+
+</body>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+{% endblock %}
+
+
