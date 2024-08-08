@@ -15,7 +15,9 @@
 	<body>
 		<section class="header">
 			<nav>
-				<a href="index.html"><img src="/img//Ecole DHN red.png" alt=""></a>
+				 <a href="{{ path('app_home') }}">
+                <img src="{{ asset('../assets/img/logo.png') }}" alt="Logo">
+            </a>
 				<div class="nav-links" id="navLinks">
                 
 					<i class="bi bi-x" onclick="hideMenu()"></i>

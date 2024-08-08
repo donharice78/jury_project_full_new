@@ -95,7 +95,7 @@
     border: 2px solid #fafafa;
     background: none;
     padding: 0.6rem 1.2rem;
-    color: #fff;
+    color: #ffffff41;
     font-weight: 500;
     font-size: 0.95rem;
     letter-spacing: 0.5px;
@@ -112,17 +112,10 @@
   }
   
   .input-container label {
-    position: absolute;
-    top: 50%;
-    left: 15px;
-    transform: translateY(-50%);
-    padding: 0 0.4rem;
-    color: #fafafa;
-    font-size: 0.9rem;
-    font-weight: 400;
-    pointer-events: none;
-    z-index: 1000;
-    transition: 0.5s;
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
   }
   
   .input-container.textarea label {

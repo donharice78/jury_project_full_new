@@ -1,0 +1,146 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+    <link rel="stylesheet" href="{{ asset ('../assets/styles/styles.css') }}">
+	<link rel="stylesheet" href="{{ asset ('../assets/styles/contact.css') }}">
+
+{% endblock %}
+
+{% block title %}Contact Us{% endblock %}
+
+
+
+{% block body %}
+<section class="contact-header">
+    <nav>
+         <a href="{{ path('app_home') }}">
+                <img src="{{ asset('../assets/img/logo.png') }}" alt="Logo">
+            </a>
+        <div class="nav-links" id="navLinks">
+            <i class="bi bi-x" onclick="hideMenu()"></i>
+            <ul>
+                <li><a href="{{ path('app_home') }}">HOME</a></li>
+                <li><a href="{{ path('app_about') }}">ABOUT</a></li>
+                <li><a href="{{ path('app_course_index') }}">COURSE</a></li>
+                <li><a href="{{ path('app_blogs_index') }}">BLOG</a></li>
+                <li><a href="{{ path('app_contact') }}">CONTACT</a></li>
+                <li><a href="{{ path('app_espace') }}">LOGIN</a></li>
+            </ul>
+        </div>
+        <i class="bi bi-list" onclick="showMenu()"></i>
+    </nav>
+</section>
+
+<section class="container">
+    <div class="form">
+        <div class="contact-info">
+            <h3 class="title">Let's get in touch</h3>
+            <p class="text">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe
+                dolorum adipisci recusandae praesentium dicta!
+            </p>
+
+            <div class="info">
+                <div class="information">
+                    <i class="fas fa-map-marker-alt"></i> &nbsp;&nbsp;
+                    <p>92 Cherry Drive Uniondale, NY 11553</p>
+                </div>
+                <div class="information">
+                    <i class="fas fa-envelope"></i> &nbsp;&nbsp;
+                    <p>lorem@ipsum.com</p>
+                </div>
+                <div class="information">
+                    <i class="fas fa-phone"></i> &nbsp;&nbsp;
+                    <p>123-456-789</p>
+                </div>
+            </div>
+
+            <div class="social-media">
+                <p>Connect with us:</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-form">
+            <span class="circle one"></span>
+            <span class="circle two"></span>
+
+            {{ form_start(form, {'attr': {'class': 'contact-form'}}) }}
+                <h3 class="title">Contact Us</h3>
+                <div class="input-container">
+                    {{ form_label(form.name, 'Username', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.name) }}
+                </div>
+                <div class="input-container">
+                    {{ form_label(form.email, 'Email', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.email) }}
+                </div>
+                <div class="input-container">
+                    {{ form_label(form.phone, 'Phone', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.phone, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.phone) }}
+                </div>
+                <div class="input-container textarea">
+                    {{ form_label(form.message, 'Message', {'label_attr': {'class': 'form-label'}}) }}
+                    {{ form_widget(form.message, {'attr': {'class': 'form-control', 'rows': 5}}) }}
+                    {{ form_errors(form.message) }}
+                </div>
+                 <button type="submit" class="btn btn-block btn-primary fw-bold text-dark">Send</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-row">
+            <div class="footer-col">
+                <h4>DHN Studies</h4>
+                <ul>
+                    <li><a href="{{ path('app_contact') }}">Contact us</a></li>
+                    <li><a href="{{ path('app_about') }}">About us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Affiliate Program</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Get Help</h4>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">Order Status</a></li>
+                    <li><a href="#">Payment Options</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Online Shop</h4>
+                <ul>
+                    <li><a href="#">Watch</a></li>
+                    <li><a href="#">Bag</a></li>
+                    <li><a href="#">Shoes</a></li>
+                    <li><a href="#">Dress</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+{% endblock %}
