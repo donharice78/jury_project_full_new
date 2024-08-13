@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class RegistrationController extends AbstractController
 {
@@ -21,7 +22,27 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $password = $form->get('password')->getData();
+
+            $photo = $form->get('photo')->getData();
+
+            if ($photo) {
+                // Génère un nouveau nom de fichier et déplace le fichier téléchargé
+                $newFileName = uniqid() . '.' . $photo->guessExtension();
+
+                try {
+                    $photo->move(
+                        $this->getParameter('kernel.project_dir') . '/public/uploads',
+                        $newFileName
+                    );
+                    // Définit le chemin de l'image pour le nouveau cours
+                    $user->setPhoto('/uploads/' . $newFileName);
+                } catch (FileException $e) {
+                    // Gère l'exception en cas de problème lors du téléchargement du fichier
+                    $this->addFlash('error', 'Erreur lors de l\'upload de l\'image: ' . $e->getMessage());
+                    return $this->redirectToRoute('app_user');
+                }
+            }
+           
             // encode the plain password
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
@@ -42,4 +63,7 @@ class RegistrationController extends AbstractController
             'registrationForm' => $form,
         ]);
     }
+
+
+
 }

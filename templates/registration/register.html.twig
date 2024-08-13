@@ -85,6 +85,14 @@
 				{{ form_errors(registrationForm.phone) }}
 			</div>
 
+			<div class="mb-3">
+				{{ form_label(registrationForm.photo, null, {'label_attr': {'class': 'form-label'}}) }}
+				{{ form_widget(registrationForm.photo, {'attr': {'class': 'form-control'}}) }}
+				{{ form_errors(registrationForm.photo) }}
+			</div>
+
+
+
 
 			<div class="mb-3 form-check">
 				{{ form_widget(registrationForm.terms, {'attr': {'class': 'form-check-input'}}) }}

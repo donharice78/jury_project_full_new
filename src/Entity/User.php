@@ -5,13 +5,10 @@ namespace App\Entity;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
-
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-
-
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
@@ -23,23 +20,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 255, unique: true)]
+    #[Assert\Email(message: 'The email "{{ value }}" is not a valid email.')]
+    #[Assert\NotBlank(message: 'Email should not be blank.')]
     private ?string $email = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Password should not be blank.')]
     private ?string $password = null;
 
-    // `confirmPassword` is generally not stored in the database.
-    // It is only used for client-side validation during registration.
-    // Remove it if you don't need it in the database.
     private ?string $confirmPassword = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Username should not be blank.')]
     private ?string $username = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'First name should not be blank.')]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Last name should not be blank.')]
     private ?string $lastName = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -47,6 +47,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $terms = null;
+
+    #[ORM\Column(type: Types::JSON)]
+    private array $roles = [];
+
+    #[ORM\Column(length: 255)]
+    private ?string $photo = null;
 
     public function getId(): ?int
     {
@@ -69,7 +75,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->password;
     }
 
-    public function setPassword(string $password): static
+    public function setPassword(string $password): self
     {
         $this->password = $password;
         return $this;
@@ -141,16 +147,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    // UserInterface methods
-
     public function getRoles(): array
     {
-        return ['ROLE_USER'];
+        $roles = $this->roles;
+        $roles[] = 'ROLE_USER'; // Add default role if not present
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+        return $this;
     }
 
     public function eraseCredentials(): void
     {
-        // If you store any temporary, sensitive data on the user, clear it here
+        // Clear any temporary sensitive data
     }
 
     public function getUserIdentifier(): string
@@ -158,9 +171,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->email;
     }
 
+    public function getPhoto(): ?string
+    {
+        return $this->photo;
+    }
 
+    public function setPhoto(string $photo): static
+    {
+        $this->photo = $photo;
 
-    // PasswordAuthenticatedUserInterface methods
-
-
+        return $this;
+    }
 }

@@ -22,7 +22,15 @@
 						<li><a href="{{path('app_courses')}}">COURSE</a></li>
 						<li><a href="{{path('app_blogs_index')}}">BLOG</a></li>
 						<li><a href="{{path('app_contact')}}">CONTACT</a></li>
-						<li><a href="{{path('app_login')}}">LOGIN</a></li>
+						 <li class="">
+                            <div>
+                                {% if app.user %}
+                                    <a class="" href="{{ path('app_logout') }}">LOGOUT</a>
+                                {% else %}
+                                    <a class="" href="{{ path('app_espace') }}">ESPACE</a>
+                                {% endif %}
+                            </div>
+                        </li>
                 </ul>
             </div>
             <i class="bi bi-list" onclick="showMenu()"></i>
@@ -72,7 +80,7 @@
                     <p><a href="#" class="btn btn-link">Forgot your password?</a></p>
                     <p>Don't have an account? <a href="{{ path('app_register') }}" class="btn btn-link">Sign up</a></p>
                     <p>Or log in with Facebook:</p>
-                    <a href="{{ path('hwi_oauth_connect_facebook') }}" class="btn btn-primary">Log in with Facebook</a>
+                    
                 </div>
             </div>
         </div>

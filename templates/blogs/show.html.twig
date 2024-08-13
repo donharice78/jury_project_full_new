@@ -55,77 +55,83 @@
        
     </section>
 
+<div class="container mt-4">
+    <!-- Blog Title and Date -->
+    <div class="text-center mb-4">
+        <h1>{{ blog.title }}</h1>
+        <p class="text-muted">{{ blog.createdAt|date('Y-m-d H:i') }}</p>
+    </div>
+
+    <!-- Blog Content -->
+    <div class="mb-4">
+        <p>{{ blog.content }}</p>
+    </div>
+
+    <!-- Image Gallery with Carousel -->
     <div class="container mt-4">
-        <!-- Blog Title and Date -->
-        <div class="text-center mb-4">
-            <h1>{{ blog.title }}</h1>
-            <p class="text-muted">{{ blog.createdAt|date('Y-m-d H:i') }}</p>
-        </div>
+        <h3 class="text-center mb-4">Image Gallery</h3>
+        {% if blog.images|length > 0 %}
+            <!-- Thumbnails -->
+            <div class="row">
+                {% for image in blog.images %}
+                    <div class="col-md-4 mb-2">
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#carouselModal" data-bs-slide-to="{{ loop.index0 }}">
+                            <img src="{{ asset('uploads/' ~ image.name) }}" class="img-thumbnail" alt="Blog Image">
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
 
-        <!-- Blog Content -->
-        <div class="mb-4">
-            <p>{{ blog.content }}</p>
-        </div>
-
-        <!-- Image Gallery with Carousel -->
-        <div class="container mt-4">
-            <h3 class="text-center mb-4">Image Gallery</h3>
-            {% if blog.images|length > 0 %}
-                <!-- Thumbnails -->
-                <div class="row">
-                    {% for image in blog.images %}
-                        <div class="col-md-4 mb-2">
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#carouselModal" data-bs-slide-to="{{ loop.index0 }}">
-                                <img src="{{ asset('uploads/' ~ image.name) }}" class="img-thumbnail" alt="Blog Image">
-                            </a>
+            <!-- Carousel Modal -->
+            <div class="modal fade" id="carouselModal" tabindex="-1" aria-labelledby="carouselModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="carouselModalLabel">Image Gallery</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                    {% endfor %}
-                </div>
-
-                <!-- Carousel Modal -->
-                <div class="modal fade" id="carouselModal" tabindex="-1" aria-labelledby="carouselModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="carouselModalLabel">Image Gallery</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div id="carouselIndicators" class="carousel slide">
-                                    <div class="carousel-inner">
-                                        {% for image in blog.images %}
-                                            <div class="carousel-item {% if loop.first %}active{% endif %}">
-                                                <img src="{{ asset('uploads/' ~ image.name) }}" class="d-block w-100" alt="Blog Image">
-                                            </div>
-                                        {% endfor %}
-                                    </div>
-                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselIndicators" data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Previous</span>
-                                    </button>
-                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselIndicators" data-bs-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Next</span>
-                                    </button>
+                        <div class="modal-body">
+                            <div id="carouselIndicators" class="carousel slide">
+                                <div class="carousel-inner">
+                                    {% for image in blog.images %}
+                                        <div class="carousel-item {% if loop.first %}active{% endif %}">
+                                            <img src="{{ asset('uploads/' ~ image.name) }}" class="d-block w-100" alt="Blog Image">
+                                        </div>
+                                    {% endfor %}
                                 </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselIndicators" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselIndicators" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
-            {% else %}
-                <div class="alert alert-info" role="alert">
-                    No images available.
-                </div>
-            {% endif %}
-        </div>
-
-        <div class="text-center mt-4">
-            <a href="{{ path('app_blogs_index') }}" class="btn btn-secondary">Back to list</a>
-            <a href="{{ path('app_blogs_edit', {'id': blog.id}) }}" class="btn btn-warning">Edit</a>
-        </div>
-
-        {{ include('blogs/_delete_form.html.twig') }}
+            </div>
+        {% else %}
+            <div class="alert alert-info" role="alert">
+                No images available.
+            </div>
+        {% endif %}
     </div>
+
+    <div class="text-center mt-4">
+        <a href="{{ path('app_blogs_index') }}" class="btn btn-secondary">Back to list</a>
+        
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('app_blogs_edit', {'id': blog.id}) }}" class="btn btn-warning">Edit</a>
+            <a href="{{ path('app_blogs_new') }}" class="btn btn-success">Create New Blog</a>
+            {{ include('blogs/_delete_form.html.twig') }}
+        {% endif %}
+    </div>
+
+  
+</div>
+
 
     <!-- ------------------------------------footer-- -->
 

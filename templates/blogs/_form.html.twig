@@ -44,12 +44,11 @@
                 <!-- Submit Button -->
                 <div class="text-center mt-4">
                     <button type="submit" class="btn btn-primary btn-lg">{{ button_label|default('Save') }}</button>
+                    <a href="{{ path('app_blogs_index') }}" class="btn btn-secondary btn-lg">Back to List</a>
                 </div>
 
                 <!-- Back to List Button -->
-                <div class="text-center mt-3">
-                    <a href="{{ path('app_blogs_index') }}" class="btn btn-secondary btn-lg">Back to List</a>
-                </div>
+               
                 
                 {{ form_end(form) }}
             </div>

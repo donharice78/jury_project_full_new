@@ -38,38 +38,45 @@
     <div class="container mt-4">
         <h1 class="text-center mb-4">Info</h1>
 
-        <div class="row">
-            {% for blog in blogs %}
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        {% if blog.images|length > 0 %}
-                            <img src="{{ asset('uploads/' ~ blog.images[0].name) }}" class="card-img-top" alt="Blog Image" style="height: 200px; object-fit: auto;">
-                        {% else %}
-                            <div class="card-img-top d-flex align-items-center justify-content-center" style="height: 200px; background-color: #f8f9fa;">
-                                <span>No image</span>
-                            </div>
-                        {% endif %}
-                        <div class="card-body justify-items-center d-flex flex-column text-center">
-                            <h5 class="card-title justify-content-center">{{ blog.title|slice(0, 30) }}</h5>
-                            <p class="card-text">{{ blog.content|slice(0, 90) ~ (blog.content|length > 90 ? '...' : '') }}</p>
-                            <p class="card-text"><small class="text-muted">Created at: {{ blog.createdAt|date('Y-m-d H:i') }}</small></p>
-                            <a href="{{ path('app_blogs_show', {'id': blog.id}) }}" class="btn btn-info btn-sm">Show</a>
-                            <a href="{{ path('app_blogs_edit', {'id': blog.id}) }}" class="btn btn-warning btn-sm">Edit</a>
-                        </div>
-                    </div>
-                </div>
-            {% else %}
-                <div class="col-12">
-                    <div class="alert alert-info" role="alert">
-                        No records found.
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
+<div class="row">
+   
 
-        <div class="text-center mt-4">
-            <a href="{{ path('app_blogs_new') }}" class="btn btn-primary">Create new</a>
+    {% for blog in blogs %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                {% if blog.images|length > 0 %}
+                    <img src="{{ asset('uploads/' ~ blog.images[0].name) }}" class="card-img-top" alt="Blog Image" style="height: 200px; object-fit: auto;">
+                {% else %}
+                    <div class="card-img-top d-flex align-items-center justify-content-center" style="height: 200px; background-color: #f8f9fa;">
+                        <span>No image</span>
+                    </div>
+                {% endif %}
+                <div class="card-body justify-items-center d-flex flex-column text-center">
+                    <h5 class="card-title justify-content-center">{{ blog.title|slice(0, 30) }}</h5>
+                    <p class="card-text">{{ blog.content|slice(0, 90) ~ (blog.content|length > 90 ? '...' : '') }}</p>
+                    <p class="card-text"><small class="text-muted">Created at: {{ blog.createdAt|date('Y-m-d H:i') }}</small></p>
+                    <a href="{{ path('app_blogs_show', {'id': blog.id}) }}" class="btn btn-info btn-sm">Show</a>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('app_blogs_edit', {'id': blog.id}) }}" class="btn btn-warning btn-sm">Edit</a>
+                    {% endif %}
+                </div>
+            </div>
         </div>
+    {% else %}
+        <div class="col-12">
+            <div class="alert alert-info" role="alert">
+                No records found.
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+
+        {% if is_granted('ROLE_ADMIN') %}
+        <div class="d-flex justify-content-center mb-4">
+            <a href="{{ path('app_blogs_new') }}" class="btn btn-success">Create New Blog</a>
+        </div>
+    {% endif %}
     </div>
 
 <footer class="footer">
