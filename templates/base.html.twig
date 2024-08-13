@@ -10,6 +10,7 @@
 
 		<link rel="icon" type="image/x-icon" href="{{asset('../assets/img/logo - fave.png')}}">
         <link rel="stylesheet" href="{{asset('../assets/styles/footer.css')}}">
+
         
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,6 +31,14 @@
 	</head>
 	<body>
 		{% block body %}
+		 <!-- Affichage des messages flash -->
+        {% for type, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ type }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
         {% endblock %}
 
 		

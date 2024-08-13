@@ -1,0 +1,145 @@
+{% extends 'base.html.twig' %}
+
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset ('../assets/styles/styles.css') }}">
+	<link rel="stylesheet" href="{{ asset ('../assets/styles/courses.css') }}">
+
+{% endblock %}
+
+{% block title %}Register
+{% endblock %}
+
+{% block body %}
+	<body>
+
+        <section class="courses-header">
+        <nav>
+            <a href="index.html"><img src="img/logo.png" alt="" /></a>
+            <div class="nav-links" id="navLinks">
+                <i class="bi bi-x" onclick="hideMenu()"></i>
+                <ul>
+                        <li><a href="{{path('app_home')}}">HOME</a></li>
+						<li><a href="{{path('app_about')}}">ABOUT</a></li>
+						<li><a href="{{path('app_courses')}}">COURSE</a></li>
+						<li><a href="{{path('app_blogs_index')}}">BLOG</a></li>
+						<li><a href="{{path('app_contact')}}">CONTACT</a></li>
+						<li><a href="{{path('app_login')}}">LOGIN</a></li>
+                </ul>
+            </div>
+            <i class="bi bi-list" onclick="showMenu()"></i>
+        </nav>
+
+       
+    </section>
+
+
+
+		<div class="container mt-5">
+			<h1 class="mb-4 text-center">Register</h1>
+
+			{{ form_start(registrationForm, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
+
+			<!-- Place Username, First Name, and Last Name fields here -->
+			<div class="mb-3">
+				{{ form_label(registrationForm.username, null, {'label_attr': {'class': 'form-label'}}) }}
+				{{ form_widget(registrationForm.username, {'attr': {'class': 'form-control'}}) }}
+				{{ form_errors(registrationForm.username) }}
+			</div>
+
+			<div class="mb-3">
+				{{ form_label(registrationForm.email, null, {'label_attr': {'class': 'form-label'}}) }}
+				{{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+				{{ form_errors(registrationForm.email) }}
+			</div>
+
+
+			<div class="mb-3">
+				{{ form_label(registrationForm.password.first, null, {'label_attr': {'class': 'form-label'}}) }}
+				{{ form_widget(registrationForm.password.first, {'attr': {'class': 'form-control'}}) }}
+				{{ form_errors(registrationForm.password.first) }}
+			</div>
+
+			<div class="mb-3">
+				{{ form_label(registrationForm.password.second, null, {'label_attr': {'class': 'form-label'}}) }}
+				{{ form_widget(registrationForm.password.second, {'attr': {'class': 'form-control'}}) }}
+				{{ form_errors(registrationForm.password.second) }}
+			</div>
+
+			<div class="mb-3">
+				{{ form_label(registrationForm.firstName, null, {'label_attr': {'class': 'form-label'}}) }}
+				{{ form_widget(registrationForm.firstName, {'attr': {'class': 'form-control'}}) }}
+				{{ form_errors(registrationForm.firstName) }}
+			</div>
+
+			<div class="mb-3">
+				{{ form_label(registrationForm.lastName, null, {'label_attr': {'class': 'form-label'}}) }}
+				{{ form_widget(registrationForm.lastName, {'attr': {'class': 'form-control'}}) }}
+				{{ form_errors(registrationForm.lastName) }}
+			</div>
+
+			<div class="mb-3">
+				{{ form_label(registrationForm.phone, null, {'label_attr': {'class': 'form-label'}}) }}
+				{{ form_widget(registrationForm.phone, {'attr': {'class': 'form-control'}}) }}
+				{{ form_errors(registrationForm.phone) }}
+			</div>
+
+
+			<div class="mb-3 form-check">
+				{{ form_widget(registrationForm.terms, {'attr': {'class': 'form-check-input'}}) }}
+				{{ form_label(registrationForm.terms, null, {'label_attr': {'class': 'form-check-label'}}) }}
+				{{ form_errors(registrationForm.terms) }}
+			</div>
+
+			<!-- Register button at the end -->
+			<button type="submit" class="btn btn-primary mb-3 align-center">Register</button>
+
+			{{ form_end(registrationForm) }}
+		</div>
+
+        <footer class="footer">
+    <div class="footer-container">
+        <div class="footer-row">
+            <div class="footer-col">
+                <h4>DHN Studies</h4>
+                <ul>
+                    <li><a href="{{path('app_contact')}}">Contact us</a></li>
+                    <li><a href="{{path('app_about')}}">about us</a></li>
+                    <li><a href="#">privacy policy</a></li>
+                    <li><a href="#">affiliate program</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>get help</h4>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">shipping</a></li>
+                    <li><a href="#">returns</a></li>
+                    <li><a href="#">order status</a></li>
+                    <li><a href="#">payment options</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>online shop</h4>
+                <ul>
+                    <li><a href="#">watch</a></li>
+                    <li><a href="#">bag</a></li>
+                    <li><a href="#">shoes</a></li>
+                    <li><a href="#">dress</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>follow us</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+	</body>
+{% endblock %}

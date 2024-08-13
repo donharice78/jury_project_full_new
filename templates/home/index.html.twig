@@ -1,12 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}school{% endblock %}
+{% block title %}school
+{% endblock %}
 
 {% block stylesheets %}
 	{{ parent() }}
-    
+
 	<link rel="stylesheet" href="{{ asset ('../assets/styles/styles.css') }}">
-    
+
 {% endblock %}
 
 {% block body %}
@@ -15,19 +16,38 @@
 	<body>
 		<section class="header">
 			<nav>
-				 <a href="{{ path('app_home') }}">
-                <img src="{{ asset('../assets/img/logo.png') }}" alt="Logo">
-            </a>
+				<a href="{{ path('app_home') }}">
+					<img src="{{ asset('../assets/img/logo.png') }}" alt="Logo">
+				</a>
 				<div class="nav-links" id="navLinks">
-                
+
 					<i class="bi bi-x" onclick="hideMenu()"></i>
 					<ul>
-						<li><a href="{{path('app_home')}}">HOME</a></li>
-						<li><a href="{{path('app_about')}}">ABOUT</a></li>
-						<li><a href="{{path('app_course_index')}}">COURSE</a></li>
-						<li><a href="{{path('app_blogs_index')}}">BLOG</a></li>
-						<li><a href="{{path('app_contact')}}">CONTACT</a></li>
-						<li><a href="{{path('app_espace')}}">LOGIN</a></li>
+						<li>
+							<a href="{{path('app_home')}}">HOME</a>
+						</li>
+						<li>
+							<a href="{{path('app_about')}}">ABOUT</a>
+						</li>
+						<li>
+							<a href="{{path('app_course_index')}}">COURSE</a>
+						</li>
+						<li>
+							<a href="{{path('app_blogs_index')}}">BLOG</a>
+						</li>
+						<li>
+							<a href="{{path('app_contact')}}">CONTACT</a>
+						</li>
+						{% if app.user %}
+							<li>
+								<a href="{{ path('app_logout') }}">LOGOUT</a>
+							</li>
+						{% else %}
+							<li>
+								<a href="{{ path('app_login') }}">LOGIN</a>
+							</li>
+						{% endif %}
+
 					</ul>
 
 				</div>
@@ -40,7 +60,7 @@
 				<h1>Welcome to FHat Univerity</h1>
 				<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa aliquam illum
 					<br>rerum ipsum eos
-					                beatae alias necessitatibus..
+										                beatae alias necessitatibus..
 				</p>
 				<a href="" class="hero-btn">Visit Us To Know More
 				</a>
@@ -56,7 +76,7 @@
 			<h2>Courses We Offer
 			</h2>
 			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-				            Nemo rerum.
+								            Nemo rerum.
 			</p>
 
 			<div class="roow">
@@ -89,7 +109,7 @@
 		<section class="campus">
 			<h1>Our Global Campus</h1>
 			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-				            Nemo rerum.
+								            Nemo rerum.
 			</p>
 
 			<div class="row">
@@ -133,7 +153,7 @@
 
 			<h1>Our Facilities</h1>
 			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-				            Nemo rerum.
+								            Nemo rerum.
 			</p>
 
 			<div class="row">
@@ -141,7 +161,7 @@
 					<img src="{{asset ('../assets/img/library.png')}}" alt="">
 					<h3>World Class Library</h3>
 					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-						                    Nemo rerum.
+												                    Nemo rerum.
 					</p>
 
 				</div>
@@ -150,7 +170,7 @@
 					<img src="{{asset ('../assets/img/basketball.png')}}" alt="">
 					<h3>Largest Play Ground</h3>
 					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-						                    Nemo rerum.
+												                    Nemo rerum.
 					</p>
 
 				</div>
@@ -159,7 +179,7 @@
 					<img src="{{asset ('../assets/img/cafeteria.png')}}" alt="">
 					<h3>tasty and Healthy Food</h3>
 					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-						                    Nemo rerum.
+												                    Nemo rerum.
 					</p>
 
 				</div>
@@ -173,7 +193,7 @@
 		<section class="testimonials">
 			<h1>What Our Students Say</h1>
 			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-				            Nemo rerum.
+								            Nemo rerum.
 			</p>
 
 			<div class="test-row">
@@ -181,8 +201,8 @@
 					<img src="{{asset ('../assets/img/user1.jpg')}}" alt="">
 					<div>
 						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-							                        Nemo rerum.Lorem ipsum dolor sit amet consectetur adipisicing elit.
-							                        Nemo rerum.
+														                        Nemo rerum.Lorem ipsum dolor sit amet consectetur adipisicing elit.
+														                        Nemo rerum.
 						</p>
 						<h3>Christine Berkley</h3>
 						<i class="fa fa-star"></i>
@@ -199,8 +219,8 @@
 					<img src="{{asset ('../assets/img/user2.jpg')}}" alt="">
 					<div>
 						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-							                        Nemo rerum.Lorem ipsum dolor sit amet consectetur adipisicing elit.
-							                        Nemo rerum.
+														                        Nemo rerum.Lorem ipsum dolor sit amet consectetur adipisicing elit.
+														                        Nemo rerum.
 						</p>
 						<h3>David Harris</h3>
 						<i class="fa fa-star"></i>
@@ -215,8 +235,8 @@
 					<img src="{{asset ('../assets/img/user2.jpg')}}" alt="">
 					<div>
 						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-							                        Nemo rerum.Lorem ipsum dolor sit amet consectetur adipisicing elit.
-							                        Nemo rerum.
+														                        Nemo rerum.Lorem ipsum dolor sit amet consectetur adipisicing elit.
+														                        Nemo rerum.
 						</p>
 						<h3>David Harris</h3>
 						<i class="fa fa-star"></i>
@@ -239,8 +259,8 @@
 					<div class="footer-col">
 						<h4>DHN Studies</h4>
 						<ul>
-							<li><a href="{{path('app_contact')}}">Contact us</a></li>
-							<li><a href="{{path('app_about')}}">about us</a></li>
+							<li><ahref="{{path('app_contact')}}">Contact us</a></li>
+							<li><ahref="{{path('app_about')}}">about us</a></li>
 							<li><a href="#">privacy policy</a></li>
 							<li><a href="#">affiliate program</a></li>
 						</ul>
@@ -286,11 +306,8 @@
 		</footer>
 
 
-	
-</body>
+	</body>
 
 {% endblock %}
 
-{% block javascripts %}
-
-{% endblock %}
+{% block javascripts %}{% endblock %}
