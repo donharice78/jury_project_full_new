@@ -2,56 +2,157 @@
 
 {% block title %}User{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('../assets/styles/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('../assets/styles/courses.css') }}">
+{% endblock %}
+
 {% block body %}
-    <h1>User</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Photo</th>
-                <td><img src="{{ user.photo }}"
-     alt="{{ user.username }}"
-     style="height: 50px; width: 50px; object-fit: cover; border-radius: 50%; border: 1px solid #ddd;"></td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-            <tr>
-                <th>Username</th>
-                <td>{{ user.username }}</td>
-            </tr>
-            <tr>
-                <th>FirstName</th>
-                <td>{{ user.firstName }}</td>
-            </tr>
-            <tr>
-                <th>LastName</th>
-                <td>{{ user.lastName }}</td>
-            </tr>
-            <tr>
-                <th>Phone</th>
-                <td>{{ user.phone }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|join(', ') : '' }}</td>
-            </tr>
-            
-        </tbody>
-    </table>
+<section class="courses-header">
+    <nav>
+        <a href="{{ path('app_home') }}">
+            <img src="{{ asset('../assets/img/logo.png') }}" alt="Logo">
+        </a>
+        <div class="nav-links" id="navLinks">
+            <i class="bi bi-x" onclick="hideMenu()"></i>
+            <ul>
+                <li><a href="{{ path('app_home') }}">HOME</a></li>
+                <li><a href="{{ path('app_apropos') }}">ABOUT</a></li>
+                <li><a href="{{ path('app_course_index') }}">COURSE</a></li>
+                <li><a href="{{ path('app_blogs_index') }}">BLOG</a></li>
+                <li><a href="{{ path('app_contact') }}">CONTACT</a></li>
+                <li>
+                    <div class="" aria-labelledby="">
+                        {% if app.user %}
+                            <a class="" href="{{ path('app_logout') }}">LOGOUT</a>
+                        {% else %}
+                            <a class="" href="{{ path('app_login') }}">ESPACE</a>
+                        {% endif %}
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <i class="bi bi-list" onclick="showMenu()"></i>
+    </nav>
+</section>
 
-    <a href="{{ path('app_admin_user_index') }}">back to list</a>
+<h2 class="text-center mt-5 mb-3">User Info</h2>
 
-    <a href="{{ path('app_admin_user_edit', {'id': user.id}) }}">edit</a>
+<div class="container mt-4 mb-5">
+    <div class="card">
+        <div class="card-header">
+            <h1>{{ user.lastName ~ ' ' ~ user.firstName }}</h1>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="{{ user.photo }}" 
+                         alt="{{ user.username }}"
+                         class="img-fluid rounded-circle"
+                         style="height: 150px; width: 150px; object-fit: cover; border: 1px solid #ddd;">
+                </div>
+                <div class="col-md-8">
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th>Id</th>
+                                <td>{{ user.id }}</td>
+                            </tr>
+                            <tr>
+                                <th>Email</th>
+                                <td>{{ user.email }}</td>
+                            </tr>
+                            <tr>
+                                <th>Username</th>
+                                <td>{{ user.username }}</td>
+                            </tr>
+                            <tr>
+                                <th>First Name</th>
+                                <td>{{ user.firstName }}</td>
+                            </tr>
+                            <tr>
+                                <th>Last Name</th>
+                                <td>{{ user.lastName }}</td>
+                            </tr>
+                            <tr>
+                                <th>Phone</th>
+                                <td>{{ user.phone }}</td>
+                            </tr>
+                            <tr>
+                                <th>Roles</th>
+                                <td>{{ user.roles ? user.roles|join(', ') : '' }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-muted d-flex justify-content-center mb-3">
+            <a href="{{ path('app_admin_user_index') }}" class="btn btn-secondary mx-2">Back to List</a>
+            <a href="{{ path('app_admin_user_edit', {'id': user.id}) }}" class="btn btn-primary mx-2">Edit</a>
+            {{ include('admin_user/_delete_form.html.twig') }}
+        </div>
+    </div>
+</div>
 
-    {{ include('admin_user/_delete_form.html.twig') }}
+<!-- ------------------------------------footer-- -->
+
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-row">
+            <div class="footer-col">
+                <h4>DHN Studies</h4>
+                <ul>
+                    <li><a href="{{ path('app_contact') }}">Contact us</a></li>
+                    <li><a href="{{ path('app_apropos') }}">About us</a></li>
+                    <li><a href="#">Privacy policy</a></li>
+                    <li><a href="#">Affiliate program</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Get help</h4>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">Order status</a></li>
+                    <li><a href="#">Payment options</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Online shop</h4>
+                <ul>
+                    <li><a href="#">Watch</a></li>
+                    <li><a href="#">Bag</a></li>
+                    <li><a href="#">Shoes</a></li>
+                    <li><a href="#">Dress</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Follow us</h4>
+                <div class="social-links">
+                    <a href="#">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap JS and Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
 {% endblock %}

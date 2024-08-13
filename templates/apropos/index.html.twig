@@ -25,7 +25,7 @@
 							<a href="{{path('app_home')}}">HOME</a>
 						</li>
 						<li>
-							<a href="{{path('app_about')}}">ABOUT</a>
+							<a href="{{path('app_apropos')}}">ABOUT</a>
 						</li>
 						<li>
 							<a href="{{path('app_course_index')}}">COURSE</a>
@@ -36,8 +36,15 @@
 						<li>
 							<a href="{{path('app_contact')}}">CONTACT</a>
 						</li>
-						<li>
-							<a href="{{path('app_espace')}}">LOGIN</a>
+						<li class="">
+
+							<div class="" aria-labelledby="">
+								{% if app.user %}
+									<a class="" href="{{ path('app_logout') }}">LOGOUT</a>
+								{% else %}
+									<a class="" href="{{ path('app_login') }}">ESPACE</a>
+								{% endif %}
+							</div>
 						</li>
 					</ul>>
 				</div>
@@ -127,7 +134,7 @@
                     <h4>DHN Studies</h4>
                     <ul>
                         <li><a href="{{ path('app_contact') }}">Contact Us</a></li>
-                        <li><a href="{{ path('app_about') }}">About Us</a></li>
+                        <li><a href="{{ path('app_apropos') }}">About Us</a></li>
                         <li><a href="#">Privacy Policy</a></li>
                         <li><a href="#">Affiliate Program</a></li>
                     </ul>

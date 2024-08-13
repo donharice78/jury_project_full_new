@@ -4,3 +4,8 @@ controllers:
         namespace: App\Controller
     type: attribute
 
+catch_all:
+    path: /{catchall}
+    controller: App\Controller\ErrorController::handleUndefinedRoute
+    requirements:
+        catchall: .*

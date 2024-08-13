@@ -1,6 +1,40 @@
     {% extends 'base.html.twig' %}
 
-    {% block body %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('../assets/styles/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('../assets/styles/courses.css') }}">
+{% endblock %}
+
+{% block body %}
+<body>
+<section class="courses-header">
+    <nav>
+        <a href="{{ path('app_home') }}">
+            <img src="{{ asset('../assets/img/logo.png') }}" alt="Logo">
+        </a>
+        <div class="nav-links" id="navLinks">
+            
+            <ul>
+                <li><a href="{{ path('app_home') }}">HOME</a></li>
+                <li><a href="{{ path('app_apropos') }}">ABOUT</a></li>
+                <li><a href="{{ path('app_course_index') }}">COURSE</a></li>
+                <li><a href="{{ path('app_blogs_index') }}">BLOG</a></li>
+                <li><a href="{{ path('app_contact') }}">CONTACT</a></li>
+                <li>
+                    <div class="" >
+                        {% if app.user %}
+                            <a class="" href="{{ path('app_logout') }}">LOGOUT</a>
+                        {% else %}
+                            <a class="" href="{{ path('app_login') }}">ESPACE</a>
+                        {% endif %}
+                    </div>
+                </li>
+            </ul>
+        </div>
+        
+    </nav>
+</section>
        <div class="container mt-5">
         <!-- Form Header -->
         <h1 class="text-center mb-4">{{ app.request.attributes.get('_route') == 'app_admin_user_edit' ? 'Edit User' : 'Create New User' }}</h1>
@@ -24,18 +58,73 @@
                 </div>
 
                 <!-- Submit Button -->
-                <div class="text-center mt-4">
+                <div class="text-center mt-4 mb-4">
                     <button type="submit" class="btn btn-primary btn-lg">{{ button_label|default('Save') }}</button>
+                    <a href="{{ path('app_admin_user_index') }}" class="btn btn-secondary btn-lg ">Back to List</a>
                 </div>
 
                 <!-- Back to List Button -->
-                <div class="text-center mt-3">
-                    <a href="{{ path('app_admin_user_index') }}" class="btn btn-secondary btn-lg">Back to List</a>
-                </div>
+               
                 
                 {{ form_end(form) }}
             </div>
         </div>
     </div>
+
+        <!-- ------------------------------------footer-- -->
+
+		<footer class="footer">
+			<div class="footer-container">
+				<div class="footer-row">
+					<div class="footer-col">
+						<h4>DHN Studies</h4>
+						<ul>
+							<li><a href="{{path('app_contact')}}">Contact us</a></li>
+							<li><a href="{{path('app_apropos')}}">about us</a></li>
+							<li><a href="#">privacy policy</a></li>
+							<li><a href="#">affiliate program</a></li>
+						</ul>
+					</div>
+					<div class="footer-col">
+						<h4>get help</h4>
+						<ul>
+							<li><a href="#">FAQ</a></li>
+							<li><a href="#">shipping</a></li>
+							<li><a href="#">returns</a></li>
+							<li><a href="#">order status</a></li>
+							<li><a href="#">payment options</a></li>
+						</ul>
+					</div>
+					<div class="footer-col">
+						<h4>online shop</h4>
+						<ul>
+							<li><a href="#">watch</a></li>
+							<li><a href="#">bag</a></li>
+							<li><a href="#">shoes</a></li>
+							<li><a href="#">dress</a></li>
+						</ul>
+					</div>
+					<div class="footer-col">
+						<h4>follow us</h4>
+						<div class="social-links">
+							<a href="#">
+								<i class="fab fa-facebook-f"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-twitter"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-instagram"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-linkedin-in"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+</body>
 
     {% endblock %}

@@ -14,21 +14,43 @@
 <body>
 
 <section class="courses-header">
-        <nav>
-            <a href="index.html"><img src="img/logo.png" alt="" /></a>
-            <div class="nav-links" id="navLinks">
-                <i class="bi bi-x" onclick="hideMenu()"></i>
-                <ul>
-                        <li><a href="{{path('app_home')}}">HOME</a></li>
-						<li><a href="{{path('app_about')}}">ABOUT</a></li>
-						<li><a href="{{path('app_courses')}}">COURSE</a></li>
-						<li><a href="{{path('app_blogs_index')}}">BLOG</a></li>
-						<li><a href="{{path('app_contact')}}">CONTACT</a></li>
-						<li><a href="{{path('app_espace')}}">LOGIN</a></li>
-                </ul>
-            </div>
-            <i class="bi bi-list" onclick="showMenu()"></i>
-        </nav>
+			<nav>
+				<a href="{{ path('app_home') }}">
+					<img src="{{ asset('../assets/img/logo.png') }}" alt="Logo">
+				</a>
+				<div class="nav-links" id="navLinks">
+					<i class="bi bi-x" onclick="hideMenu()"></i>
+					<ul>
+						<li>
+							<a href="{{ path('app_home') }}">HOME</a>
+						</li>
+						<li>
+							<a href="{{ path('app_apropos') }}">ABOUT</a>
+						</li>
+						<li>
+							<a href="{{ path('app_course_index') }}">COURSE</a>
+						</li>
+						<li>
+							<a href="{{ path('app_blogs_index') }}">BLOG</a>
+						</li>
+						<li>
+							<a href="{{ path('app_contact') }}">CONTACT</a>
+						</li>
+
+						<li class="">
+
+							<div class="" aria-labelledby="">
+								{% if app.user %}
+									<a class="" href="{{ path('app_logout') }}">LOGOUT</a>
+								{% else %}
+									<a class="" href="{{ path('app_login') }}">ESPACE</a>
+								{% endif %}
+							</div>
+						</li>
+					</ul>
+				</div>
+				<i class="bi bi-list" onclick="showMenu()"></i>
+			</nav>
 
        
     </section>
@@ -50,7 +72,7 @@
                 <h4>DHN Studies</h4>
                 <ul>
                     <li><a href="{{path('app_contact')}}">Contact us</a></li>
-                    <li><a href="{{path('app_about')}}">about us</a></li>
+                    <li><a href="{{path('app_apropos')}}">about us</a></li>
                     <li><a href="#">privacy policy</a></li>
                     <li><a href="#">affiliate program</a></li>
                 </ul>

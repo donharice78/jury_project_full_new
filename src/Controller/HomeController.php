@@ -14,36 +14,23 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig');
     }
 
-
-    #[Route('/courses', name: 'app_courses')]
-    public function courses(): Response
-    {
-        return $this->render('home/courses.html.twig');
-    }
-
-    #[Route('/about', name: 'app_about')]
+    #[Route('/about-us', name: 'app_home_about')]
     public function about(): Response
     {
-        return $this->render('home/about.html.twig');
+        return $this->render('home/index.html.twig');
     }
 
-    #[Route('/blog', name: 'app_blog')]
-    public function blog(): Response
-    {
-        return $this->render('home/blog.html.twig');
-    }
+    
 
-    #[Route('/contac', name: 'app_contac')]
-    public function contact(): Response
-    {
-        return $this->render('home/contact.html.twig');
-    }
 
-    #[Route('/espace', name: 'app_espace')]
-    public function espace(): Response
-    {
-        return $this->render('home/espace.html.twig');
-    }
+
+
+ 
+ 
+
+ 
+
+  
 }
 
 

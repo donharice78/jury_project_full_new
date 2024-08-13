@@ -122,9 +122,16 @@ class AdminUserController extends AbstractController
     #[Route('/{id}', name: 'app_admin_user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->getPayload()->getString('_token'))) {
+        // Vérifie la validité du token CSRF pour la suppression
+        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
             $entityManager->remove($user);
             $entityManager->flush();
+
+            // Ajoute un message flash de succès
+            $this->addFlash('success', 'Le cours a été supprimé avec succès.');
+        } else {
+            // Ajoute un message flash d'erreur en cas de token CSRF invalide
+            $this->addFlash('error', 'Token CSRF invalide.');
         }
 
         return $this->redirectToRoute('app_admin_user_index', [], Response::HTTP_SEE_OTHER);
