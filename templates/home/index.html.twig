@@ -7,6 +7,11 @@
 	{{ parent() }}
 	<link rel="stylesheet" href="{{ asset ('../assets/styles/styles.css') }}">
 	<link rel="stylesheet" href="{{ asset ('../assets/styles/courses.css') }}">
+	<style>
+	.no-underline {
+    text-decoration: none;
+	}
+	</style>
 
 {% endblock %}
 
@@ -15,19 +20,19 @@
 		<section class="header">
 			<nav>
 				<a href="{{ path('app_home') }}">
-					<img src="{{ asset('../assets/img/logo.png') }}" alt="Logo">
+					<img src="{{ asset('../assets/img/Web Dev-logo.png') }}" alt="Logo">
 				</a>
 				<div class="nav-links" id="navLinks">
 					<i class="bi bi-x" onclick="hideMenu()"></i>
 					<ul>
 						<li>
-							<a href="{{ path('app_home') }}">HOME</a>
+							<a href="{{ path('app_home') }} ">HOME</a>
 						</li>
 						<li>
-							<a href="{{ path('app_apropos') }}">ABOUT</a>
+							<a href="{{ path('app_apropos') }}">À PROPOS</a>
 						</li>
 						<li>
-							<a href="{{ path('app_course_index') }}">COURSE</a>
+							<a href="{{ path('app_course_index') }}">COURS</a>
 						</li>
 						<li>
 							<a href="{{ path('app_blogs_index') }}">BLOG</a>
@@ -40,7 +45,7 @@
 
 							<div class="" aria-labelledby="">
 								{% if app.user %}
-									<a class="" href="{{ path('app_logout') }}">LOGOUT</a>
+									<a class="" href="{{ path('app_logout') }}">DÉCONNEXION</a>
 								{% else %}
 									<a class="" href="{{ path('app_login') }}">ESPACE</a>
 								{% endif %}
@@ -51,41 +56,71 @@
 				<i class="bi bi-list" onclick="showMenu()"></i>
 			</nav>
 
-			<div class="text-box">
-				<h1>Welcome to FHat University</h1>
-				<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa aliquam illum
-					<br>rerum ipsum eos beatae alias necessitatibus..
+			<div class="text-box mt-5">
+				<h1>Bienvenue à Web Dev</h1>
+				<p>
+					<strong>
+						Ici, nous vous emmenons d'une faible connaissance du développement Web
+						<br>
+						à un développeur Web professionnel
+					</strong>
 				</p>
-				<a href="" class="hero-btn">Visit Us To Know More</a>
+				<a href="{{ path('app_course_index') }}" class="hero-btn">Regardez ce que nous proposons</a>
 			</div>
 		</section>
+
 
 		<!-- ------------------------------------course------------------------------ -->
 
 		<section class="course">
-			<h2>Courses We Offer</h2>
-			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo rerum.</p>
+			<h2>Les diplômes que nous proposons</h2>
+			<p>Le titre RNCP (Répertoire National des Certifications Professionnelles) pour les développeurs web.</p>
 			<div class="roow">
 				<div class="course-col">
-					<h3>Intermediate</h3>
-					<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, necessitatibus?</p>
+					<a href="{{path('app_certification') }}" class="fw-bold text-danger mx-1 no-underline">
+						<h3>RNCP Niveau 5</h3>
+					</a>
+					<p>
+						<strong class="fw-bold">Développeur Web et Web Mobile (BTS, DUT)
+							<br>
+						</strong>
+						<br>
+						Le niveau 5 correspond à des formations équivalentes au BTS ou au DUT. 
+											Les diplômés à ce niveau possèdent des compétences techniques de base nécessaires pour exercer le métier de développeur web et web mobile.</p>
+					<a href="{{ path('app_course_index') }}" class="hero-btn text-black">Regardez ce que nous proposons</a>
 				</div>
 				<div class="course-col">
-					<h3>Degree</h3>
-					<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, necessitatibus?</p>
+					<a href="{{path('app_certification') }}" class="fw-bold text-danger mx-1 no-underline">
+						<h3>RNCP Niveau 6</h3>
+					</a>
+					<p>
+						<strong class="fw-bold">
+							Développeur Web et Web Mobile (Licence, Bachelor)</strong>
+						<br>Le niveau 6 correspond à des formations équivalentes à une Licence ou un Bachelor. 
+											Les diplômés à ce niveau ont des compétences plus approfondies et une meilleure compréhension des technologies web avancées.
+					</p>
+					<a href="{{ path('app_course_index') }}" class="hero-btn text-black">Regardez ce que nous proposons</a>
 				</div>
 				<div class="course-col">
-					<h3>Post Graduation</h3>
-					<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, necessitatibus?</p>
+					<a href="{{path('app_certification') }}" class="fw-bold text-danger mx-1 no-underline">
+						<h3>RNCP Niveau 7</h3>
+					</a>
+					<p>
+						<strong class="fw-bold">Développeur Web et Web Mobile (Master, MBA)
+							<br></strong>
+						<br>
+						Le niveau 7 correspond à des formations équivalentes à un Master ou un MBA. 
+											Les diplômés à ce niveau possèdent des compétences avancées et une expertise approfondie dans le développement web et mobile.</p>
+					<a href="{{ path('app_course_index') }}" class="hero-btn text-black">Regardez ce que nous proposons</a>
 				</div>
 			</div>
 		</section>
 
 		<!-- ------------------------------------Campus------------------------------ -->
 
-		<section class="campus">
-			<h1>Our Global Campus</h1>
-			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo rerum.</p>
+		<section class="campus" id="campus">
+			<h1>Notre Campus</h1>
+			<p>Pour l'instant, nous avons trois campus en France</p>
 			<div class="row">
 				<div class="campus-col">
 					<img src="{{ asset('../assets/img/Tour_eff.jpg') }}" alt="Paris">
@@ -110,24 +145,29 @@
 
 		<!-- ------------------------------------Facilities------------------------------ -->
 
-		<section class="facilities">
-			<h1>Our Facilities</h1>
-			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo rerum.</p>
+		<section class="facilities" id="facilities">
+			<h1>Nos installations</h1>
+			<p>En tant que développeur Web, vous n'avez pas besoin de rester assis devant votre ordinateur.
+				<br>
+				Découvrez certaines de nos installations pour vous libérer du stress</p>
 			<div class="row">
 				<div class="facilities-col">
-					<img src="{{ asset('../assets/img/library.png') }}" alt="Library">
-					<h3>World Class Library</h3>
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo rerum.</p>
+					<img src="{{ asset('../assets/img/Bibliothèque de classe.jpg') }}" alt="Library">
+					<h3 class="text-center">Bibliothèque de classe</h3>
+					<p class="text-center">Possède une vaste collection de livres, manuscrits, archives, périodiques, 
+											et autres documents couvrant une large gamme de sujets.</p>
 				</div>
 				<div class="facilities-col">
-					<img src="{{ asset('../assets/img/basketball.png') }}" alt="Basketball">
-					<h3>Largest Playground</h3>
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo rerum.</p>
+					<img src="{{ asset('../assets/img/basketball2.jpg') }}" alt="Basketball">
+					<h3 class="text-center">Grande aire de jeux</h3>
+					<p class="text-center">Les pauses récréatives peuvent aider à recharger les batteries, ce qui conduit à une 
+											meilleure concentration et une plus grande productivité</p>
 				</div>
 				<div class="facilities-col">
-					<img src="{{ asset('../assets/img/cafeteria.png') }}" alt="Cafeteria">
-					<h3>Tasty and Healthy Food</h3>
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo rerum.</p>
+					<img src="{{ asset('../assets/img/office food canteen.jpg') }}" alt="Cafeteria">
+					<h3 class="text-center">Nourriture savoureuse</h3>
+					<p class="text-center">Proposez une sélection variée de plats pour répondre aux différents goûts et besoins alimentaires, 
+											y compris des options végétariennes, véganes.</p>
 				</div>
 			</div>
 		</section>
@@ -135,14 +175,14 @@
 		<!-- ------------------------------------Testimonials------------------------------ -->
 
 		<section class="testimonials">
-			<h1>What Our Students Say</h1>
-			<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo rerum.</p>
+			<h1>Ce que disent nos étudiants</h1>
+			<p>Voir ce que nos étudiants disent de nous.</p>
 			<div class="test-row">
 				<div class="testimonial-col">
 					<img src="{{ asset('../assets/img/user1.jpg') }}" alt="Christine Berkley">
 					<div>
-						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo rerum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo rerum.</p>
-						<h3>Christine Berkley</h3>
+						<p>La formation a été exceptionnelle et m'a permis d'acquérir des compétences pratiques immédiatement applicables dans mon travail</p>
+						<h3>Christabel Mau</h3>
 						<i class="fa fa-star"></i>
 						<i class="fa fa-star"></i>
 						<i class="fa fa-star"></i>
@@ -153,8 +193,8 @@
 				<div class="testimonial-col">
 					<img src="{{ asset('../assets/img/user2.jpg') }}" alt="David Harris">
 					<div>
-						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo rerum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo rerum.</p>
-						<h3>David Harris</h3>
+						<p>Les cours sont très bien structurés et les formateurs sont experts dans leur domaine. Je recommande vivement cette école.</p>
+						<h3>David Morris</h3>
 						<i class="fa fa-star"></i>
 						<i class="fa fa-star"></i>
 						<i class="fa fa-star"></i>
@@ -165,8 +205,8 @@
 				<div class="testimonial-col">
 					<img src="{{ asset('../assets/img/user2.jpg') }}" alt="David Harris">
 					<div>
-						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo rerum. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo rerum.</p>
-						<h3>David Harris</h3>
+						<p>Une expérience enrichissante avec des supports de cours modernes et une excellente ambiance d'apprentissage.</p>
+						<h3>Matin Benjamin</h3>
 						<i class="fa fa-star"></i>
 						<i class="fa fa-star"></i>
 						<i class="fa fa-star"></i>
@@ -182,36 +222,41 @@
 		<footer class="footer">
 			<div class="footer-container">
 				<div class="footer-row">
+
 					<div class="footer-col">
-						<h4>DHN Studies</h4>
+						<h4>Obtenir de l'aide</h4>
 						<ul>
-							<li><a href="{{ path('app_contact') }}">Contact us</a></li>
-							<li><a href="{{ path('app_apropos') }}">About us</a></li>
-							<li><a href="#">Privacy Policy</a></li>
-							<li><a href="#">Affiliate Program</a></li>
+							<li><a href="{{ path('app_faq') }}">FAQ</a></li>
+							<li><a href="{{path('app_certification') }}">Certification</a></li>
+							<li><a href="{{ path('app_financements') }}">Financements</a></li>
+							<li><a href="{{ path('app_evenements') }}">Evenements</a></li>
+							<li><a href="{{ path('app_modaliteacces') }}">Modalités d'accès</a></li>
+
 						</ul>
 					</div>
 					<div class="footer-col">
-						<h4>Get Help</h4>
+						<h4>DeV WeB</h4>
 						<ul>
-							<li><a href="#">FAQ</a></li>
-							<li><a href="#">Shipping</a></li>
-							<li><a href="#">Returns</a></li>
-							<li><a href="#">Order Status</a></li>
-							<li><a href="#">Payment Options</a></li>
+						    <li><a href="{{ path('app_home') }}">Home</a></li>
+							<li><a href="{{ path('app_blogs_index') }}">Notre Blog</a></li>
+							<li><a href="{{ path('app_contact') }}">Contactez-nous</a></li>
+							<li><a href="{{ path('app_apropos') }}">À propos de nous</a></li>
+							<li><a href="{{ path('app_privacy') }}">politique de confidentialité</a></li>
+
+						</ul>
+					</div>
+
+					<div class="footer-col">
+						<h4>Adresse</h4>
+						<ul>
+							<li><a href="">7 Avenue du General Patton</a></li>
+							<li><a href="">77000</a></li>
+							<li><a href="">Melun</a></li>
+							<li><a href="">Tel: 07 83 65 08 80</a></li>
 						</ul>
 					</div>
 					<div class="footer-col">
-						<h4>Online Shop</h4>
-						<ul>
-							<li><a href="#">Watch</a></li>
-							<li><a href="#">Bag</a></li>
-							<li><a href="#">Shoes</a></li>
-							<li><a href="#">Dress</a></li>
-						</ul>
-					</div>
-					<div class="footer-col">
-						<h4>Follow Us</h4>
+						<h4>Suivez-nous</h4>
 						<div class="social-links">
 							<a href="#">
 								<i class="fab fa-facebook-f"></i>

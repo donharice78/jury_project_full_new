@@ -13,7 +13,7 @@
     <section class="courses-header">
 			<nav>
 				<a href="{{ path('app_home') }}">
-					<img src="{{ asset('../assets/img/logo.png') }}" alt="Logo">
+					<img src="{{ asset('../assets/img/Web Dev-logo.png') }}" alt="Logo">
 				</a>
 				<div class="nav-links" id="navLinks">
 					<i class="bi bi-x" onclick="hideMenu()"></i>
@@ -85,7 +85,9 @@
                             </ul>
                             <!-- Action Buttons -->
                             <a href="{{ path('app_course_show', {'id': course.id}) }}" class="btn btn-primary">Show</a>
+                            {% if is_granted('ROLE_ADMIN') %}
                             <a href="{{ path('app_course_edit', {'id': course.id}) }}" class="btn btn-secondary">Edit</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -98,55 +100,68 @@
         </div>
 
         <!-- Create New Course Button -->
-        <a href="{{ path('app_course_new') }}" class="btn btn-success mt-4">Create New</a>
+        <div class="text-center m-4">
+                <a href="{{ path('app_course_new') }}" class="btn btn-success mt-4 ">Create New</a>
+
+        </div>
     </div>
 
-    <!-- Footer Section -->
-    <footer class="footer mt-5">
-        <div class="footer-container">
-            <div class="footer-row">
-                <!-- Footer Column 1 -->
-                <div class="footer-col">
-                    <h4>DHN Studies</h4>
-                    <ul>
-                        <li><a href="{{ path('app_contact') }}">Contact Us</a></li>
-                        <li><a href="{{ path('app_apropos') }}">About Us</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Affiliate Program</a></li>
-                    </ul>
-                </div>
-                <!-- Footer Column 2 -->
-                <div class="footer-col">
-                    <h4>Get Help</h4>
-                    <ul>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Shipping</a></li>
-                        <li><a href="#">Returns</a></li>
-                        <li><a href="#">Order Status</a></li>
-                        <li><a href="#">Payment Options</a></li>
-                    </ul>
-                </div>
-                <!-- Footer Column 3 -->
-                <div class="footer-col">
-                    <h4>Online Shop</h4>
-                    <ul>
-                        <li><a href="#">Watches</a></li>
-                        <li><a href="#">Bags</a></li>
-                        <li><a href="#">Shoes</a></li>
-                        <li><a href="#">Dresses</a></li>
-                    </ul>
-                </div>
-                <!-- Footer Column 4 -->
-                <div class="footer-col">
-                    <h4>Follow Us</h4>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+		<!-- ------------------------------------footer-- -->
+
+		<footer class="footer">
+			<div class="footer-container">
+				<div class="footer-row">
+
+					<div class="footer-col">
+						<h4>Obtenir de l'aide</h4>
+						<ul>
+							<li><a href="{{ path('app_faq') }}">FAQ</a></li>
+							<li><a href="{{path('app_certification') }}">Certification</a></li>
+							<li><a href="{{ path('app_financements') }}">Financements</a></li>
+							<li><a href="{{ path('app_evenements') }}">Evenements</a></li>
+							<li><a href="{{ path('app_modaliteacces') }}">Modalités d'accès</a></li>
+
+						</ul>
+					</div>
+					<div class="footer-col">
+						<h4>DeV WeB</h4>
+						<ul>
+						    <li><a href="{{ path('app_home') }}">Home</a></li>
+							<li><a href="{{ path('app_blogs_index') }}">Notre Blog</a></li>
+							<li><a href="{{ path('app_contact') }}">Contactez-nous</a></li>
+							<li><a href="{{ path('app_apropos') }}">À propos de nous</a></li>
+							<li><a href="{{ path('app_privacy') }}">politique de confidentialité</a></li>
+
+						</ul>
+					</div>
+
+					<div class="footer-col">
+						<h4>Adresse</h4>
+						<ul>
+							<li><a href="">7 Avenue du General Patton</a></li>
+							<li><a href="">77000</a></li>
+							<li><a href="">Melun</a></li>
+							<li><a href="">Tel: 07 83 65 08 80</a></li>
+						</ul>
+					</div>
+					<div class="footer-col">
+						<h4>Suivez-nous</h4>
+						<div class="social-links">
+							<a href="#">
+								<i class="fab fa-facebook-f"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-twitter"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-instagram"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-linkedin-in"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
 {% endblock %}

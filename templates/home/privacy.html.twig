@@ -1,0 +1,268 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Politique de Confidentialité{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset ('../assets/styles/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset ('../assets/styles/aboutUs.css') }}">
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+        .section-title {
+            margin-bottom: 30px;
+        }
+        .section-content {
+            margin-bottom: 20px;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <section class="aboutUs-header">
+        <nav>
+            <a href="{{ path('app_home') }}">
+                <img src="{{ asset('../assets/img/Web Dev-logo.png') }}" alt="Logo">
+            </a>
+            <div class="nav-links" id="navLinks">
+                <i class="bi bi-x" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="{{ path('app_home') }}">HOME</a></li>
+                    <li><a href="{{ path('app_apropos') }}">ABOUT</a></li>
+                    <li><a href="{{ path('app_course_index') }}">COURSE</a></li>
+                    <li><a href="{{ path('app_blogs_index') }}">BLOG</a></li>
+                    <li><a href="{{ path('app_contact') }}">CONTACT</a></li>
+                    <li>
+                        <div class="" aria-labelledby="">
+                            {% if app.user %}
+                                <a class="" href="{{ path('app_logout') }}">LOGOUT</a>
+                            {% else %}
+                                <a class="" href="{{ path('app_login') }}">ESPACE</a>
+                            {% endif %}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <i class="bi bi-list" onclick="showMenu()"></i>
+        </nav>
+    </section>
+
+    <!-- Privacy Policy Accordion Section -->
+    <section class="container my-5">
+        <div class="text-center">
+            <h1 class="section-title">Politique de Confidentialité</h1>
+            <p class="lead">
+                Nous <span class="fw-bold text-danger mx-1">DeV WeB</span> respectons votre vie privée et nous engageons à protéger vos informations personnelles. 
+                Cette politique de confidentialité décrit comment nous collectons, utilisons, stockons et partageons vos informations lorsque vous 
+                utilisez notre site web <a href="{{ path('app_home') }}" class="fw-bold text-danger mx-1">DeV WeB</a> et nos services.
+            </p>
+        </div>
+
+        <div class="accordion" id="privacyAccordion">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        1. Informations Collectées
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#privacyAccordion">
+                    <div class="accordion-body">
+                        <h3>1.1. Informations Personnelles</h3>
+                        <p>Lorsque vous utilisez notre Site, nous pouvons collecter les types d'informations personnelles suivantes :</p>
+                        <ul>
+                            <li>Nom</li>
+                            <li>Adresse e-mail</li>
+                            <li>Numéro de téléphone</li>
+                            <li>Adresse postale</li>
+                            <li>Informations de paiement</li>
+                        </ul>
+
+                        <h3>1.2. Informations Non Personnelles</h3>
+                        <p>Nous collectons également des informations non personnelles, telles que :</p>
+                        <ul>
+                            <li>Adresse IP</li>
+                            <li>Type de navigateur</li>
+                            <li>Pages visitées</li>
+                            <li>Durée de la visite</li>
+                            <li>Données de géolocalisation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        2. Utilisation des Informations
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#privacyAccordion">
+                    <div class="accordion-body">
+                        <p>Nous utilisons vos informations pour :</p>
+                        <ul>
+                            <li>Fournir et améliorer nos services</li>
+                            <li>Traiter vos transactions et gérer vos commandes</li>
+                            <li>Vous envoyer des informations importantes et des mises à jour</li>
+                            <li>Répondre à vos demandes et questions</li>
+                            <li>Vous envoyer des communications marketing (avec votre consentement)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        3. Partage des Informations
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#privacyAccordion">
+                    <div class="accordion-body">
+                        <p>Nous ne partageons pas vos informations personnelles avec des tiers, sauf dans les cas suivants :</p>
+                        <ul>
+                            <li>Avec des prestataires de services qui nous aident à exploiter notre Site et à fournir nos services</li>
+                            <li>Pour se conformer à la loi ou à des obligations légales</li>
+                            <li>En cas de fusion, acquisition ou vente de l'entreprise</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingFour">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        4. Sécurité des Données
+                    </button>
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#privacyAccordion">
+                    <div class="accordion-body">
+                        <p>Nous mettons en place des mesures de sécurité appropriées pour protéger vos informations contre l'accès non autorisé, la divulgation, la modification ou la destruction.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingFive">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                        5. Cookies
+                    </button>
+                </h2>
+                <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#privacyAccordion">
+                    <div class="accordion-body">
+                        <p>Nous utilisons des cookies pour améliorer votre expérience sur notre Site. Les cookies sont de petits fichiers texte stockés sur votre appareil. Vous pouvez gérer vos préférences en matière de cookies via les paramètres de votre navigateur.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingSix">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                        6. Vos Droits
+                    </button>
+                </h2>
+                <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#privacyAccordion">
+                    <div class="accordion-body">
+                        <p>Vous avez les droits suivants concernant vos informations personnelles :</p>
+                        <ul>
+                            <li><strong>Accès :</strong> Vous pouvez demander une copie des informations personnelles que nous détenons sur vous.</li>
+                            <li><strong>Correction :</strong> Vous pouvez demander la correction des informations personnelles inexactes.</li>
+                            <li><strong>Suppression :</strong> Vous pouvez demander la suppression de vos informations personnelles, sous réserve des obligations légales.</li>
+                            <li><strong>Opposition :</strong> Vous pouvez vous opposer à l'utilisation de vos informations personnelles à des fins de marketing.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingSeven">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                        7. Modifications de la Politique
+                    </button>
+                </h2>
+                <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#privacyAccordion">
+                    <div class="accordion-body">
+                        <p>Nous pouvons modifier cette politique de confidentialité de temps à autre. Les modifications seront publiées sur cette page avec la date de mise à jour. Nous vous encourageons à consulter régulièrement cette politique pour rester informé des changements.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingEight">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                        8. Contact
+                    </button>
+                </h2>
+                <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight" data-bs-parent="#privacyAccordion">
+                    <div class="accordion-body">
+                        <p>Si vous avez des questions ou des préoccupations concernant cette politique de confidentialité ou le traitement de vos informations personnelles, veuillez nous contacter à :</p>
+                        <a href="{{ path('app_contact') }}" class="fw-bold text-danger mx-1">Contactez-nous</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+		<!-- ------------------------------------footer-- -->
+
+		<footer class="footer">
+			<div class="footer-container">
+				<div class="footer-row">
+
+					<div class="footer-col">
+						<h4>Obtenir de l'aide</h4>
+						<ul>
+							<li><a href="{{ path('app_faq') }}">FAQ</a></li>
+							<li><a href="{{path('app_certification') }}">Certification</a></li>
+							<li><a href="{{ path('app_financements') }}">Financements</a></li>
+							<li><a href="{{ path('app_evenements') }}">Evenements</a></li>
+							<li><a href="{{ path('app_modaliteacces') }}">Modalités d'accès</a></li>
+
+						</ul>
+					</div>
+					<div class="footer-col">
+						<h4>DeV WeB</h4>
+						<ul>
+						    <li><a href="{{ path('app_home') }}">Home</a></li>
+							<li><a href="{{ path('app_blogs_index') }}">Notre Blog</a></li>
+							<li><a href="{{ path('app_contact') }}">Contactez-nous</a></li>
+							<li><a href="{{ path('app_apropos') }}">À propos de nous</a></li>
+							<li><a href="{{ path('app_privacy') }}">politique de confidentialité</a></li>
+
+						</ul>
+					</div>
+
+					<div class="footer-col">
+						<h4>Adresse</h4>
+						<ul>
+							<li><a href="">7 Avenue du General Patton</a></li>
+							<li><a href="">77000</a></li>
+							<li><a href="">Melun</a></li>
+							<li><a href="">Tel: 07 83 65 08 80</a></li>
+						</ul>
+					</div>
+					<div class="footer-col">
+						<h4>Suivez-nous</h4>
+						<div class="social-links">
+							<a href="#">
+								<i class="fab fa-facebook-f"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-twitter"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-instagram"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-linkedin-in"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+
+    <!-- Ensure Bootstrap JavaScript is included -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+{% endblock %}

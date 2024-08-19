@@ -1,0 +1,196 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Certifications RNCP - Développement Web et Mobile{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset ('../assets/styles/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset ('../assets/styles/aboutUs.css') }}">
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+        .section-title {
+            margin-bottom: 30px;
+        }
+        .accordion-button {
+            font-weight: bold;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <section class="aboutUs-header">
+        <nav>
+            <a href="{{ path('app_home') }}">
+                <img src="{{ asset('../assets/img/Web Dev-logo.png') }}" alt="Logo">
+            </a>
+            <div class="nav-links" id="navLinks">
+                <i class="bi bi-x" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="{{ path('app_home') }}">HOME</a></li>
+                    <li><a href="{{ path('app_apropos') }}">ABOUT</a></li>
+                    <li><a href="{{ path('app_course_index') }}">COURSE</a></li>
+                    <li><a href="{{ path('app_blogs_index') }}">BLOG</a></li>
+                    <li><a href="{{ path('app_contact') }}">CONTACT</a></li>
+                    <li>
+                        <div class="" aria-labelledby="">
+                            {% if app.user %}
+                                <a class="" href="{{ path('app_logout') }}">LOGOUT</a>
+                            {% else %}
+                                <a class="" href="{{ path('app_login') }}">ESPACE</a>
+                            {% endif %}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <i class="bi bi-list" onclick="showMenu()"></i>
+        </nav>
+    </section>
+
+    <!-- Certifications Accordion Section -->
+    <section class="container my-5">
+        <div class="text-center">
+            <h1 class="section-title">Certifications RNCP en Développement Web et Mobile</h1>
+        </div>
+
+        <div class="accordion" id="certificationsAccordion">
+            <!-- RNCP Level 5 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="certificationHeadingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#certificationCollapseOne" aria-expanded="true" aria-controls="certificationCollapseOne">
+                        RNCP Niveau 5 : Développeur Web et Web Mobile
+                    </button>
+                </h2>
+                <div id="certificationCollapseOne" class="accordion-collapse collapse show" aria-labelledby="certificationHeadingOne" data-bs-parent="#certificationsAccordion">
+                    <div class="accordion-body">
+                        <h3>Description</h3>
+                        <p>La certification RNCP Niveau 5 "Développeur Web et Web Mobile" valide des compétences dans le développement et la maintenance de sites web et d'applications mobiles. Les diplômés seront capables de créer des applications interactives, d'intégrer des contenus et de gérer les bases de données.</p>
+                        <h3>Compétences Clés</h3>
+                        <ul>
+                            <li>Développement front-end (HTML, CSS, JavaScript)</li>
+                            <li>Développement back-end (PHP, Node.js)</li>
+                            <li>Gestion des bases de données (MySQL, MongoDB)</li>
+                            <li>Intégration et développement de sites responsive</li>
+                            <li>Connaissance des outils de versionnage (Git)</li>
+                        </ul>
+                        <h3>Débouchés Professionnels</h3>
+                        <p>Développeur web, Intégrateur web, Développeur front-end, Développeur back-end.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RNCP Level 6 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="certificationHeadingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#certificationCollapseTwo" aria-expanded="false" aria-controls="certificationCollapseTwo">
+                        RNCP Niveau 6 : Développeur Full Stack
+                    </button>
+                </h2>
+                <div id="certificationCollapseTwo" class="accordion-collapse collapse" aria-labelledby="certificationHeadingTwo" data-bs-parent="#certificationsAccordion">
+                    <div class="accordion-body">
+                        <h3>Description</h3>
+                        <p>La certification RNCP Niveau 6 "Développeur Full Stack" atteste de la maîtrise des technologies de développement web et mobile, tant pour le front-end que pour le back-end. Les diplômés seront capables de gérer l'ensemble du cycle de développement d'un projet.</p>
+                        <h3>Compétences Clés</h3>
+                        <ul>
+                            <li>Développement front-end (React, Vue.js)</li>
+                            <li>Développement back-end (Node.js, Python, Ruby)</li>
+                            <li>Gestion des API et services web</li>
+                            <li>Architecture de base de données avancée</li>
+                            <li>Déploiement et maintenance des applications</li>
+                        </ul>
+                        <h3>Débouchés Professionnels</h3>
+                        <p>Développeur Full Stack, Architecte logiciel, Chef de projet technique.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RNCP Level 7 -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="certificationHeadingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#certificationCollapseThree" aria-expanded="false" aria-controls="certificationCollapseThree">
+                        RNCP Niveau 7 : Expert en Développement Web et Mobile
+                    </button>
+                </h2>
+                <div id="certificationCollapseThree" class="accordion-collapse collapse" aria-labelledby="certificationHeadingThree" data-bs-parent="#certificationsAccordion">
+                    <div class="accordion-body">
+                        <h3>Description</h3>
+                        <p>La certification RNCP Niveau 7 "Expert en Développement Web et Mobile" certifie des compétences avancées dans le développement et la gestion de projets complexes en web et mobile. Les diplômés sont formés pour assumer des rôles de leadership et de gestion dans des équipes de développement.</p>
+                        <h3>Compétences Clés</h3>
+                        <ul>
+                            <li>Conception et architecture des systèmes complexes</li>
+                            <li>Gestion de projets Agile et Scrum</li>
+                            <li>Optimisation des performances et sécurité des applications</li>
+                            <li>Gestion des équipes de développement</li>
+                            <li>Veille technologique et innovation</li>
+                        </ul>
+                        <h3>Débouchés Professionnels</h3>
+                        <p>Architecte logiciel, Responsable technique, Directeur de projets IT, Consultant en développement web et mobile.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+		<!-- ------------------------------------footer-- -->
+
+		<footer class="footer">
+			<div class="footer-container">
+				<div class="footer-row">
+
+					<div class="footer-col">
+						<h4>Obtenir de l'aide</h4>
+						<ul>
+							<li><a href="{{ path('app_faq') }}">FAQ</a></li>
+							<li><a href="{{path('app_certification') }}">Certification</a></li>
+							<li><a href="{{ path('app_financements') }}">Financements</a></li>
+							<li><a href="{{ path('app_evenements') }}">Evenements</a></li>
+							<li><a href="{{ path('app_modaliteacces') }}">Modalités d'accès</a></li>
+
+						</ul>
+					</div>
+					<div class="footer-col">
+						<h4>DeV WeB</h4>
+						<ul>
+						    <li><a href="{{ path('app_home') }}">Home</a></li>
+							<li><a href="{{ path('app_blogs_index') }}">Notre Blog</a></li>
+							<li><a href="{{ path('app_contact') }}">Contactez-nous</a></li>
+							<li><a href="{{ path('app_apropos') }}">À propos de nous</a></li>
+							<li><a href="{{ path('app_privacy') }}">politique de confidentialité</a></li>
+
+						</ul>
+					</div>
+
+					<div class="footer-col">
+						<h4>Adresse</h4>
+						<ul>
+							<li><a href="">7 Avenue du General Patton</a></li>
+							<li><a href="">77000</a></li>
+							<li><a href="">Melun</a></li>
+							<li><a href="">Tel: 07 83 65 08 80</a></li>
+						</ul>
+					</div>
+					<div class="footer-col">
+						<h4>Suivez-nous</h4>
+						<div class="social-links">
+							<a href="#">
+								<i class="fab fa-facebook-f"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-twitter"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-instagram"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-linkedin-in"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+    <!-- Ensure Bootstrap JavaScript is included -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+{% endblock %}

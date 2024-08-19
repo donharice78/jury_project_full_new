@@ -1,0 +1,188 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Événements - Certifications Web et Mobile{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset ('../assets/styles/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset ('../assets/styles/aboutUs.css') }}">
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+        .section-title {
+            margin-bottom: 30px;
+        }
+        .accordion-button {
+            font-weight: bold;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <section class="aboutUs-header">
+        <nav>
+            <a href="{{ path('app_home') }}">
+                <img src="{{ asset('../assets/img/Web Dev-logo.png') }}" alt="Logo">
+            </a>
+            <div class="nav-links" id="navLinks">
+                <i class="bi bi-x" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="{{ path('app_home') }}">HOME</a></li>
+                    <li><a href="{{ path('app_apropos') }}">ABOUT</a></li>
+                    <li><a href="{{ path('app_course_index') }}">COURSE</a></li>
+                    <li><a href="{{ path('app_blogs_index') }}">BLOG</a></li>
+                    <li><a href="{{ path('app_contact') }}">CONTACT</a></li>
+                    <li>
+                        <div class="" aria-labelledby="">
+                            {% if app.user %}
+                                <a class="" href="{{ path('app_logout') }}">LOGOUT</a>
+                            {% else %}
+                                <a class="" href="{{ path('app_login') }}">ESPACE</a>
+                            {% endif %}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <i class="bi bi-list" onclick="showMenu()"></i>
+        </nav>
+    </section>
+
+    <!-- Events Accordion Section -->
+    <section class="container my-5">
+        <div class="text-center">
+            <h1 class="section-title">Événements à Venir</h1>
+        </div>
+
+        <div class="accordion" id="eventsAccordion">
+            <!-- Workshops -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="eventsHeadingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#eventsCollapseOne" aria-expanded="true" aria-controls="eventsCollapseOne">
+                        Ateliers
+                    </button>
+                </h2>
+                <div id="eventsCollapseOne" class="accordion-collapse collapse show" aria-labelledby="eventsHeadingOne" data-bs-parent="#eventsAccordion">
+                    <div class="accordion-body">
+                        <h3>Description</h3>
+                        <p>Découvrez nos prochains ateliers pratiques pour les certifications en développement web et mobile :</p>
+                        <ul>
+                            <li><strong>Atelier HTML/CSS</strong>: Date : 15 septembre 2024 - Description : Apprenez les bases du développement web avec HTML et CSS.</li>
+                            <li><strong>Atelier JavaScript</strong>: Date : 22 septembre 2024 - Description : Approfondissez vos connaissances en JavaScript avec des exercices pratiques.</li>
+                            <li><strong>Atelier Développement Mobile</strong>: Date : 29 septembre 2024 - Description : Introduction au développement d'applications mobiles avec React Native.</li>
+                        </ul>
+                        <h3>Inscription</h3>
+                        <p>Pour vous inscrire, veuillez visiter notre <a href="">page d'inscription</a>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Webinars -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="eventsHeadingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#eventsCollapseTwo" aria-expanded="false" aria-controls="eventsCollapseTwo">
+                        Webinaires
+                    </button>
+                </h2>
+                <div id="eventsCollapseTwo" class="accordion-collapse collapse" aria-labelledby="eventsHeadingTwo" data-bs-parent="#eventsAccordion">
+                    <div class="accordion-body">
+                        <h3>Description</h3>
+                        <p>Participez à nos webinaires pour rester à jour avec les dernières tendances et technologies :</p>
+                        <ul>
+                            <li><strong>Introduction à l'IA dans le Développement Web</strong>: Date : 10 octobre 2024 - Description : Explorez comment l'intelligence artificielle peut transformer le développement web.</li>
+                            <li><strong>Les Tendances du Développement Mobile en 2024</strong>: Date : 17 octobre 2024 - Description : Découvrez les dernières tendances et technologies dans le développement mobile.</li>
+                            <li><strong>Optimisation des Performances Web</strong>: Date : 24 octobre 2024 - Description : Techniques et outils pour améliorer les performances de vos sites web.</li>
+                        </ul>
+                        <h3>Inscription</h3>
+                        <p>Inscrivez-vous via notre <a href="">page d'inscription</a> pour participer à ces webinaires.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conferences -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="eventsHeadingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#eventsCollapseThree" aria-expanded="false" aria-controls="eventsCollapseThree">
+                        Conférences
+                    </button>
+                </h2>
+                <div id="eventsCollapseThree" class="accordion-collapse collapse" aria-labelledby="eventsHeadingThree" data-bs-parent="#eventsAccordion">
+                    <div class="accordion-body">
+                        <h3>Description</h3>
+                        <p>Assistez à nos conférences pour en apprendre davantage sur les sujets clés du développement web et mobile :</p>
+                        <ul>
+                            <li><strong>Conférence sur les Technologies Web Emergentes</strong>: Date : 5 novembre 2024 - Description : Un aperçu des nouvelles technologies et tendances dans le développement web.</li>
+                            <li><strong>Conférence sur le Développement Mobile et la Sécurité</strong>: Date : 12 novembre 2024 - Description : Discutez des meilleures pratiques pour sécuriser vos applications mobiles.</li>
+                            <li><strong>Conférence Annuelle sur le Développement de Logiciels</strong>: Date : 19 novembre 2024 - Description : Réseautage et discussions sur les dernières innovations dans le domaine du développement de logiciels.</li>
+                        </ul>
+                        <h3>Inscription</h3>
+                        <p>Pour plus d'informations et pour vous inscrire, veuillez consulter notre <a href="">page d'inscription</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+		<!-- ------------------------------------footer-- -->
+
+		<footer class="footer">
+			<div class="footer-container">
+				<div class="footer-row">
+
+					<div class="footer-col">
+						<h4>Obtenir de l'aide</h4>
+						<ul>
+							<li><a href="{{ path('app_faq') }}">FAQ</a></li>
+							<li><a href="{{path('app_certification') }}">Certification</a></li>
+							<li><a href="{{ path('app_financements') }}">Financements</a></li>
+							<li><a href="{{ path('app_evenements') }}">Evenements</a></li>
+							<li><a href="{{ path('app_modaliteacces') }}">Modalités d'accès</a></li>
+
+						</ul>
+					</div>
+					<div class="footer-col">
+						<h4>DeV WeB</h4>
+						<ul>
+						    <li><a href="{{ path('app_home') }}">Home</a></li>
+							<li><a href="{{ path('app_blogs_index') }}">Notre Blog</a></li>
+							<li><a href="{{ path('app_contact') }}">Contactez-nous</a></li>
+							<li><a href="{{ path('app_apropos') }}">À propos de nous</a></li>
+							<li><a href="{{ path('app_privacy') }}">politique de confidentialité</a></li>
+
+						</ul>
+					</div>
+
+					<div class="footer-col">
+						<h4>Adresse</h4>
+						<ul>
+							<li><a href="">7 Avenue du General Patton</a></li>
+							<li><a href="">77000</a></li>
+							<li><a href="">Melun</a></li>
+							<li><a href="">Tel: 07 83 65 08 80</a></li>
+						</ul>
+					</div>
+					<div class="footer-col">
+						<h4>Suivez-nous</h4>
+						<div class="social-links">
+							<a href="#">
+								<i class="fab fa-facebook-f"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-twitter"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-instagram"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-linkedin-in"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+    <!-- JavaScript Bundle with Popper (Bootstrap 5) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"></script>
+{% endblock %}

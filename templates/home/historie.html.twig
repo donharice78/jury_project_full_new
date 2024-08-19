@@ -1,0 +1,189 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset ('../assets/styles/styles.css') }}">
+	<link rel="stylesheet" href="{{ asset ('../assets/styles/contact.css') }}">
+
+    <style>
+            .timeline-item {
+            border-left: 3px solid #dc3545;
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+        .timeline-item h5 {
+            font-weight: bold;
+        }
+    </style>
+
+{% endblock %}
+{% block title %}Team{% endblock %}
+
+
+{% block body %}
+
+	<body>
+		<section class="contact-header">
+			<nav>
+				<a href="{{ path('app_home') }}">
+					<img src="{{ asset('../assets/img/Web Dev-logo.png') }}" alt="Logo">
+				</a>
+				<div class="nav-links" id="navLinks">
+					<i class="bi bi-x" onclick="hideMenu()"></i>
+					<ul>
+						<li>
+							<a href="{{ path('app_home') }} ">HOME</a>
+						</li>
+						<li>
+							<a href="{{ path('app_apropos') }}">À PROPOS</a>
+						</li>
+						<li>
+							<a href="{{ path('app_course_index') }}">COURS</a>
+						</li>
+						<li>
+							<a href="{{ path('app_blogs_index') }}">BLOG</a>
+						</li>
+						<li>
+							<a href="{{ path('app_contact') }}">CONTACT</a>
+						</li>
+
+						<li class="">
+
+							<div class="" aria-labelledby="">
+								{% if app.user %}
+									<a class="" href="{{ path('app_logout') }}">DÉCONNEXION</a>
+								{% else %}
+									<a class="" href="{{ path('app_login') }}">ESPACE</a>
+								{% endif %}
+							</div>
+						</li>
+					</ul>
+				</div>
+				<i class="bi bi-list" onclick="showMenu()"></i>
+			</nav>
+		</section>
+
+
+        <div class="m-5">
+        <section>
+            <h2 class="text-center mb-4">Chronologie des Événements</h2>
+            <div class="timeline ">
+                <div class="timeline-item">
+                    <h5>2010</h5>
+                    <p>Création de l'école avec une vision innovante de former des professionnels compétents en développement web. Les premiers cours incluaient HTML, CSS et JavaScript.</p>
+                </div>
+                <div class="timeline-item">
+                    <h5>2012</h5>
+                    <p>Élargissement du programme pour inclure AngularJS et React. L'école a gagné en popularité et a attiré de nombreux étudiants passionnés par les nouvelles technologies.</p>
+                </div>
+                <div class="timeline-item">
+                    <h5>2015</h5>
+                    <p>Introduction des formations backend avec PHP et Python. Début des programmes de certification pour renforcer l'employabilité des diplômés.</p>
+                </div>
+                <div class="timeline-item">
+                    <h5>2018</h5>
+                    <p>Lancement de la plateforme d'apprentissage en ligne. Cette initiative a permis aux étudiants d'accéder aux cours à distance et a élargi l'audience de l'école.</p>
+                </div>
+                <div class="timeline-item">
+                    <h5>2020</h5>
+                    <p>Introduction de cours sur le développement mobile et l'intelligence artificielle. Renforcement des partenariats avec des entreprises pour offrir des stages et des opportunités professionnelles.</p>
+                </div>
+                <div class="timeline-item">
+                    <h5>2023</h5>
+                    <p>Modernisation des cours et intégration de nouvelles technologies comme le développement de réalité augmentée et virtuelle. L'école continue d'évoluer pour rester à la pointe de l'innovation technologique.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Milestones Section -->
+        <section class="mt-5">
+            <h2 class="text-center mb-4">Moments Clés</h2>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <img src="{{ asset('../assets/img/online.jpg') }}" class="card-img-top" alt="Lancement">
+                        <div class="card-body">
+                            <h5 class="card-title">Lancement de la Plateforme en Ligne</h5>
+                            <p class="card-text">En 2018, nous avons lancé notre plateforme d'apprentissage en ligne avec notre formateurs, rendant nos cours accessibles à un public mondial.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <img src="{{ asset('../assets/img/rncp.jpg') }}" class="card-img-top" alt="Certification">
+                        <div class="card-body">
+                            <h5 class="card-title">Introduction des Certifications</h5>
+                            <p class="card-text">Depuis 2015, nous proposons des certifications reconnues pour aider nos étudiants à se démarquer sur le marché du travail.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <img src="{{ asset('../assets/img/partnerships.jpg') }}" class="card-img-top" alt="Partenariats">
+                        <div class="card-body">
+                            <h5 class="card-title">Partenariats avec des Entreprises</h5>
+                            <p class="card-text">Nous avons établi des partenariats avec des entreprises leaders pour offrir des opportunités de stage et d'emploi à nos étudiants.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    		<footer class="footer">
+			<div class="footer-container">
+				<div class="footer-row">
+
+					<div class="footer-col">
+						<h4>Obtenir de l'aide</h4>
+						<ul>
+							<li><a href="{{ path('app_faq') }}">FAQ</a></li>
+							<li><a href="{{path('app_certification') }}">Certification</a></li>
+							<li><a href="{{ path('app_financements') }}">Financements</a></li>
+							<li><a href="{{ path('app_evenements') }}">Evenements</a></li>
+							<li><a href="{{ path('app_modaliteacces') }}">Modalités d'accès</a></li>
+
+						</ul>
+					</div>
+					<div class="footer-col">
+						<h4>DeV WeB</h4>
+						<ul>
+						    <li><a href="{{ path('app_home') }}">Home</a></li>
+							<li><a href="{{ path('app_blogs_index') }}">Notre Blog</a></li>
+							<li><a href="{{ path('app_contact') }}">Contactez-nous</a></li>
+							<li><a href="{{ path('app_apropos') }}">À propos de nous</a></li>
+							<li><a href="{{ path('app_privacy') }}">politique de confidentialité</a></li>
+
+						</ul>
+					</div>
+
+					<div class="footer-col">
+						<h4>Adresse</h4>
+						<ul>
+							<li><a href="">7 Avenue du General Patton</a></li>
+							<li><a href="">77000</a></li>
+							<li><a href="">Melun</a></li>
+							<li><a href="">Tel: 07 83 65 08 80</a></li>
+						</ul>
+					</div>
+					<div class="footer-col">
+						<h4>Suivez-nous</h4>
+						<div class="social-links">
+							<a href="#">
+								<i class="fab fa-facebook-f"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-twitter"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-instagram"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-linkedin-in"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+{% endblock %}

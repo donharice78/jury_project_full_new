@@ -1,0 +1,183 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Financements pour Formation Web et Mobile{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset ('../assets/styles/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset ('../assets/styles/aboutUs.css') }}">
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+        .section-title {
+            margin-bottom: 30px;
+        }
+        .accordion-button {
+            font-weight: bold;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <section class="aboutUs-header">
+        <nav>
+            <a href="{{ path('app_home') }}">
+                <img src="{{ asset('../assets/img/Web Dev-logo.png') }}" alt="Logo">
+            </a>
+            <div class="nav-links" id="navLinks">
+                <i class="bi bi-x" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="{{ path('app_home') }}">HOME</a></li>
+                    <li><a href="{{ path('app_apropos') }}">ABOUT</a></li>
+                    <li><a href="{{ path('app_course_index') }}">COURSE</a></li>
+                    <li><a href="{{ path('app_blogs_index') }}">BLOG</a></li>
+                    <li><a href="{{ path('app_contact') }}">CONTACT</a></li>
+                    <li>
+                        <div class="" aria-labelledby="">
+                            {% if app.user %}
+                                <a class="" href="{{ path('app_logout') }}">LOGOUT</a>
+                            {% else %}
+                                <a class="" href="{{ path('app_login') }}">ESPACE</a>
+                            {% endif %}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <i class="bi bi-list" onclick="showMenu()"></i>
+        </nav>
+    </section>
+
+    <!-- Financing Accordion Section -->
+    <section class="container my-5">
+        <div class="text-center">
+            <h1 class="section-title">Financements pour la Formation Web et Mobile</h1>
+        </div>
+
+        <div class="accordion" id="financingAccordion">
+            <!-- Government Funding -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="financingHeadingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#financingCollapseOne" aria-expanded="true" aria-controls="financingCollapseOne">
+                        Financement Public
+                    </button>
+                </h2>
+                <div id="financingCollapseOne" class="accordion-collapse collapse show" aria-labelledby="financingHeadingOne" data-bs-parent="#financingAccordion">
+                    <div class="accordion-body">
+                        <h3>Description</h3>
+                        <p>Les financements publics peuvent couvrir tout ou partie des frais de formation. Voici quelques options :</p>
+                        <ul>
+                            <li><strong>Compte Personnel de Formation (CPF)</strong>: Permet de financer des formations certifiantes, y compris les certifications RNCP.</li>
+                            <li><strong>Régions</strong>: Certaines régions offrent des aides pour les formations professionnelles. Renseignez-vous auprès de votre conseil régional.</li>
+                            <li><strong>Pôle Emploi</strong>: Des aides peuvent être disponibles pour les demandeurs d'emploi pour suivre des formations certifiantes.</li>
+                        </ul>
+                        <h3>Comment Postuler</h3>
+                        <p>Consultez les sites web des organismes mentionnés ci-dessus pour plus d'informations sur les démarches à suivre et les conditions d'éligibilité.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Employer Funding -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="financingHeadingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#financingCollapseTwo" aria-expanded="false" aria-controls="financingCollapseTwo">
+                        Financement par l'Employeur
+                    </button>
+                </h2>
+                <div id="financingCollapseTwo" class="accordion-collapse collapse" aria-labelledby="financingHeadingTwo" data-bs-parent="#financingAccordion">
+                    <div class="accordion-body">
+                        <h3>Description</h3>
+                        <p>Votre employeur peut financer tout ou partie de votre formation dans le cadre du développement professionnel. Voici comment :</p>
+                        <ul>
+                            <li><strong>Plan de Développement des Compétences</strong>: L'employeur peut intégrer la formation dans son plan de développement des compétences.</li>
+                            <li><strong>Prise en charge individuelle</strong>: Discutez avec votre employeur de la possibilité de prise en charge des frais de formation.</li>
+                        </ul>
+                        <h3>Comment Procéder</h3>
+                        <p>Parlez à votre responsable des ressources humaines pour explorer les options de financement disponibles et les conditions requises.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scholarships -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="financingHeadingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#financingCollapseThree" aria-expanded="false" aria-controls="financingCollapseThree">
+                        Bourses et Aides
+                    </button>
+                </h2>
+                <div id="financingCollapseThree" class="accordion-collapse collapse" aria-labelledby="financingHeadingThree" data-bs-parent="#financingAccordion">
+                    <div class="accordion-body">
+                        <h3>Description</h3>
+                        <p>Des bourses ou aides financières peuvent être disponibles pour les candidats éligibles. Les options incluent :</p>
+                        <ul>
+                            <li><strong>Bourses d'Études</strong>: Certaines organisations et institutions offrent des bourses pour les formations professionnelles.</li>
+                            <li><strong>Aides des Fondations</strong>: Des fondations peuvent proposer des aides pour soutenir les candidats à la formation.</li>
+                        </ul>
+                        <h3>Comment Postuler</h3>
+                        <p>Renseignez-vous auprès des organismes de formation ou des associations professionnelles pour connaître les opportunités de bourses et les critères d'éligibilité.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+		<!-- ------------------------------------footer-- -->
+
+		<footer class="footer">
+			<div class="footer-container">
+				<div class="footer-row">
+
+					<div class="footer-col">
+						<h4>Obtenir de l'aide</h4>
+						<ul>
+							<li><a href="{{ path('app_faq') }}">FAQ</a></li>
+							<li><a href="{{path('app_certification') }}">Certification</a></li>
+							<li><a href="{{ path('app_financements') }}">Financements</a></li>
+							<li><a href="{{ path('app_evenements') }}">Evenements</a></li>
+							<li><a href="{{ path('app_modaliteacces') }}">Modalités d'accès</a></li>
+
+						</ul>
+					</div>
+					<div class="footer-col">
+						<h4>DeV WeB</h4>
+						<ul>
+						    <li><a href="{{ path('app_home') }}">Home</a></li>
+							<li><a href="{{ path('app_blogs_index') }}">Notre Blog</a></li>
+							<li><a href="{{ path('app_contact') }}">Contactez-nous</a></li>
+							<li><a href="{{ path('app_apropos') }}">À propos de nous</a></li>
+							<li><a href="{{ path('app_privacy') }}">politique de confidentialité</a></li>
+
+						</ul>
+					</div>
+
+					<div class="footer-col">
+						<h4>Adresse</h4>
+						<ul>
+							<li><a href="">7 Avenue du General Patton</a></li>
+							<li><a href="">77000</a></li>
+							<li><a href="">Melun</a></li>
+							<li><a href="">Tel: 07 83 65 08 80</a></li>
+						</ul>
+					</div>
+					<div class="footer-col">
+						<h4>Suivez-nous</h4>
+						<div class="social-links">
+							<a href="#">
+								<i class="fab fa-facebook-f"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-twitter"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-instagram"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-linkedin-in"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+   
+{% endblock %}

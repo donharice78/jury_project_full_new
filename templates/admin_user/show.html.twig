@@ -13,7 +13,7 @@
 <section class="courses-header">
     <nav>
         <a href="{{ path('app_home') }}">
-            <img src="{{ asset('../assets/img/logo.png') }}" alt="Logo">
+            <img src="{{ asset('../assets/img/Web Dev-logo.png') }}" alt="Logo">
         </a>
         <div class="nav-links" id="navLinks">
             <i class="bi bi-x" onclick="hideMenu()"></i>
@@ -97,58 +97,63 @@
     </div>
 </div>
 
-<!-- ------------------------------------footer-- -->
+		<!-- ------------------------------------footer-- -->
 
 <footer class="footer">
-    <div class="footer-container">
-        <div class="footer-row">
-            <div class="footer-col">
-                <h4>DHN Studies</h4>
-                <ul>
-                    <li><a href="{{ path('app_contact') }}">Contact us</a></li>
-                    <li><a href="{{ path('app_apropos') }}">About us</a></li>
-                    <li><a href="#">Privacy policy</a></li>
-                    <li><a href="#">Affiliate program</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Get help</h4>
-                <ul>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Shipping</a></li>
-                    <li><a href="#">Returns</a></li>
-                    <li><a href="#">Order status</a></li>
-                    <li><a href="#">Payment options</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Online shop</h4>
-                <ul>
-                    <li><a href="#">Watch</a></li>
-                    <li><a href="#">Bag</a></li>
-                    <li><a href="#">Shoes</a></li>
-                    <li><a href="#">Dress</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Follow us</h4>
-                <div class="social-links">
-                    <a href="#">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="#">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="#">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+			<div class="footer-container">
+				<div class="footer-row">
+
+					<div class="footer-col">
+						<h4>Obtenir de l'aide</h4>
+						<ul>
+							<li><a href="{{ path('app_faq') }}">FAQ</a></li>
+							<li><a href="{{path('app_certification') }}">Certification</a></li>
+							<li><a href="{{ path('app_financements') }}">Financements</a></li>
+							<li><a href="{{ path('app_evenements') }}">Evenements</a></li>
+							<li><a href="{{ path('app_modaliteacces') }}">Modalités d'accès</a></li>
+
+						</ul>
+					</div>
+					<div class="footer-col">
+						<h4>DeV WeB</h4>
+						<ul>
+						    <li><a href="{{ path('app_home') }}">Home</a></li>
+							<li><a href="{{ path('app_blogs_index') }}">Notre Blog</a></li>
+							<li><a href="{{ path('app_contact') }}">Contactez-nous</a></li>
+							<li><a href="{{ path('app_apropos') }}">À propos de nous</a></li>
+							<li><a href="{{ path('app_privacy') }}">politique de confidentialité</a></li>
+
+						</ul>
+					</div>
+
+					<div class="footer-col">
+						<h4>Adresse</h4>
+						<ul>
+							<li><a href="">7 Avenue du General Patton</a></li>
+							<li><a href="">77000</a></li>
+							<li><a href="">Melun</a></li>
+							<li><a href="">Tel: 07 83 65 08 80</a></li>
+						</ul>
+					</div>
+					<div class="footer-col">
+						<h4>Suivez-nous</h4>
+						<div class="social-links">
+							<a href="#">
+								<i class="fab fa-facebook-f"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-twitter"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-instagram"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-linkedin-in"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
 </footer>
 
 <!-- Bootstrap JS and Popper.js -->

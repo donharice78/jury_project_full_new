@@ -1,0 +1,188 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modalités d'Accès aux Certifications Web et Mobile{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset ('../assets/styles/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset ('../assets/styles/aboutUs.css') }}">
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+        .section-title {
+            margin-bottom: 30px;
+        }
+        .accordion-button {
+            font-weight: bold;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <section class="aboutUs-header">
+        <nav>
+            <a href="{{ path('app_home') }}">
+                <img src="{{ asset('../assets/img/Web Dev-logo.png') }}" alt="Logo">
+            </a>
+            <div class="nav-links" id="navLinks">
+                <i class="bi bi-x" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="{{ path('app_home') }}">HOME</a></li>
+                    <li><a href="{{ path('app_apropos') }}">ABOUT</a></li>
+                    <li><a href="{{ path('app_course_index') }}">COURSE</a></li>
+                    <li><a href="{{ path('app_blogs_index') }}">BLOG</a></li>
+                    <li><a href="{{ path('app_contact') }}">CONTACT</a></li>
+                    <li>
+                        <div class="" aria-labelledby="">
+                            {% if app.user %}
+                                <a class="" href="{{ path('app_logout') }}">LOGOUT</a>
+                            {% else %}
+                                <a class="" href="{{ path('app_login') }}">ESPACE</a>
+                            {% endif %}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <i class="bi bi-list" onclick="showMenu()"></i>
+        </nav>
+    </section>
+
+    <!-- Access Modalities Accordion Section -->
+    <section class="container my-5">
+        <div class="text-center">
+            <h1 class="section-title">Modalités d'Accès aux Certifications Web et Mobile</h1>
+        </div>
+
+        <div class="accordion" id="accessAccordion">
+            <!-- Prerequisites -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="accessHeadingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#accessCollapseOne" aria-expanded="true" aria-controls="accessCollapseOne">
+                        Prérequis
+                    </button>
+                </h2>
+                <div id="accessCollapseOne" class="accordion-collapse collapse show" aria-labelledby="accessHeadingOne" data-bs-parent="#accessAccordion">
+                    <div class="accordion-body">
+                        <h3>Description</h3>
+                        <p>Avant de s'inscrire à une certification en développement web ou mobile, il est important de remplir certains prérequis :</p>
+                        <ul>
+                            <li><strong>Niveau de Formation</strong>: Généralement, une formation préalable en développement ou dans un domaine connexe est requise.</li>
+                            <li><strong>Compétences Techniques</strong>: Une connaissance de base des technologies web (HTML, CSS, JavaScript) ou des langages de programmation mobile est souvent nécessaire.</li>
+                            <li><strong>Expérience Professionnelle</strong>: Pour les certifications avancées, une expérience professionnelle préalable peut être exigée.</li>
+                        </ul>
+                        <h3>Comment Vérifier</h3>
+                        <p>Consultez les exigences spécifiques de chaque certification sur le site de l’organisme de formation ou contactez un conseiller pour obtenir des détails sur les prérequis.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Application Process -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="accessHeadingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accessCollapseTwo" aria-expanded="false" aria-controls="accessCollapseTwo">
+                        Processus de Candidature
+                    </button>
+                </h2>
+                <div id="accessCollapseTwo" class="accordion-collapse collapse" aria-labelledby="accessHeadingTwo" data-bs-parent="#accessAccordion">
+                    <div class="accordion-body">
+                        <h3>Description</h3>
+                        <p>Pour s'inscrire à une certification, suivez les étapes suivantes :</p>
+                        <ul>
+                            <li><strong>Soumettre une Candidature</strong>: Remplissez le formulaire de candidature en ligne ou en personne selon les instructions de l’organisme de formation.</li>
+                            <li><strong>Fournir les Documents Requis</strong>: Préparez les documents nécessaires tels que les diplômes, les CV, et les lettres de motivation.</li>
+                            <li><strong>Payer les Frais</strong>: Assurez-vous de régler les frais d'inscription ou de formation, si applicable.</li>
+                            <li><strong>Passer les Évaluations</strong>: Certains programmes peuvent inclure des tests d'entrée ou des évaluations pour vérifier vos compétences.</li>
+                        </ul>
+                        <h3>Ressources Utiles</h3>
+                        <p>Consultez les sites web des organismes de certification pour des instructions détaillées et des conseils sur la préparation de votre candidature.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Specific Conditions -->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="accessHeadingThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#accessCollapseThree" aria-expanded="false" aria-controls="accessCollapseThree">
+                        Conditions Spécifiques
+                    </button>
+                </h2>
+                <div id="accessCollapseThree" class="accordion-collapse collapse" aria-labelledby="accessHeadingThree" data-bs-parent="#accessAccordion">
+                    <div class="accordion-body">
+                        <h3>Description</h3>
+                        <p>Certaines certifications peuvent avoir des conditions spécifiques :</p>
+                        <ul>
+                            <li><strong>Conditions d'Éligibilité</strong>: Certaines certifications peuvent être réservées à des professionnels ayant un certain niveau d'expérience ou de formation préalable.</li>
+                            <li><strong>Conditions d'Admission</strong>: Des entretiens ou des tests supplémentaires peuvent être nécessaires pour certaines certifications.</li>
+                            <li><strong>Conditions Particulières</strong>: Vérifiez les conditions particulières liées à chaque certification spécifique pour vous assurer de répondre à tous les critères.</li>
+                        </ul>
+                        <h3>Vérification</h3>
+                        <p>Consultez les descriptions détaillées des certifications ou contactez le centre de formation pour obtenir des informations sur les conditions spécifiques.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+		<!-- ------------------------------------footer-- -->
+
+		<footer class="footer">
+			<div class="footer-container">
+				<div class="footer-row">
+
+					<div class="footer-col">
+						<h4>Obtenir de l'aide</h4>
+						<ul>
+							<li><a href="{{ path('app_faq') }}">FAQ</a></li>
+							<li><a href="{{path('app_certification') }}">Certification</a></li>
+							<li><a href="{{ path('app_financements') }}">Financements</a></li>
+							<li><a href="{{ path('app_evenements') }}">Evenements</a></li>
+							<li><a href="{{ path('app_modaliteacces') }}">Modalités d'accès</a></li>
+
+						</ul>
+					</div>
+					<div class="footer-col">
+						<h4>DeV WeB</h4>
+						<ul>
+						    <li><a href="{{ path('app_home') }}">Home</a></li>
+							<li><a href="{{ path('app_blogs_index') }}">Notre Blog</a></li>
+							<li><a href="{{ path('app_contact') }}">Contactez-nous</a></li>
+							<li><a href="{{ path('app_apropos') }}">À propos de nous</a></li>
+							<li><a href="{{ path('app_privacy') }}">politique de confidentialité</a></li>
+
+						</ul>
+					</div>
+
+					<div class="footer-col">
+						<h4>Adresse</h4>
+						<ul>
+							<li><a href="">7 Avenue du General Patton</a></li>
+							<li><a href="">77000</a></li>
+							<li><a href="">Melun</a></li>
+							<li><a href="">Tel: 07 83 65 08 80</a></li>
+						</ul>
+					</div>
+					<div class="footer-col">
+						<h4>Suivez-nous</h4>
+						<div class="social-links">
+							<a href="#">
+								<i class="fab fa-facebook-f"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-twitter"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-instagram"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-linkedin-in"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+    <!-- JavaScript Bundle with Popper (Bootstrap 5) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"></script>
+{% endblock %}

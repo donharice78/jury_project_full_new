@@ -1,0 +1,225 @@
+{# templates/team/index.html.twig #}
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset ('../assets/styles/styles.css') }}">
+	<link rel="stylesheet" href="{{ asset ('../assets/styles/contact.css') }}">
+
+{% endblock %}
+{% block title %}Team{% endblock %}
+
+
+{% block body %}
+
+	<body>
+		<section class="contact-header">
+			<nav>
+				<a href="{{ path('app_home') }}">
+					<img src="{{ asset('../assets/img/Web Dev-logo.png') }}" alt="Logo">
+				</a>
+				<div class="nav-links" id="navLinks">
+					<i class="bi bi-x" onclick="hideMenu()"></i>
+					<ul>
+						<li>
+							<a href="{{ path('app_home') }} ">HOME</a>
+						</li>
+						<li>
+							<a href="{{ path('app_apropos') }}">À PROPOS</a>
+						</li>
+						<li>
+							<a href="{{ path('app_course_index') }}">COURS</a>
+						</li>
+						<li>
+							<a href="{{ path('app_blogs_index') }}">BLOG</a>
+						</li>
+						<li>
+							<a href="{{ path('app_contact') }}">CONTACT</a>
+						</li>
+
+						<li class="">
+
+							<div class="" aria-labelledby="">
+								{% if app.user %}
+									<a class="" href="{{ path('app_logout') }}">DÉCONNEXION</a>
+								{% else %}
+									<a class="" href="{{ path('app_login') }}">ESPACE</a>
+								{% endif %}
+							</div>
+						</li>
+					</ul>
+				</div>
+				<i class="bi bi-list" onclick="showMenu()"></i>
+			</nav>
+		</section>
+
+		<section class="m-5">
+			<h1 class="text-center mb-4">Rencontrez Notre Équipe</h1>
+
+			<div class="row">
+				{% for member in team_members %}
+					<div class="col-md-4 mb-4">
+						<div class="card d-flex flex-row align-items-center">
+							<div class="card-body d-flex align-items-center">
+								<img src="{{ asset('assets/img/team/' ~ member.image) }}" class="rounded-circle me-3" alt="{{ member.name }}" style="width: 100px; height: 100px; object-fit: cover;">
+								<div>
+									<h5 class="card-title mb-1">{{ member.name }}</h5>
+									<h6 class="card-subtitle mb-2 text-muted">{{ member.role }}</h6>
+									<p class="card-text mb-0">{{ member.bio | slice(0, 110) }}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</section>
+
+
+		<section class="m-5">
+			<h2 class="text-center mb-4">Nos Partenaires et Organisations</h2>
+
+			<!-- Partner Logos -->
+			<div class="text-center mb-4 d">
+				<h5>Nos Partenaires</h5>
+				<div class="d-flex justify-content-center flex-wrap">
+					<div class="p-2">
+						<img src="{{ asset('../assets/img/nexrt.jpg') }}" alt="Partner 2" class="img-fluid" style="max-width: 150px;">
+					</div>
+					<div class="p-2">
+						<img src="{{ asset('../assets/img/etc.png') }}" alt="Partner 1" class="img-fluid" style="max-width: 150px;">
+					</div>
+					<div class="mt-5">
+						<img src="{{ asset('../assets/img/Persistent.jpg') }}" alt="Partner 3" class="img-fluid" style="max-width: 150px;">
+					</div>
+					<!-- Add more logos as needed -->
+				</div>
+			</div>
+
+			<!-- Detailed Partner Information -->
+			<div class="row">
+				<div class="col-md-12 mb-4">
+					<div class="card">
+						<div class="card-body d-flex flex-column align-items-center">
+							<h5 class="card-title">À Propos de Nos Partenaires</h5>
+							<p class="card-text">
+								Notre centre de développement web collabore avec plusieurs organisations de premier plan pour enrichir notre programme éducatif et offrir à nos élèves des opportunités uniques.
+							</p>
+							<p class="card-text">
+								Voici un aperçu de certains de nos partenaires clés et de leur contribution :
+							</p>
+							<ul class="list-unstyled ">
+								<li>
+									<img src="{{ asset('../assets/img/nexrt.jpg') }}" alt="Partner 1" class="img-fluid d-block mx-auto my-4" style="max-width: 150px;">
+									<strong>NEXT IT:</strong>
+									Une organisation leader dans le secteur technologique, fournissant des ressources et des outils pour le développement web. Ils nous aident à intégrer les dernières technologies dans notre curriculum.
+								</li>
+								<li>
+									<img src="{{ asset('../assets/img/etc.png') }}" alt="Partner 1" class="img-fluid d-block mx-auto my-4" style="max-width: 150px;">
+
+									<strong>ETC TECH:</strong>
+									Spécialisé dans les formations professionnelles, ce partenaire organise des ateliers et des conférences qui préparent nos élèves aux défis actuels du marché du travail.
+								</li>
+								<li>
+									<img src="{{ asset('../assets/img/Persistent.jpg') }}" alt="Partner 1" class="img-fluid d-block mx-auto my-4" style="max-width: 150px;">
+									<strong>PERSISTENT:</strong>
+									Offrant des services de mentorat et des opportunités de réseautage, ce partenaire aide nos élèves à se connecter avec des professionnels de l'industrie et à bâtir leur réseau professionnel.
+								</li>
+								<!-- Add more detailed partner descriptions as needed -->
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Additional Section on Impact -->
+			<div class="row">
+				<div class="col-md-12 mb-4">
+					<div class="card">
+						<div class="card-body d-flex flex-column align-items-center">
+							<h5 class="card-title">Impact de Nos Partenariats</h5>
+							<p class="card-text">
+								Nos partenariats ont un impact significatif sur le développement de nos élèves et le succès de notre programme. Voici quelques-uns des avantages que nous avons observés :
+							</p>
+							<ul>
+								<li>
+									<strong>Accès à des Ressources Avancées:</strong>
+									Grâce à nos partenaires, nous avons accès à des outils et des technologies de pointe qui enrichissent l'expérience d'apprentissage.
+								</li>
+								<li>
+									<strong>Opportunités de Stages:</strong>
+									Nos élèves bénéficient de stages pratiques dans des entreprises reconnues, leur permettant d'acquérir une expérience précieuse et de se préparer au marché du travail.
+								</li>
+								<li>
+									<strong>Ateliers et Formations:</strong>
+									Des ateliers spécialisés et des formations sont régulièrement organisés pour développer les compétences pratiques et théoriques de nos élèves.
+								</li>
+								<li>
+									<strong>Réseautage Professionnel:</strong>
+									Les opportunités de réseautage offertes par nos partenaires aident les élèves à établir des contacts importants dans l'industrie.
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</body>
+
+    		<footer class="footer">
+			<div class="footer-container">
+				<div class="footer-row">
+
+					<div class="footer-col">
+						<h4>Obtenir de l'aide</h4>
+						<ul>
+							<li><a href="{{ path('app_faq') }}">FAQ</a></li>
+							<li><a href="{{path('app_certification') }}">Certification</a></li>
+							<li><a href="{{ path('app_financements') }}">Financements</a></li>
+							<li><a href="{{ path('app_evenements') }}">Evenements</a></li>
+							<li><a href="{{ path('app_modaliteacces') }}">Modalités d'accès</a></li>
+
+						</ul>
+					</div>
+					<div class="footer-col">
+						<h4>DeV WeB</h4>
+						<ul>
+						    <li><a href="{{ path('app_home') }}">Home</a></li>
+							<li><a href="{{ path('app_blogs_index') }}">Notre Blog</a></li>
+							<li><a href="{{ path('app_contact') }}">Contactez-nous</a></li>
+							<li><a href="{{ path('app_apropos') }}">À propos de nous</a></li>
+							<li><a href="{{ path('app_privacy') }}">politique de confidentialité</a></li>
+
+						</ul>
+					</div>
+
+					<div class="footer-col">
+						<h4>Adresse</h4>
+						<ul>
+							<li><a href="">7 Avenue du General Patton</a></li>
+							<li><a href="">77000</a></li>
+							<li><a href="">Melun</a></li>
+							<li><a href="">Tel: 07 83 65 08 80</a></li>
+						</ul>
+					</div>
+					<div class="footer-col">
+						<h4>Suivez-nous</h4>
+						<div class="social-links">
+							<a href="#">
+								<i class="fab fa-facebook-f"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-twitter"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-instagram"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-linkedin-in"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+
+{% endblock %}
