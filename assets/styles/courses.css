@@ -1,20 +1,20 @@
-.courses-header{
-    min-height: 50vh;
-    width: 100%;
-    background-image:linear-gradient(rgba(4, 9, 3, 0.418),
-     rgba(4, 9, 3, 0.418)),url(../img/Lyon.jpg);
-    background-position: center;
-    background-size: cover;
-    
-    
+/* En-tête des sections de cours */
+.courses-header {
+  min-height: 50vh;
+  width: 100%;
+  background-image: linear-gradient(rgba(4, 9, 3, 0.418), rgba(4, 9, 3, 0.418)), url(../img/Lyon.jpg);
+  background-position: center;
+  background-size: cover;
 }
 
+/* Images générales */
 img {
   height: auto;
   max-width: 100%;
   vertical-align: middle;
 }
 
+/* Boutons */
 .btn {
   background-color: white;
   border: 1px solid black;
@@ -24,11 +24,13 @@ img {
   text-transform: lowercase;
 }
 
+/* Bouton pleine largeur */
 .btn--block {
   display: block;
   width: 100%;
 }
- 
+
+/* Liste des cartes */
 .cards {
   display: flex;
   flex-wrap: wrap;
@@ -41,41 +43,48 @@ img {
   padding: 20px 12px;
   box-sizing: border-box;
   transition: 0.5s;
-  
-}
-.card{
-   
-    background-color:rgba(58,116,179,0.5) ;
-    
-}
-.card:hover{
-    box-shadow: 0 0 20px 0px rgba(58,116,179,0.8);
 }
 
+/* Style de base des cartes */
+.card {
+  background-color: rgba(58, 116, 179, 0.5);
+}
 
+/* Effet au survol sur les cartes */
+.card:hover {
+  box-shadow: 0 0 20px 0px rgba(58, 116, 179, 0.8);
+}
 
+/* Élément de la liste de cartes */
 .cards__item {
-    
   display: flex;
   padding: 1rem;
-  @media(min-width: 40rem) {
-    width: 50%;
-  }
-  @media(min-width: 56rem) {
-    width: 33.3333%;
+}
+
+/* Responsivité des éléments de la liste */
+@media (min-width: 40rem) {
+  .cards__item {
+      width: 50%;
   }
 }
 
+@media (min-width: 56rem) {
+  .cards__item {
+      width: 33.3333%;
+  }
+}
+
+/* Structure de base des cartes */
 .card {
-  background-color: rgba(58,116,179,0.5);
+  background-color: rgba(58, 116, 179, 0.5);
   border-radius: 0.25rem;
-  box-shadow: 0 20px 40px -14px rgba(0,0,0,0.25);
+  box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
   overflow: hidden;
-
 }
 
+/* Contenu des cartes */
 .card__content {
   display: flex;
   flex: 1 1 auto;
@@ -83,6 +92,7 @@ img {
   padding: 1rem;
 }
 
+/* Image dans les cartes */
 .card_image {
   background-position: center center;
   background-repeat: no-repeat;
@@ -93,13 +103,10 @@ img {
   filter: saturate(80%);
   overflow: hidden;
   position: relative;
-  transition: filter 0.5s cubic-bezier(.43,.41,.22,.91);;
-
- 
+  transition: filter 0.5s cubic-bezier(.43, .41, .22, .91);
 }
 
-
-
+/* Titre des cartes */
 .card__title {
   color: darkgray;
   font-size: 1.25rem;
@@ -108,6 +115,7 @@ img {
   text-transform: uppercase;
 }
 
+/* Texte dans les cartes */
 .card__text {
   flex: 1 1 auto;
   font-size: 0.875rem;
@@ -115,9 +123,9 @@ img {
   margin-bottom: 1.25rem;
 }
 
-
-@media(min-width: 40rem) {
-    &::before {
-      padding-top: 66.6%; // 3:2 aspect ratio
-    }
+/* Aspect ratio pour les images des cartes en responsivité */
+@media (min-width: 40rem) {
+  .card_image::before {
+      padding-top: 66.6%; /* Ratio 3:2 */
   }
+}
