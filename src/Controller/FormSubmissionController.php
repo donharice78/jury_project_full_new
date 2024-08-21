@@ -16,23 +16,27 @@ class FormSubmissionController extends AbstractController
     #[Route('/form/submission', name: 'app_contact')]
     public function contact(Request $request, MailerInterface $mailer): Response
     {
+        // Crée une nouvelle instance de ContactMessage
         $contactMessage = new ContactMessage();
+        
+        // Crée le formulaire basé sur ContactMessage
         $form = $this->createForm(ContactMessageType::class, $contactMessage);
 
+        // Traite les données soumises du formulaire
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Get form data
+            // Récupère les données du formulaire
             $contactMessage = $form->getData();
 
-            // Send email
+            // Crée l'email à envoyer
             $email = (new Email())
                 ->from($contactMessage->getEmail())
                 ->to('kolonelaboki78@gmail.com')
-                ->subject('Contact Form Submission')
+                ->subject('Soumission de formulaire de contact')
                 ->text(
                     sprintf(
-                        "Name: %s\nEmail: %s\nPhone: %s\nMessage: %s",
+                        "Nom: %s\nEmail: %s\nTéléphone: %s\nMessage: %s",
                         $contactMessage->getName(),
                         $contactMessage->getEmail(),
                         $contactMessage->getPhone(),
@@ -41,15 +45,21 @@ class FormSubmissionController extends AbstractController
                 );
 
             try {
+                // Envoie l'email
                 $mailer->send($email);
-                $this->addFlash('success', 'Your message has been sent!');
+                
+                // Affiche un message de succès
+                $this->addFlash('success', 'Votre message a été envoyé avec succès !');
             } catch (\Exception $e) {
-                $this->addFlash('error', 'An error occurred while sending the email.');
+                // Affiche un message d'erreur en cas de problème
+                $this->addFlash('error', 'Une erreur est survenue lors de l\'envoi de l\'email.');
             }
 
-            return $this->redirectToRoute('app_form_submission');
+            // Redirige vers la page d'accueil après l'envoi
+            return $this->redirectToRoute('app_home');
         }
 
+        // Affiche le formulaire de contact
         return $this->render('form_submission/index.html.twig', [
             'form' => $form->createView(),
         ]);

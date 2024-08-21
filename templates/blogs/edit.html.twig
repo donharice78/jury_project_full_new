@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Blogs{% endblock %}
+{% block title %}Modifier{% endblock %}
 
 {% block stylesheets %}
 	{{ parent() }}
@@ -14,43 +14,36 @@
 <body>
 
 <section class="courses-header">
-			<nav>
-				<a href="{{ path('app_home') }}">
-					<img src="{{ asset('../assets/img/Web Dev-logo.png') }}" alt="Logo">
-				</a>
-				<div class="nav-links" id="navLinks">
-					<i class="bi bi-x" onclick="hideMenu()"></i>
-					<ul>
-						<li>
-							<a href="{{ path('app_home') }}">HOME</a>
-						</li>
-						<li>
-							<a href="{{ path('app_apropos') }}">ABOUT</a>
-						</li>
-						<li>
-							<a href="{{ path('app_course_index') }}">COURSE</a>
-						</li>
-						<li>
-							<a href="{{ path('app_blogs_index') }}">BLOG</a>
-						</li>
-						<li>
-							<a href="{{ path('app_contact') }}">CONTACT</a>
-						</li>
-
-						<li class="">
-
-							<div class="" aria-labelledby="">
-								{% if app.user %}
-									<a class="" href="{{ path('app_logout') }}">LOGOUT</a>
-								{% else %}
-									<a class="" href="{{ path('app_login') }}">ESPACE</a>
-								{% endif %}
-							</div>
-						</li>
-					</ul>
-				</div>
-				<i class="bi bi-list" onclick="showMenu()"></i>
-			</nav>
+            <nav>
+                <!-- Logo cliquable qui redirige vers la page d'accueil -->
+                <a href="{{ path('app_home') }}">
+                    <img src="{{ asset('../assets/img/Web Dev-logo.png') }}" alt="Logo">
+                </a>
+                <div class="nav-links" id="navLinks">
+                    <!-- Icône pour fermer le menu -->
+                    <i class="bi bi-x" onclick="hideMenu()"></i>
+                    <ul>
+                        <!-- Liens de navigation -->
+                        <li><a href="{{ path('app_home') }}">HOME</a></li>
+                        <li><a href="{{ path('app_apropos') }}">À PROPOS</a></li>
+                        <li><a href="{{ path('app_course_index') }}">COURS</a></li>
+                        <li><a href="{{ path('app_blogs_index') }}">BLOG</a></li>
+                        <li><a href="{{ path('app_contact') }}">CONTACT</a></li>
+                        <li>
+                            <!-- Liens de connexion/déconnexion -->
+                            <div aria-labelledby="">
+                                {% if app.user %}
+                                    <a href="{{ path('app_logout') }}">DÉCONNEXION</a>
+                                {% else %}
+                                    <a href="{{ path('app_login') }}">ESPACE</a>
+                                {% endif %}
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Icône pour ouvrir le menu -->
+                <i class="bi bi-list" onclick="showMenu()"></i>
+            </nav>
 
        
     </section>

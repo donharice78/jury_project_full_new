@@ -63,7 +63,7 @@ class CourseController extends AbstractController
                     $course->setImage('/uploads/' . $newFileName);
                 } catch (FileException $e) {
                     // Gère l'exception en cas de problème lors du téléchargement du fichier
-                    $this->addFlash('error', 'Erreur lors de l\'upload de l\'image: ' . $e->getMessage());
+                    $this->addFlash('error', 'Erreur lors de l\'upload de l\'image : ' . $e->getMessage());
                     return $this->redirectToRoute('app_course_new');
                 }
             }
@@ -129,7 +129,7 @@ class CourseController extends AbstractController
                     $course->setImage('/uploads/' . $newFileName);
                 } catch (FileException $e) {
                     // Gère l'exception en cas de problème lors du téléchargement du fichier
-                    $this->addFlash('error', 'Erreur lors de l\'upload de l\'image: ' . $e->getMessage());
+                    $this->addFlash('error', 'Erreur lors de l\'upload de l\'image : ' . $e->getMessage());
                     return $this->redirectToRoute('app_course_edit', ['id' => $course->getId()]);
                 }
             }

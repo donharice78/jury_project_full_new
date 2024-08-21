@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
@@ -11,48 +13,59 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[UniqueEntity(fields: ['email'], message: 'Il y a déjà un compte avec cet email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: Types::INTEGER)]
-    private ?int $id = null;
+    private ?int $id = null; // Identifiant unique de l'utilisateur
 
     #[ORM\Column(length: 255, unique: true)]
-    #[Assert\Email(message: 'The email "{{ value }}" is not a valid email.')]
-    #[Assert\NotBlank(message: 'Email should not be blank.')]
-    private ?string $email = null;
+    #[Assert\Email(message: 'L\'email "{{ value }}" n\'est pas valide.')]
+    #[Assert\NotBlank(message: 'L\'email ne doit pas être vide.')]
+    private ?string $email = null; // Adresse email de l'utilisateur
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'Password should not be blank.')]
-    private ?string $password = null;
+    #[Assert\NotBlank(message: 'Le mot de passe ne doit pas être vide.')]
+    private ?string $password = null; // Mot de passe de l'utilisateur
 
-    private ?string $confirmPassword = null;
-
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'Username should not be blank.')]
-    private ?string $username = null;
+    private ?string $confirmPassword = null; // Mot de passe de confirmation pour les formulaires (non stocké dans la base de données)
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'First name should not be blank.')]
-    private ?string $firstName = null;
+    #[Assert\NotBlank(message: 'Le nom d\'utilisateur ne doit pas être vide.')]
+    private ?string $username = null; // Nom d'utilisateur
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'Last name should not be blank.')]
-    private ?string $lastName = null;
+    #[Assert\NotBlank(message: 'Le prénom ne doit pas être vide.')]
+    private ?string $firstName = null; // Prénom de l'utilisateur
+
+    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Le nom de famille ne doit pas être vide.')]
+    private ?string $lastName = null; // Nom de famille de l'utilisateur
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $phone = null;
+    private ?string $phone = null; // Numéro de téléphone de l'utilisateur (optionnel)
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $terms = null;
+    private ?string $terms = null; // Conditions acceptées par l'utilisateur (optionnel)
 
     #[ORM\Column(type: Types::JSON)]
-    private array $roles = [];
+    private array $roles = []; // Rôles de l'utilisateur (ex. ROLE_USER, ROLE_ADMIN)
 
     #[ORM\Column(length: 255)]
-    private ?string $photo = null;
+    private ?string $photo = null; // Photo de profil de l'utilisateur (chemin du fichier)
+
+    /**
+     * @var Collection<int, Comment>
+     */
+    #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'name')]
+    private Collection $comments; // Commentaires associés à l'utilisateur
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -150,7 +163,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        $roles[] = 'ROLE_USER'; // Add default role if not present
+        $roles[] = 'ROLE_USER'; // Ajouter le rôle par défaut si non présent
 
         return array_unique($roles);
     }
@@ -163,12 +176,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function eraseCredentials(): void
     {
-        // Clear any temporary sensitive data
+        // Effacer les données sensibles temporaires
     }
 
     public function getUserIdentifier(): string
     {
-        return $this->email;
+        return $this->email; // Utilisé pour l'identification de l'utilisateur
     }
 
     public function getPhoto(): ?string
@@ -179,6 +192,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPhoto(string $photo): static
     {
         $this->photo = $photo;
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): static
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): static
+    {
+        if ($this->comments->removeElement($comment)) {
+            // Assigner la relation possédante à null (sauf si déjà changé)
+            if ($comment->getUser() === $this) {
+                $comment->setUser(null);
+            }
+        }
 
         return $this;
     }

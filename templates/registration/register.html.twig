@@ -1,190 +1,197 @@
 {% extends 'base.html.twig' %}
 
-
 {% block stylesheets %}
 	{{ parent() }}
-	<link rel="stylesheet" href="{{ asset ('../assets/styles/styles.css') }}">
-	<link rel="stylesheet" href="{{ asset ('../assets/styles/courses.css') }}">
-
+	<!-- Importation des fichiers CSS pour le style général et spécifique aux cours -->
+	<link rel="stylesheet" href="{{ asset('../assets/styles/styles.css') }}">
+	<link rel="stylesheet" href="{{ asset('../assets/styles/courses.css') }}">
 {% endblock %}
 
-{% block title %}Register
+{% block title %}Inscription
 {% endblock %}
 
 {% block body %}
-	<body>
-
-        <section class="courses-header">
-			<nav>
-				<a href="{{ path('app_home') }}">
-					<img src="{{ asset('../assets/img/Web Dev-logo.png') }}" alt="Logo">
-				</a>
-				<div class="nav-links" id="navLinks">
-					<i class="bi bi-x" onclick="hideMenu()"></i>
-					<ul>
-						<li>
-							<a href="{{ path('app_home') }}">HOME</a>
-						</li>
-						<li>
-							<a href="{{ path('app_apropos') }}">ABOUT</a>
-						</li>
-						<li>
-							<a href="{{ path('app_course_index') }}">COURSE</a>
-						</li>
-						<li>
-							<a href="{{ path('app_blogs_index') }}">BLOG</a>
-						</li>
-						<li>
-							<a href="{{ path('app_contact') }}">CONTACT</a>
-						</li>
-
-						<li class="">
-
-							<div class="" aria-labelledby="">
-								{% if app.user %}
-									<a class="" href="{{ path('app_logout') }}">LOGOUT</a>
-								{% else %}
-									<a class="" href="{{ path('app_login') }}">ESPACE</a>
-								{% endif %}
-							</div>
-						</li>
-					</ul>
-				</div>
-				<i class="bi bi-list" onclick="showMenu()"></i>
-			</nav>
-       
-    </section>
-
-
-
-		<div class="container mt-5">
-			<h1 class="mb-4 text-center">Register</h1>
-
-			{{ form_start(registrationForm, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
-
-			<!-- Place Username, First Name, and Last Name fields here -->
-			<div class="mb-3">
-				{{ form_label(registrationForm.username, null, {'label_attr': {'class': 'form-label'}}) }}
-				{{ form_widget(registrationForm.username, {'attr': {'class': 'form-control'}}) }}
-				{{ form_errors(registrationForm.username) }}
+	<!-- Section d'en-tête pour les cours -->
+	<section class="courses-header">
+		<nav>
+			<!-- Logo cliquable qui redirige vers la page d'accueil -->
+			<a href="{{ path('app_home') }}">
+				<img src="{{ asset('../assets/img/Web Dev-logo.png') }}" alt="Logo">
+			</a>
+			<div
+				class="nav-links" id="navLinks">
+				<!-- Icône pour fermer le menu -->
+				<i class="bi bi-x" onclick="hideMenu()"></i>
+				<ul>
+					<!-- Liens de navigation -->
+					<li>
+						<a href="{{ path('app_home') }}">ACCUEIL</a>
+					</li>
+					<li>
+						<a href="{{ path('app_apropos') }}">À PROPOS</a>
+					</li>
+					<li>
+						<a href="{{ path('app_course_index') }}">COURS</a>
+					</li>
+					<li>
+						<a href="{{ path('app_blogs_index') }}">BLOG</a>
+					</li>
+					<li>
+						<a href="{{ path('app_contact') }}">CONTACT</a>
+					</li>
+					<li>
+						<!-- Liens de connexion/déconnexion -->
+						<div aria-labelledby="">
+							{% if app.user %}
+								<a href="{{ path('app_logout') }}">DÉCONNEXION</a>
+							{% else %}
+								<a href="{{ path('app_login') }}">ESPACE</a>
+							{% endif %}
+						</div>
+					</li>
+				</ul>
 			</div>
+			<!-- Icône pour ouvrir le menu -->
+			<i class="bi bi-list" onclick="showMenu()"></i>
+		</nav>
+	</section>
 
-			<div class="mb-3">
-				{{ form_label(registrationForm.email, null, {'label_attr': {'class': 'form-label'}}) }}
-				{{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
-				{{ form_errors(registrationForm.email) }}
-			</div>
+	<!-- Section principale contenant le formulaire d'inscription -->
+	<div class="container mt-5">
+		<a href="{{ path('app_home') }}" class="d-flex justify-content-center mb-4">
+			<img src="{{ asset('../assets/img/Web Dev-logo.png') }}" alt="Logo" class="img-fluid" style="width: 150px;">
+		</a>
 
+		<h1 class="mb-4 text-center">Inscription</h1>
 
-			<div class="mb-3">
-				{{ form_label(registrationForm.password.first, null, {'label_attr': {'class': 'form-label'}}) }}
-				{{ form_widget(registrationForm.password.first, {'attr': {'class': 'form-control'}}) }}
-				{{ form_errors(registrationForm.password.first) }}
-			</div>
+		<!-- Début du formulaire avec attributs de validation -->
+		{{ form_start(registrationForm, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
 
-			<div class="mb-3">
-				{{ form_label(registrationForm.password.second, null, {'label_attr': {'class': 'form-label'}}) }}
-				{{ form_widget(registrationForm.password.second, {'attr': {'class': 'form-control'}}) }}
-				{{ form_errors(registrationForm.password.second) }}
-			</div>
-
-			<div class="mb-3">
-				{{ form_label(registrationForm.firstName, null, {'label_attr': {'class': 'form-label'}}) }}
-				{{ form_widget(registrationForm.firstName, {'attr': {'class': 'form-control'}}) }}
-				{{ form_errors(registrationForm.firstName) }}
-			</div>
-
-			<div class="mb-3">
-				{{ form_label(registrationForm.lastName, null, {'label_attr': {'class': 'form-label'}}) }}
-				{{ form_widget(registrationForm.lastName, {'attr': {'class': 'form-control'}}) }}
-				{{ form_errors(registrationForm.lastName) }}
-			</div>
-
-			<div class="mb-3">
-				{{ form_label(registrationForm.phone, null, {'label_attr': {'class': 'form-label'}}) }}
-				{{ form_widget(registrationForm.phone, {'attr': {'class': 'form-control'}}) }}
-				{{ form_errors(registrationForm.phone) }}
-			</div>
-
-			<div class="mb-3">
-				{{ form_label(registrationForm.photo, null, {'label_attr': {'class': 'form-label'}}) }}
-				{{ form_widget(registrationForm.photo, {'attr': {'class': 'form-control'}}) }}
-				{{ form_errors(registrationForm.photo) }}
-			</div>
-
-
-
-
-			<div class="mb-3 form-check">
-				{{ form_widget(registrationForm.terms, {'attr': {'class': 'form-check-input'}}) }}
-				{{ form_label(registrationForm.terms, null, {'label_attr': {'class': 'form-check-label'}}) }}
-				{{ form_errors(registrationForm.terms) }}
-			</div>
-
-			<!-- Register button at the end -->
-			<button type="submit" class="btn btn-primary mb-3 align-center">Register</button>
-
-			{{ form_end(registrationForm) }}
+		<!-- Champs de formulaire pour nom d'utilisateur, email, mot de passe, etc. -->
+		<div class="mb-3">
+			{{ form_label(registrationForm.username, 'Nom d’utilisateur', {'label_attr': {'class': 'form-label'}}) }}
+			{{ form_widget(registrationForm.username, {'attr': {'class': 'form-control'}}) }}
+			{{ form_errors(registrationForm.username) }}
 		</div>
 
-		<!-- ------------------------------------footer-- -->
+		<div class="mb-3">
+			{{ form_label(registrationForm.email, 'Email', {'label_attr': {'class': 'form-label'}}) }}
+			{{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+			{{ form_errors(registrationForm.email) }}
+		</div>
 
-		<footer class="footer">
-			<div class="footer-container">
-				<div class="footer-row">
+		<div class="mb-3">
+			{{ form_label(registrationForm.password.first, 'Mot de passe', {'label_attr': {'class': 'form-label'}}) }}
+			{{ form_widget(registrationForm.password.first, {'attr': {'class': 'form-control'}}) }}
+			{{ form_errors(registrationForm.password.first) }}
+		</div>
 
-					<div class="footer-col">
-						<h4>Obtenir de l'aide</h4>
-						<ul>
-							<li><a href="{{ path('app_faq') }}">FAQ</a></li>
-							<li><a href="{{path('app_certification') }}">Certification</a></li>
-							<li><a href="{{ path('app_financements') }}">Financements</a></li>
-							<li><a href="{{ path('app_evenements') }}">Evenements</a></li>
-							<li><a href="{{ path('app_modaliteacces') }}">Modalités d'accès</a></li>
+		<div class="mb-3">
+			{{ form_label(registrationForm.password.second, 'Confirmer le mot de passe', {'label_attr': {'class': 'form-label'}}) }}
+			{{ form_widget(registrationForm.password.second, {'attr': {'class': 'form-control'}}) }}
+			{{ form_errors(registrationForm.password.second) }}
+		</div>
 
-						</ul>
-					</div>
-					<div class="footer-col">
-						<h4>DeV WeB</h4>
-						<ul>
-						    <li><a href="{{ path('app_home') }}">Home</a></li>
-							<li><a href="{{ path('app_blogs_index') }}">Notre Blog</a></li>
-							<li><a href="{{ path('app_contact') }}">Contactez-nous</a></li>
-							<li><a href="{{ path('app_apropos') }}">À propos de nous</a></li>
-							<li><a href="{{ path('app_privacy') }}">politique de confidentialité</a></li>
+		<div class="mb-3">
+			{{ form_label(registrationForm.firstName, 'Prénom', {'label_attr': {'class': 'form-label'}}) }}
+			{{ form_widget(registrationForm.firstName, {'attr': {'class': 'form-control'}}) }}
+			{{ form_errors(registrationForm.firstName) }}
+		</div>
 
-						</ul>
-					</div>
+		<div class="mb-3">
+			{{ form_label(registrationForm.lastName, 'Nom de famille', {'label_attr': {'class': 'form-label'}}) }}
+			{{ form_widget(registrationForm.lastName, {'attr': {'class': 'form-control'}}) }}
+			{{ form_errors(registrationForm.lastName) }}
+		</div>
 
-					<div class="footer-col">
-						<h4>Adresse</h4>
-						<ul>
-							<li><a href="">7 Avenue du General Patton</a></li>
-							<li><a href="">77000</a></li>
-							<li><a href="">Melun</a></li>
-							<li><a href="">Tel: 07 83 65 08 80</a></li>
-						</ul>
-					</div>
-					<div class="footer-col">
-						<h4>Suivez-nous</h4>
-						<div class="social-links">
-							<a href="#">
-								<i class="fab fa-facebook-f"></i>
-							</a>
-							<a href="#">
-								<i class="fab fa-twitter"></i>
-							</a>
-							<a href="#">
-								<i class="fab fa-instagram"></i>
-							</a>
-							<a href="#">
-								<i class="fab fa-linkedin-in"></i>
-							</a>
-						</div>
+		<div class="mb-3">
+			{{ form_label(registrationForm.phone, 'Téléphone', {'label_attr': {'class': 'form-label'}}) }}
+			{{ form_widget(registrationForm.phone, {'attr': {'class': 'form-control'}}) }}
+			{{ form_errors(registrationForm.phone) }}
+		</div>
+
+		<div class="mb-3">
+			{{ form_label(registrationForm.photo, 'Photo de profil', {'label_attr': {'class': 'form-label'}}) }}
+			{{ form_widget(registrationForm.photo, {'attr': {'class': 'form-control'}}) }}
+			{{ form_errors(registrationForm.photo) }}
+		</div>
+
+		<div class="mb-3">
+			<label class="form-label">Rôles</label>
+			<div class="d-flex flex-wrap">
+				{{ form_widget(registrationForm.roles) }}
+			</div>
+			{{ form_errors(registrationForm.roles) }}
+		</div>
+
+		<div class="mb-3 form-check">
+			{{ form_widget(registrationForm.terms, {'attr': {'class': 'form-check-input'}}) }}
+			{{ form_label(registrationForm.terms, 'J’accepte les conditions générales', {'label_attr': {'class': 'form-check-label'}}) }}
+			{{ form_errors(registrationForm.terms) }}
+		</div>
+
+		<!-- Bouton pour soumettre le formulaire -->
+		<button type="submit" class="btn btn-primary mb-3 align-center">S'inscrire</button>
+
+		{{ form_end(registrationForm) }}
+	</div>
+
+	<!-- Footer -->
+	<footer class="footer">
+		<div class="footer-container">
+			<div
+				class="footer-row">
+				<!-- Colonnes du pied de page avec informations et liens -->
+				<div class="footer-col">
+					<h4>WeB DeV</h4>
+					<ul>
+						<li><a href="{{ path('app_home') }}">Home</a></li>
+						<li><a href="{{ path('app_blogs_index') }}">Notre Blog</a></li>
+						<li><a href="{{ path('app_contact') }}">Contactez-nous</a></li>
+						<li><a href="{{ path('app_apropos') }}">À propos de nous</a></li>
+						<li><a href="{{ path('app_privacy') }}">Politique de confidentialité</a></li>
+					</ul>
+				</div>
+				<div class="footer-col">
+					<h4>Obtenir de l'aide</h4>
+					<ul>
+						<li><a href="{{ path('app_faq') }}">FAQ</a></li>
+						<li><a href="{{ path('app_certification') }}">Certification</a></li>
+						<li><a href="{{ path('app_financements') }}">Financements</a></li>
+						<li><a href="{{ path('app_evenements') }}">Événements</a></li>
+						<li><a href="{{ path('app_modaliteacces') }}">Modalités d'accès</a></li>
+					</ul>
+				</div>
+				<div class="footer-col">
+					<h4>Adresse</h4>
+					<ul>
+						<li><a href="">7 Avenue du General Patton</a></li>
+						<li><a href="">77000</a></li>
+						<li><a href="">Melun</a></li>
+						<li><a href="">Tel: 07 83 65 08 80</a></li>
+					</ul>
+				</div>
+				<div class="footer-col">
+					<h4>Suivez-nous</h4>
+					<div class="social-links">
+						<a href="#">
+							<i class="fab fa-facebook-f"></i>
+						</a>
+						<a href="#">
+							<i class="fab fa-twitter"></i>
+						</a>
+						<a href="#">
+							<i class="fab fa-instagram"></i>
+						</a>
+						<a href="#">
+							<i class="fab fa-linkedin-in"></i>
+						</a>
 					</div>
 				</div>
+
+
 			</div>
-		</footer>
-</footer>
-	</body>
-{% endblock %}
+		</div>
+	</footer>
+</body>{% endblock %}
+

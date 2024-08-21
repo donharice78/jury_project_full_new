@@ -1,5 +1,8 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Comment
+{% endblock %}
+
 {% block stylesheets %}
 	{{ parent() }}
 	<link rel="stylesheet" href="{{ asset('../assets/styles/styles.css') }}">
@@ -51,40 +54,45 @@
 				<i class="bi bi-list" onclick="showMenu()"></i>
 			</nav>
 		</section>
-		<div
-			class="container mt-5">
-			<!-- Form Header -->
-			<h1 class="text-center mb-4">{{ app.request.attributes.get('_route') == 'app_admin_user_edit' ? 'Edit User' : 'Create New User' }}</h1>
 
-			<!-- Form Container -->
-			<div class="row justify-content-center">
-				<div class="col-md-8 col-lg-6">
-					{{ form_start(form, {'attr': {'class': 'form'}}) }}
+		<div class="container mt-5 mb-5">
+			<h2 class="text-center mb-4">Comment Details</h2>
 
-					<!-- Form Fields -->
-					<div class="mb-4">
-						{% for field in form %}
-							{% if field.vars.name != '_token' %}
-								<!-- Exclude token field -->
-								<div class="mb-3">
-									{{ form_label(field, null, {'attr': {'class': 'form-label'}}) }}
-									{{ form_widget(field, {'attr': {'class': 'form-control form-control-lg'}}) }}
-									{{ form_errors(field) }}
-								</div>
+			<div class="card">
+				<div class="card-header">
+					<h3>Comment #{{ comment.id }}</h3>
+				</div>
+				<div class="card-body">
+					<div class="row">
+						<div
+							class="col-md-4">
+							<!-- User Photo -->
+							{% if comment.user and comment.user.photo %}
+								<img src="{{ asset('uploads/photos/' ~ comment.user.photo) }}" alt="{{ comment.user.name }}" class="img-fluid rounded-circle" style="height: 150px; width: 150px; object-fit: cover; border: 1px solid #ddd;">
+							{% else %}
+								<img src="{{ asset('../assets/img/user.png') }}" alt="Default Photo" class="img-fluid rounded-circle" style="height: 150px; width: 150px; object-fit: cover; border: 1px solid #ddd;">
 							{% endif %}
-						{% endfor %}
+						</div>
+						<div class="col-md-8">
+							<table class="table table-borderless">
+								<tbody>
+									<tr>
+										<th>Content</th>
+										<td>{{ comment.content }}</td>
+									</tr>
+									<tr>
+										<th>Publisher</th>
+										<td>{{ comment.user ? comment.user.lastName ~ ' ' ~ comment.user.firstName : 'Unknown' }}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 					</div>
-
-					<!-- Submit Button -->
-					<div class="text-center mt-4 mb-4">
-						<button type="submit" class="btn btn-primary btn-lg">{{ button_label|default('Save') }}</button>
-						<a href="{{ path('app_admin_user_index') }}" class="btn btn-secondary btn-lg ">Back to List</a>
-					</div>
-
-					<!-- Back to List Button -->
-
-
-					{{ form_end(form) }}
+				</div>
+				<div class="card-footer text-muted d-flex justify-content-center">
+					<a href="{{ path('app_comment_index') }}" class="btn btn-secondary mx-2">Back to List</a>
+					<a href="{{ path('app_comment_edit', {'id': comment.id}) }}" class="btn btn-primary mx-2">Edit</a>
+					{{ include('comment/_delete_form.html.twig') }}
 				</div>
 			</div>
 		</div>
@@ -148,5 +156,7 @@
 		</footer>
 
 	</body>
+
+	<!-- Optionally include the footer -->
 
 {% endblock %}

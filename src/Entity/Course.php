@@ -12,130 +12,123 @@ class Course
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private ?int $id = null; // Identifiant unique du cours
 
     #[ORM\Column(length: 255)]
-    private ?string $title = null;
+    private ?string $title = null; // Titre du cours
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $description = null;
+    private ?string $description = null; // Description détaillée du cours
 
     #[ORM\Column(length: 255)]
-    private ?string $duration = null;
+    private ?string $duration = null; // Durée du cours
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $start_date = null;
+    private ?\DateTimeInterface $start_date = null; // Date de début du cours
 
     #[ORM\Column(length: 255)]
-    private ?string $course_format = null;
+    private ?string $course_format = null; // Format du cours (en ligne, présentiel, etc.)
 
     #[ORM\Column(length: 255)]
-    private ?string $prerequisities = null;
+    private ?string $prerequisities = null; // Prérequis nécessaires pour suivre le cours
 
     #[ORM\Column]
-    private ?int $course_fee = null;
+    private ?int $course_fee = null; // Frais du cours
 
     #[ORM\Column(length: 255)]
-    private ?string $image = null;
+    private ?string $image = null; // Nom du fichier image associé au cours
 
     public function getId(): ?int
     {
-        return $this->id;
+        return $this->id; // Retourne l'identifiant du cours
     }
 
     public function getTitle(): ?string
     {
-        return $this->title;
+        return $this->title; // Retourne le titre du cours
     }
 
     public function setTitle(string $title): static
     {
-        $this->title = $title;
-
-        return $this;
+        $this->title = $title; // Définit le titre du cours
+        return $this; // Retourne l'instance actuelle pour la chaîne de méthodes
     }
 
     public function getDescription(): ?string
     {
-        return $this->description;
+        return $this->description; // Retourne la description du cours
     }
 
     public function setDescription(string $description): static
     {
-        $this->description = $description;
-
-        return $this;
+        $this->description = $description; // Définit la description du cours
+        return $this; // Retourne l'instance actuelle pour la chaîne de méthodes
     }
 
     public function getDuration(): ?string
     {
-        return $this->duration;
+        return $this->duration; // Retourne la durée du cours
     }
 
     public function setDuration(string $duration): static
     {
-        $this->duration = $duration;
-
-        return $this;
+        $this->duration = $duration; // Définit la durée du cours
+        return $this; // Retourne l'instance actuelle pour la chaîne de méthodes
     }
 
     public function getStartDate(): ?\DateTimeInterface
     {
-        return $this->start_date;
+        return $this->start_date; // Retourne la date de début du cours
     }
 
     public function setStartDate(\DateTimeInterface $start_date): static
     {
-        $this->start_date = $start_date;
-
-        return $this;
+        $this->start_date = $start_date; // Définit la date de début du cours
+        return $this; // Retourne l'instance actuelle pour la chaîne de méthodes
     }
 
     public function getCourseFormat(): ?string
     {
-        return $this->course_format;
+        return $this->course_format; // Retourne le format du cours
     }
 
     public function setCourseFormat(string $course_format): static
     {
-        $this->course_format = $course_format;
-
-        return $this;
+        $this->course_format = $course_format; // Définit le format du cours
+        return $this; // Retourne l'instance actuelle pour la chaîne de méthodes
     }
 
     public function getPrerequisities(): ?string
     {
-        return $this->prerequisities;
+        return $this->prerequisities; // Retourne les prérequis nécessaires pour le cours
     }
 
     public function setPrerequisities(string $prerequisities): static
     {
-        $this->prerequisities = $prerequisities;
-
-        return $this;
+        $this->prerequisities = $prerequisities; // Définit les prérequis pour le cours
+        return $this; // Retourne l'instance actuelle pour la chaîne de méthodes
     }
 
     public function getCourseFee(): ?int
     {
-        return $this->course_fee;
+        return $this->course_fee; // Retourne les frais du cours
     }
 
     public function setCourseFee(int $course_fee): static
     {
-        $this->course_fee = $course_fee;
-
-        return $this;
+        $this->course_fee = $course_fee; // Définit les frais du cours
+        return $this; // Retourne l'instance actuelle pour la chaîne de méthodes
     }
 
     public function getImage(): ?string
     {
-        return $this->image;
+        return $this->image; // Retourne le nom du fichier image associé au cours
     }
 
     public function setImage(string $image): static
     {
-        $this->image = $image;
-
-        return $this;
+        $this->image = $image; // Définit le nom du fichier image associé au cours
+        return $this; // Retourne l'instance actuelle pour la chaîne de méthodes
     }
 }
+

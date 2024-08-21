@@ -1,34 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Info {% endblock %}
+{% block title %}Info
+{% endblock %}
 
 {% block stylesheets %}
 	{{ parent() }}
-    <link rel="stylesheet" href="{{ asset ('../assets/styles/styles.css') }}">
-	<link rel="stylesheet" href="{{ asset ('../assets/styles/courses.css') }}">
-
+	<link rel="stylesheet" href="{{ asset('../assets/styles/styles.css') }}">
+	<link rel="stylesheet" href="{{ asset('../assets/styles/courses.css') }}">
 {% endblock %}
 
 {% block body %}
+	<body>
 
-<body>  
-
-<section class="courses-header">
+		<!-- Section d'en-tête -->
+		<section class="courses-header">
 			<nav>
+				<!-- Logo cliquable qui redirige vers la page d'accueil -->
 				<a href="{{ path('app_home') }}">
 					<img src="{{ asset('../assets/img/Web Dev-logo.png') }}" alt="Logo">
 				</a>
-				<div class="nav-links" id="navLinks">
+				<div
+					class="nav-links" id="navLinks">
+					<!-- Icône pour fermer le menu -->
 					<i class="bi bi-x" onclick="hideMenu()"></i>
 					<ul>
+						<!-- Liens de navigation -->
 						<li>
-							<a href="{{ path('app_home') }}">HOME</a>
+							<a href="{{ path('app_home') }}">ACCUEIL</a>
 						</li>
 						<li>
-							<a href="{{ path('app_apropos') }}">ABOUT</a>
+							<a href="{{ path('app_apropos') }}">À PROPOS</a>
 						</li>
 						<li>
-							<a href="{{ path('app_course_index') }}">COURSE</a>
+							<a href="{{ path('app_course_index') }}">COURS</a>
 						</li>
 						<li>
 							<a href="{{ path('app_blogs_index') }}">BLOG</a>
@@ -36,98 +40,104 @@
 						<li>
 							<a href="{{ path('app_contact') }}">CONTACT</a>
 						</li>
-
-						<li class="">
-
-							<div class="" aria-labelledby="">
+						<li>
+							<!-- Liens de connexion/déconnexion -->
+							<div aria-labelledby="">
 								{% if app.user %}
-									<a class="" href="{{ path('app_logout') }}">LOGOUT</a>
+									<a href="{{ path('app_logout') }}">DÉCONNEXION</a>
 								{% else %}
-									<a class="" href="{{ path('app_login') }}">ESPACE</a>
+									<a href="{{ path('app_login') }}">ESPACE</a>
 								{% endif %}
 							</div>
 						</li>
 					</ul>
 				</div>
+				<!-- Icône pour ouvrir le menu -->
 				<i class="bi bi-list" onclick="showMenu()"></i>
 			</nav>
+		</section>
 
-       
-    </section>
+		<!-- Section du contenu principal -->
+		<div class="container mt-4">
+			<h1 class="text-center mb-4">Info</h1>
 
-    <div class="container mt-4">
-        <h1 class="text-center mb-4">Info</h1>
+			<!-- Grille de blogs -->
+			<div class="row">
+				{% for blog in blogs %}
+					<div class="col-md-4 mb-4">
+						<div class="card">
+							{% if blog.images|length > 0 %}
+								<!-- Affichage de l'image du blog -->
+								<img src="{{ asset('uploads/' ~ blog.images[0].name) }}" class="card-img-top" alt="Image du Blog" style="height: 200px; object-fit: auto;">
+							{% else %}
+								<!-- Affichage d'un espace réservé si aucune image n'est disponible -->
+								<div class="card-img-top d-flex align-items-center justify-content-center" style="height: 200px; background-color: #f8f9fa;">
+									<span>Aucune image</span>
+								</div>
+							{% endif %}
+							<div
+								class="card-body justify-items-center d-flex flex-column text-center">
+								<!-- Titre du blog -->
+								<h5 class="card-title justify-content-center">{{ blog.title|slice(0, 30) }}</h5>
+								<!-- Extrait du contenu du blog -->
+								<p class="card-text">{{ blog.content|slice(0, 90) ~ (blog.content|length > 90 ? '...' : '') }}</p>
+								<!-- Date de création du blog -->
+								<p class="card-text">
+									<small class="text-muted">Créé le :
+										{{ blog.createdAt|date('Y-m-d H:i') }}</small>
+								</p>
+								<!-- Boutons d'action -->
+								<a href="{{ path('app_blogs_show', {'id': blog.id}) }}" class="btn btn-info btn-sm mb-1">Voir</a>
+								{% if is_granted('ROLE_ADMIN') %}
+									<a href="{{ path('app_blogs_edit', {'id': blog.id}) }}" class="btn btn-warning btn-sm">Modifier</a>
+								{% endif %}
+							</div>
+						</div>
+					</div>
+				{% else %}
+					<!-- Message lorsqu'aucun blog n'est trouvé -->
+					<div class="col-12">
+						<div class="alert alert-info" role="alert">
+							Aucun enregistrement trouvé.
+						</div>
+					</div>
+				{% endfor %}
+			</div>
 
-<div class="row">
-   
+			<!-- Bouton pour créer un nouveau blog (visible seulement pour les administrateurs) -->
+			{% if is_granted('ROLE_ADMIN') %}
+				<div class="d-flex justify-content-center mb-4">
+					<a href="{{ path('app_blogs_new') }}" class="btn btn-success">Créer un Nouveau Blog</a>
+				</div>
+			{% endif %}
+		</div>
 
-    {% for blog in blogs %}
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                {% if blog.images|length > 0 %}
-                    <img src="{{ asset('uploads/' ~ blog.images[0].name) }}" class="card-img-top" alt="Blog Image" style="height: 200px; object-fit: auto;">
-                {% else %}
-                    <div class="card-img-top d-flex align-items-center justify-content-center" style="height: 200px; background-color: #f8f9fa;">
-                        <span>No image</span>
-                    </div>
-                {% endif %}
-                <div class="card-body justify-items-center d-flex flex-column text-center">
-                    <h5 class="card-title justify-content-center">{{ blog.title|slice(0, 30) }}</h5>
-                    <p class="card-text">{{ blog.content|slice(0, 90) ~ (blog.content|length > 90 ? '...' : '') }}</p>
-                    <p class="card-text"><small class="text-muted">Created at: {{ blog.createdAt|date('Y-m-d H:i') }}</small></p>
-                    <a href="{{ path('app_blogs_show', {'id': blog.id}) }}" class="btn btn-info btn-sm">Show</a>
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <a href="{{ path('app_blogs_edit', {'id': blog.id}) }}" class="btn btn-warning btn-sm">Edit</a>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    {% else %}
-        <div class="col-12">
-            <div class="alert alert-info" role="alert">
-                No records found.
-            </div>
-        </div>
-    {% endfor %}
-</div>
-
-
-        {% if is_granted('ROLE_ADMIN') %}
-        <div class="d-flex justify-content-center mb-4">
-            <a href="{{ path('app_blogs_new') }}" class="btn btn-success">Create New Blog</a>
-        </div>
-    {% endif %}
-    </div>
-
-		<!-- ------------------------------------footer-- -->
-
+		<!-- Footer -->
 		<footer class="footer">
 			<div class="footer-container">
-				<div class="footer-row">
-
+				<div
+					class="footer-row">
+					<!-- Colonnes du pied de page avec informations et liens -->
+					<div class="footer-col">
+						<h4>WeB DeV</h4>
+						<ul>
+							<li><a href="{{ path('app_home') }}">Home</a></li>
+							<li><a href="{{ path('app_blogs_index') }}">Notre Blog</a></li>
+							<li><a href="{{ path('app_contact') }}">Contactez-nous</a></li>
+							<li><a href="{{ path('app_apropos') }}">À propos de nous</a></li>
+							<li><a href="{{ path('app_privacy') }}">Politique de confidentialité</a></li>
+						</ul>
+					</div>
 					<div class="footer-col">
 						<h4>Obtenir de l'aide</h4>
 						<ul>
 							<li><a href="{{ path('app_faq') }}">FAQ</a></li>
-							<li><a href="{{path('app_certification') }}">Certification</a></li>
+							<li><a href="{{ path('app_certification') }}">Certification</a></li>
 							<li><a href="{{ path('app_financements') }}">Financements</a></li>
-							<li><a href="{{ path('app_evenements') }}">Evenements</a></li>
+							<li><a href="{{ path('app_evenements') }}">Événements</a></li>
 							<li><a href="{{ path('app_modaliteacces') }}">Modalités d'accès</a></li>
-
 						</ul>
 					</div>
-					<div class="footer-col">
-						<h4>DeV WeB</h4>
-						<ul>
-						    <li><a href="{{ path('app_home') }}">Home</a></li>
-							<li><a href="{{ path('app_blogs_index') }}">Notre Blog</a></li>
-							<li><a href="{{ path('app_contact') }}">Contactez-nous</a></li>
-							<li><a href="{{ path('app_apropos') }}">À propos de nous</a></li>
-							<li><a href="{{ path('app_privacy') }}">politique de confidentialité</a></li>
-
-						</ul>
-					</div>
-
 					<div class="footer-col">
 						<h4>Adresse</h4>
 						<ul>
@@ -154,9 +164,11 @@
 							</a>
 						</div>
 					</div>
+
+
 				</div>
 			</div>
 		</footer>
 
-</body>
+	</body>
 {% endblock %}

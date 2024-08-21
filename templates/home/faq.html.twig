@@ -1,225 +1,255 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}FAQ - Centre de Formation Dev Web{% endblock %}
+{% block title %}FAQ - Centre de Formation Dev Web
+{% endblock %}
 
 {% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="{{ asset ('../assets/styles/styles.css') }}">
-    <link rel="stylesheet" href="{{ asset ('../assets/styles/aboutUs.css') }}">
-    <style>
-        .container {
-            margin-top: 50px;
-        }
-        .section-title {
-            margin-bottom: 30px;
-        }
-        .accordion-button {
-            font-weight: bold;
-        }
-    </style>
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset ('../assets/styles/styles.css') }}">
+	<link rel="stylesheet" href="{{ asset ('../assets/styles/aboutUs.css') }}">
+	<style>
+		.container {
+			margin-top: 50px;
+		}
+		.section-title {
+			margin-bottom: 30px;
+		}
+		.accordion-button {
+			font-weight: bold;
+		}
+
+		.no-underline {
+			text-decoration: none;
+		}
+
+		.dev-danger {
+			color: rgba(255, 49, 49, 255)
+		}
+	</style>
 {% endblock %}
 
 {% block body %}
-    <section class="aboutUs-header">
-        <nav>
-            <a href="{{ path('app_home') }}">
-                <img src="{{ asset('../assets/img/Web Dev-logo.png') }}" alt="Logo">
-            </a>
-            <div class="nav-links" id="navLinks">
-                <i class="bi bi-x" onclick="hideMenu()"></i>
-                <ul>
-                    <li><a href="{{ path('app_home') }}">HOME</a></li>
-                    <li><a href="{{ path('app_apropos') }}">ABOUT</a></li>
-                    <li><a href="{{ path('app_course_index') }}">COURSE</a></li>
-                    <li><a href="{{ path('app_blogs_index') }}">BLOG</a></li>
-                    <li><a href="{{ path('app_contact') }}">CONTACT</a></li>
-                    <li>
-                        <div class="" aria-labelledby="">
-                            {% if app.user %}
-                                <a class="" href="{{ path('app_logout') }}">LOGOUT</a>
-                            {% else %}
-                                <a class="" href="{{ path('app_login') }}">ESPACE</a>
-                            {% endif %}
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <i class="bi bi-list" onclick="showMenu()"></i>
-        </nav>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="container my-5">
-        <div class="text-center">
-            <h1 class="section-title ">FAQ - Centre de Formation <span class="fw-bold text-danger mx-1">Dev Web</span></h1>
-        </div>
-
-        <div class="accordion" id="faqAccordion">
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="faqHeadingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseOne" aria-expanded="true" aria-controls="faqCollapseOne">
-                        Qu'est-ce que le Centre de Formation Dev Web ?
-                    </button>
-                </h2>
-                <div id="faqCollapseOne" class="accordion-collapse collapse show" aria-labelledby="faqHeadingOne" data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">
-                        Le Centre de Formation <span class="fw-bold text-danger mx-1">Dev Web</span>  est un organisme dédié à la formation professionnelle en développement web. Nous proposons des cours complets pour apprendre à créer, gérer et optimiser des sites web et applications web.
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="faqHeadingTwo">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseTwo" aria-expanded="false" aria-controls="faqCollapseTwo">
-                        Quels types de formations proposez-vous ?
-                    </button>
-                </h2>
-                <div id="faqCollapseTwo" class="accordion-collapse collapse" aria-labelledby="faqHeadingTwo" data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">
-                        Nous offrons une variété de formations, y compris des cours de développement front-end, back-end, et full-stack, ainsi que des formations spécialisées en frameworks et bibliothèques populaires comme React, Vue.js, et Angular.
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="faqHeadingThree">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseThree" aria-expanded="false" aria-controls="faqCollapseThree">
-                        Quels sont les prérequis pour suivre vos formations ?
-                    </button>
-                </h2>
-                <div id="faqCollapseThree" class="accordion-collapse collapse" aria-labelledby="faqHeadingThree" data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">
-                        Les prérequis varient selon la formation. Pour les cours de base, il est généralement suffisant d'avoir une bonne maîtrise des notions fondamentales en informatique et en programmation. Pour les formations plus avancées, des connaissances préalables en développement web peuvent être nécessaires.
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="faqHeadingFour">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseFour" aria-expanded="false" aria-controls="faqCollapseFour">
-                        Quelle est la durée des formations ?
-                    </button>
-                </h2>
-                <div id="faqCollapseFour" class="accordion-collapse collapse" aria-labelledby="faqHeadingFour" data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">
-                        La durée des formations varie en fonction du cours choisi. Les formations intensives peuvent durer de quelques semaines à quelques mois, tandis que les cours plus modulaires peuvent être étalés sur une période plus longue.
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="faqHeadingFive">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseFive" aria-expanded="false" aria-controls="faqCollapseFive">
-                        Proposez-vous des formations en ligne ?
-                    </button>
-                </h2>
-                <div id="faqCollapseFive" class="accordion-collapse collapse" aria-labelledby="faqHeadingFive" data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">
-                        Oui, nous proposons des formations en ligne pour permettre à nos étudiants de suivre les cours depuis n'importe où. Nos formations en ligne incluent des vidéos, des ressources interactives, et des sessions de questions-réponses en direct.
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="faqHeadingSix">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseSix" aria-expanded="false" aria-controls="faqCollapseSix">
-                        Comment puis-je m'inscrire à une formation ?
-                    </button>
-                </h2>
-                <div id="faqCollapseSix" class="accordion-collapse collapse" aria-labelledby="faqHeadingSix" data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">
-                        Vous pouvez vous inscrire à nos formations en visitant notre site web et en sélectionnant le cours qui vous intéresse. Suivez les instructions d'inscription en ligne ou contactez notre équipe pour obtenir de l'aide avec le processus d'inscription.
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="faqHeadingSeven">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseSeven" aria-expanded="false" aria-controls="faqCollapseSeven">
-                        Quelle est la politique de remboursement ?
-                    </button>
-                </h2>
-                <div id="faqCollapseSeven" class="accordion-collapse collapse" aria-labelledby="faqHeadingSeven" data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">
-                        Nous offrons une politique de remboursement sous certaines conditions. Si vous souhaitez annuler votre inscription, veuillez consulter notre politique de remboursement sur notre site web ou contacter notre service client pour plus d'informations.
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="faqHeadingEight">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseEight" aria-expanded="false" aria-controls="faqCollapseEight">
-                        Offrez-vous un soutien après la fin de la formation ?
-                    </button>
-                </h2>
-                <div id="faqCollapseEight" class="accordion-collapse collapse" aria-labelledby="faqHeadingEight" data-bs-parent="#faqAccordion">
-                    <div class="accordion-body">
-                        Oui, nous offrons un soutien continu après la fin de la formation. Vous pouvez accéder à notre communauté en ligne, poser des questions à nos formateurs, et bénéficier de ressources supplémentaires pour vous aider à mettre en pratique ce que vous avez appris.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-		<!-- ------------------------------------footer-- -->
-
-		<footer class="footer">
-			<div class="footer-container">
-				<div class="footer-row">
-
-					<div class="footer-col">
-						<h4>Obtenir de l'aide</h4>
-						<ul>
-							<li><a href="{{ path('app_faq') }}">FAQ</a></li>
-							<li><a href="{{path('app_certification') }}">Certification</a></li>
-							<li><a href="{{ path('app_financements') }}">Financements</a></li>
-							<li><a href="{{ path('app_evenements') }}">Evenements</a></li>
-							<li><a href="{{ path('app_modaliteacces') }}">Modalités d'accès</a></li>
-
-						</ul>
-					</div>
-					<div class="footer-col">
-						<h4>DeV WeB</h4>
-						<ul>
-						    <li><a href="{{ path('app_home') }}">Home</a></li>
-							<li><a href="{{ path('app_blogs_index') }}">Notre Blog</a></li>
-							<li><a href="{{ path('app_contact') }}">Contactez-nous</a></li>
-							<li><a href="{{ path('app_apropos') }}">À propos de nous</a></li>
-							<li><a href="{{ path('app_privacy') }}">politique de confidentialité</a></li>
-
-						</ul>
-					</div>
-
-					<div class="footer-col">
-						<h4>Adresse</h4>
-						<ul>
-							<li><a href="">7 Avenue du General Patton</a></li>
-							<li><a href="">77000</a></li>
-							<li><a href="">Melun</a></li>
-							<li><a href="">Tel: 07 83 65 08 80</a></li>
-						</ul>
-					</div>
-					<div class="footer-col">
-						<h4>Suivez-nous</h4>
-						<div class="social-links">
-							<a href="#">
-								<i class="fab fa-facebook-f"></i>
-							</a>
-							<a href="#">
-								<i class="fab fa-twitter"></i>
-							</a>
-							<a href="#">
-								<i class="fab fa-instagram"></i>
-							</a>
-							<a href="#">
-								<i class="fab fa-linkedin-in"></i>
-							</a>
+	<section class="aboutUs-header">
+		<nav>
+			<!-- Logo cliquable qui redirige vers la page d'accueil -->
+			<a href="{{ path('app_home') }}">
+				<img src="{{ asset('../assets/img/Web Dev-logo.png') }}" alt="Logo">
+			</a>
+			<div
+				class="nav-links" id="navLinks">
+				<!-- Icône pour fermer le menu -->
+				<i class="bi bi-x" onclick="hideMenu()"></i>
+				<ul>
+					<!-- Liens de navigation -->
+					<li>
+						<a href="{{ path('app_home') }}">HOME</a>
+					</li>
+					<li>
+						<a href="{{ path('app_apropos') }}">À PROPOS</a>
+					</li>
+					<li>
+						<a href="{{ path('app_course_index') }}">COURS</a>
+					</li>
+					<li>
+						<a href="{{ path('app_blogs_index') }}">BLOG</a>
+					</li>
+					<li>
+						<a href="{{ path('app_contact') }}">CONTACT</a>
+					</li>
+					<li>
+						<!-- Liens de connexion/déconnexion -->
+						<div aria-labelledby="">
+							{% if app.user %}
+								<a href="{{ path('app_logout') }}">DÉCONNEXION</a>
+							{% else %}
+								<a href="{{ path('app_login') }}">ESPACE</a>
+							{% endif %}
 						</div>
+					</li>
+				</ul>
+			</div>
+			<!-- Icône pour ouvrir le menu -->
+			<i class="bi bi-list" onclick="showMenu()"></i>
+		</nav>
+	</section>
+
+	<!-- FAQ Section -->
+	<section class="container my-5">
+		<div class="text-center">
+			<h1 class="section-title ">FAQ - Centre de Formation
+				<span class="fw-bold dev-danger mx-1">Dev Web</span>
+			</h1>
+		</div>
+
+		<div class="accordion" id="faqAccordion">
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="faqHeadingOne">
+					<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseOne" aria-expanded="true" aria-controls="faqCollapseOne">
+						<h5>
+							Qu'est-ce que le Centre de Formation
+							<span class="dev-danger">
+								<strong>Dev Web</strong>
+							</span>?</h5>
+					</button>
+				</h2>
+				<div id="faqCollapseOne" class="accordion-collapse collapse show" aria-labelledby="faqHeadingOne" data-bs-parent="#faqAccordion">
+					<div class="accordion-body">
+						Le Centre de Formation
+						<span class="fw-bold dev-danger mx-1">Dev Web</span>
+						est un organisme dédié à la formation professionnelle en développement web. Nous proposons des cours complets pour apprendre à créer, gérer et optimiser des sites web et applications web.
 					</div>
 				</div>
 			</div>
-		</footer>
 
-    <!-- Ensure Bootstrap JavaScript is included -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="faqHeadingTwo">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseTwo" aria-expanded="false" aria-controls="faqCollapseTwo">
+						Quels types de formations proposez-vous ?
+					</button>
+				</h2>
+				<div id="faqCollapseTwo" class="accordion-collapse collapse" aria-labelledby="faqHeadingTwo" data-bs-parent="#faqAccordion">
+					<div class="accordion-body">
+						Nous offrons une variété de formations, y compris des cours de développement front-end, back-end, et full-stack, ainsi que des formations spécialisées en frameworks et bibliothèques populaires comme React, Vue.js, et Angular.
+					</div>
+				</div>
+			</div>
+
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="faqHeadingThree">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseThree" aria-expanded="false" aria-controls="faqCollapseThree">
+						Quels sont les prérequis pour suivre vos formations ?
+					</button>
+				</h2>
+				<div id="faqCollapseThree" class="accordion-collapse collapse" aria-labelledby="faqHeadingThree" data-bs-parent="#faqAccordion">
+					<div class="accordion-body">
+						Les prérequis varient selon la formation. Pour les cours de base, il est généralement suffisant d'avoir une bonne maîtrise des notions fondamentales en informatique et en programmation. Pour les formations plus avancées, des connaissances préalables en développement web peuvent être nécessaires.
+					</div>
+				</div>
+			</div>
+
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="faqHeadingFour">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseFour" aria-expanded="false" aria-controls="faqCollapseFour">
+						Quelle est la durée des formations ?
+					</button>
+				</h2>
+				<div id="faqCollapseFour" class="accordion-collapse collapse" aria-labelledby="faqHeadingFour" data-bs-parent="#faqAccordion">
+					<div class="accordion-body">
+						La durée des formations varie en fonction du cours choisi. Les formations intensives peuvent durer de quelques semaines à quelques mois, tandis que les cours plus modulaires peuvent être étalés sur une période plus longue.
+					</div>
+				</div>
+			</div>
+
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="faqHeadingFive">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseFive" aria-expanded="false" aria-controls="faqCollapseFive">
+						Proposez-vous des formations en ligne ?
+					</button>
+				</h2>
+				<div id="faqCollapseFive" class="accordion-collapse collapse" aria-labelledby="faqHeadingFive" data-bs-parent="#faqAccordion">
+					<div class="accordion-body">
+						Oui, nous proposons des formations en ligne pour permettre à nos étudiants de suivre les cours depuis n'importe où. Nos formations en ligne incluent des vidéos, des ressources interactives, et des sessions de questions-réponses en direct.
+					</div>
+				</div>
+			</div>
+
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="faqHeadingSix">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseSix" aria-expanded="false" aria-controls="faqCollapseSix">
+						Comment puis-je m'inscrire à une formation ?
+					</button>
+				</h2>
+				<div id="faqCollapseSix" class="accordion-collapse collapse" aria-labelledby="faqHeadingSix" data-bs-parent="#faqAccordion">
+					<div class="accordion-body">
+						Vous pouvez vous inscrire à nos formations en visitant notre site web et en sélectionnant le cours qui vous intéresse. Suivez les instructions d'inscription en ligne ou contactez notre équipe pour obtenir de l'aide avec le processus d'inscription.
+					</div>
+				</div>
+			</div>
+
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="faqHeadingSeven">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseSeven" aria-expanded="false" aria-controls="faqCollapseSeven">
+						Quelle est la politique de remboursement ?
+					</button>
+				</h2>
+				<div id="faqCollapseSeven" class="accordion-collapse collapse" aria-labelledby="faqHeadingSeven" data-bs-parent="#faqAccordion">
+					<div class="accordion-body">
+						Nous offrons une politique de remboursement sous certaines conditions. Si vous souhaitez annuler votre inscription, veuillez consulter notre politique de remboursement sur notre site web ou contacter notre service client pour plus d'informations.
+					</div>
+				</div>
+			</div>
+
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="faqHeadingEight">
+					<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapseEight" aria-expanded="false" aria-controls="faqCollapseEight">
+						Offrez-vous un soutien après la fin de la formation ?
+					</button>
+				</h2>
+				<div id="faqCollapseEight" class="accordion-collapse collapse" aria-labelledby="faqHeadingEight" data-bs-parent="#faqAccordion">
+					<div class="accordion-body">
+						Oui, nous offrons un soutien continu après la fin de la formation. Vous pouvez accéder à notre communauté en ligne, poser des questions à nos formateurs, et bénéficier de ressources supplémentaires pour vous aider à mettre en pratique ce que vous avez appris.
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer class="footer">
+		<div class="footer-container">
+			<div
+				class="footer-row">
+				<!-- Colonnes du pied de page avec informations et liens -->
+				<div class="footer-col">
+					<h4>WeB DeV</h4>
+					<ul>
+						<li><a href="{{ path('app_home') }}">Home</a></li>
+						<li><a href="{{ path('app_blogs_index') }}">Notre Blog</a></li>
+						<li><a href="{{ path('app_contact') }}">Contactez-nous</a></li>
+						<li><a href="{{ path('app_apropos') }}">À propos de nous</a></li>
+						<li><a href="{{ path('app_privacy') }}">Politique de confidentialité</a></li>
+					</ul>
+				</div>
+				<div class="footer-col">
+					<h4>Obtenir de l'aide</h4>
+					<ul>
+						<li><a href="{{ path('app_faq') }}">FAQ</a></li>
+						<li><a href="{{ path('app_certification') }}">Certification</a></li>
+						<li><a href="{{ path('app_financements') }}">Financements</a></li>
+						<li><a href="{{ path('app_evenements') }}">Événements</a></li>
+						<li><a href="{{ path('app_modaliteacces') }}">Modalités d'accès</a></li>
+					</ul>
+				</div>
+				<div class="footer-col">
+					<h4>Adresse</h4>
+					<ul>
+						<li><a href="">7 Avenue du General Patton</a></li>
+						<li><a href="">77000</a></li>
+						<li><a href="">Melun</a></li>
+						<li><a href="">Tel: 07 83 65 08 80</a></li>
+					</ul>
+				</div>
+				<div class="footer-col">
+					<h4>Suivez-nous</h4>
+					<div class="social-links">
+						<a href="#">
+							<i class="fab fa-facebook-f"></i>
+						</a>
+						<a href="#">
+							<i class="fab fa-twitter"></i>
+						</a>
+						<a href="#">
+							<i class="fab fa-instagram"></i>
+						</a>
+						<a href="#">
+							<i class="fab fa-linkedin-in"></i>
+						</a>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</footer>
+
 {% endblock %}

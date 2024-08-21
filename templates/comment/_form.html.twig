@@ -51,10 +51,11 @@
 				<i class="bi bi-list" onclick="showMenu()"></i>
 			</nav>
 		</section>
+
 		<div
 			class="container mt-5">
 			<!-- Form Header -->
-			<h1 class="text-center mb-4">{{ app.request.attributes.get('_route') == 'app_admin_user_edit' ? 'Edit User' : 'Create New User' }}</h1>
+			<h1 class="text-center mb-4">{{ app.request.attributes.get('_route') == 'app_comment_Comment' ? 'Edit User' : 'Create New Comment' }}</h1>
 
 			<!-- Form Container -->
 			<div class="row justify-content-center">
@@ -78,11 +79,8 @@
 					<!-- Submit Button -->
 					<div class="text-center mt-4 mb-4">
 						<button type="submit" class="btn btn-primary btn-lg">{{ button_label|default('Save') }}</button>
-						<a href="{{ path('app_admin_user_index') }}" class="btn btn-secondary btn-lg ">Back to List</a>
+						<a href="{{ path('app_comment_index') }}" class="btn btn-secondary btn-lg">Back to List</a>
 					</div>
-
-					<!-- Back to List Button -->
-
 
 					{{ form_end(form) }}
 				</div>
@@ -148,5 +146,4 @@
 		</footer>
 
 	</body>
-
 {% endblock %}

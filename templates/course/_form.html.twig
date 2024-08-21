@@ -1,21 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ app.request.attributes.get('_route') == 'app_blogs_edit' ? 'Edit Blog' : 'Create New Blog' }}{% endblock %}
+{% block title %}{{ app.request.attributes.get('_route') == 'app_blogs_edit' ? 'Modifier le Blog' : 'Créer un Nouveau Blog' }}{% endblock %}
 
 {% block body %}
     <div class="container mt-5">
-        <!-- Form Header -->
-        <h1 class="text-center mb-4">{{ app.request.attributes.get('_route') == 'app_blogs_edit' ? 'Edit Blog' : 'Create New Blog' }}</h1>
+        <!-- En-tête du formulaire -->
+        <h1 class="text-center mb-4">{{ app.request.attributes.get('_route') == 'app_blogs_edit' ? 'Modifier le Blog' : 'Créer un Nouveau Blog' }}</h1>
 
-        <!-- Form Container -->
+        <!-- Conteneur du formulaire -->
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6">
                 {{ form_start(form, {'attr': {'class': 'form'}}) }}
                 
-                <!-- Form Fields -->
+                <!-- Champs du formulaire -->
                 <div class="mb-4">
                     {% for field in form %}
-                        {% if field.vars.name != '_token' %} <!-- Exclude token field -->
+                        {% if field.vars.name != '_token' %} <!-- Exclure le champ _token -->
                             <div class="mb-3">
                                 {{ form_label(field, null, {'attr': {'class': 'form-label'}}) }}
                                 {{ form_widget(field, {'attr': {'class': 'form-control form-control-lg'}}) }}
@@ -25,14 +25,14 @@
                     {% endfor %}
                 </div>
 
-                <!-- Submit Button -->
+                <!-- Bouton de soumission -->
                 <div class="text-center mt-4">
-                    <button type="submit" class="btn btn-primary btn-lg">{{ button_label|default('Save') }}</button>
+                    <button type="submit" class="btn btn-primary btn-lg">{{ button_label|default('Enregistrer') }}</button>
                 </div>
 
-                <!-- Back to List Button -->
+                <!-- Bouton Retour à la Liste -->
                 <div class="text-center mt-3 mb-5">
-                    <a href="{{ path('app_course_index') }}" class="btn btn-secondary btn-lg">Back to List</a>
+                    <a href="{{ path('app_course_index') }}" class="btn btn-secondary btn-lg">Retour à la Liste</a>
                 </div>
                 
                 {{ form_end(form) }}

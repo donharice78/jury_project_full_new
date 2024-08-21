@@ -1,32 +1,73 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log In{% endblock %}
+{% block title %}Connexion
+{% endblock %}
 
 {% block stylesheets %}
 	{{ parent() }}
-	<link rel="stylesheet" href="{{ asset ('../assets/styles/styles.css') }}">
-	<link rel="stylesheet" href="{{ asset ('../assets/styles/courses.css') }}">
+	<!-- Inclusion des styles CSS personnalisés -->
+	<link rel="stylesheet" href="{{ asset('../assets/styles/styles.css') }}">
+	<link rel="stylesheet" href="{{ asset('../assets/styles/courses.css') }}">
 
+	<style>
+		/* Conteneur principal de connexion */
+		.login-container {
+			max-width: 500px;
+			padding: 20px;
+			border-radius: 8px;
+			box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+			background-color: #fff;
+		}
+		/* Logo de la connexion */
+		.login-logo img {
+			width: 150px;
+		}
+		/* Bouton de connexion sociale */
+		.social-login-btn {
+			background-color: #3b5998;
+			color: white;
+			border: none;
+			width: 100%;
+			padding: 10px;
+			font-size: 16px;
+		}
+		.social-login-btn:hover {
+			background-color: #2d4373;
+		}
+		/* Style des liens de bouton */
+		.btn-link {
+			color: #007bff;
+			text-decoration: none;
+		}
+		.btn-link:hover {
+			color: #0056b3;
+			text-decoration: none;
+		}
+	</style>
 {% endblock %}
 
 {% block body %}
-<body>
-       <section class="courses-header">
+	<body>
+		<section class="courses-header">
 			<nav>
+				<!-- Logo cliquable qui redirige vers la page d'accueil -->
 				<a href="{{ path('app_home') }}">
 					<img src="{{ asset('../assets/img/Web Dev-logo.png') }}" alt="Logo">
 				</a>
-				<div class="nav-links" id="navLinks">
+				<div
+					class="nav-links" id="navLinks">
+					<!-- Icône pour fermer le menu -->
 					<i class="bi bi-x" onclick="hideMenu()"></i>
 					<ul>
+						<!-- Liens de navigation -->
 						<li>
-							<a href="{{ path('app_home') }}">HOME</a>
+							<a href="{{ path('app_home') }}">ACCUEIL</a>
 						</li>
 						<li>
-							<a href="{{ path('app_apropos') }}">ABOUT</a>
+							<a href="{{ path('app_apropos') }}">À PROPOS</a>
 						</li>
 						<li>
-							<a href="{{ path('app_course_index') }}">COURSE</a>
+							<a href="{{ path('app_course_index') }}">COURS</a>
 						</li>
 						<li>
 							<a href="{{ path('app_blogs_index') }}">BLOG</a>
@@ -34,101 +75,107 @@
 						<li>
 							<a href="{{ path('app_contact') }}">CONTACT</a>
 						</li>
-
-						<li class="">
-
-							<div class="" aria-labelledby="">
+						<li>
+							<!-- Liens de connexion/déconnexion -->
+							<div aria-labelledby="">
 								{% if app.user %}
-									<a class="" href="{{ path('app_logout') }}">LOGOUT</a>
+									<a href="{{ path('app_logout') }}">DÉCONNEXION</a>
 								{% else %}
-									<a class="" href="{{ path('app_login') }}">ESPACE</a>
+									<a href="{{ path('app_login') }}">ESPACE</a>
 								{% endif %}
 							</div>
 						</li>
 					</ul>
 				</div>
+				<!-- Icône pour ouvrir le menu -->
 				<i class="bi bi-list" onclick="showMenu()"></i>
 			</nav>
+		</section>
 
-       
-    </section>
+		<!-- Conteneur principal pour le formulaire de connexion -->
+		<div class="container d-flex justify-content-center align-items-center min-vh-100">
+			<div class="row w-100">
+				<div class="col-md-6 col-lg-4 mx-auto">
+					<div class="login-container">
+						<div class="text-center mb-4">
+							<div
+								class="login-logo">
+								<!-- Logo optionnel pour la connexion -->
+								<img src="{{ asset('../assets/img/Web Dev-logo.png') }}" alt="Logo">
+							</div>
+							<h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
+						</div>
 
-    <div class="container d-flex justify-content-center align-items-center vh-100">
-        <div class="row w-100">
-            <div class="col-md-4 mx-auto">
-                <div class="text-center mb-4">
-                    <h1 class="h3 mb-3 font-weight-normal">Log In</h1>
-                </div>
+						<!-- Formulaire de connexion -->
+						<form action="{{ path('app_login') }}" method="post">
+							{% if error %}
+								<!-- Affichage d'un message d'erreur -->
+								<div class="alert alert-danger">
+									{{ error.messageKey|trans(error.messageData, 'security') }}
+								</div>
+							{% endif %}
 
-                <form action="{{ path('app_login') }}" method="post">
-                    {% if error %}
-                        <div class="alert alert-danger">
-                            {{ error.messageKey|trans(error.messageData, 'security') }}
-                        </div>
-                    {% endif %}
+							<div class="mb-3">
+								<label for="username" class="form-label">Email</label>
+								<input type="email" value="{{ username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>
+							</div>
 
-                    <div class="mb-3">
-                        <label for="username" class="form-label">Email</label>
-                        <input type="email" value="{{ username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>
-                    </div>
+							<div class="mb-3">
+								<label for="password" class="form-label">Mot de passe</label>
+								<input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
+							</div>
 
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
-                    </div>
+							{# Décommenter si vous utilisez la fonctionnalité "se souvenir de moi" #}
+							<div class="form-check mb-3">
+								<input type="checkbox" name="_remember_me" id="_remember_me" class="form-check-input">
+								<label for="_remember_me" class="form-check-label">Se souvenir de moi</label>
+							</div>
 
-                    {# Uncomment if using remember me functionality #}
-                    
-                    <div class="form-check mb-3">
-                        <input type="checkbox" name="_remember_me" id="_remember_me" class="form-check-input">
-                        <label for="_remember_me" class="form-check-label">Remember me</label>
-                    </div>
-                    
+							<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+							<button class="btn btn-primary btn-block" type="submit">Se connecter</button>
+						</form>
 
-                    <button class="btn btn-primary btn-block" type="submit">Sign In</button>
-                </form>
+						<div class="text-center mt-4">
+							<p>
+								<a href="#" class="btn-link">Mot de passe oublié ?</a>
+							</p>
+							<p>Pas encore de compte ?
+								<a href="{{ path('app_register') }}" class="btn-link">Inscrivez-vous</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-                <div class="text-center mt-4">
-                    <p><a href="#" class="btn btn-link">Forgot your password?</a></p>
-                    <p>Don't have an account? <a href="{{ path('app_register') }}" class="btn btn-link">Sign up</a></p>
-                    <p>Or log in with Facebook:</p>
-                    
-                </div>
-            </div>
-        </div>
-    </div>
 
-		<!-- ------------------------------------footer-- -->
-
+		<!-- Footer -->
 		<footer class="footer">
 			<div class="footer-container">
-				<div class="footer-row">
-
+				<div
+					class="footer-row">
+					<!-- Colonnes du pied de page avec informations et liens -->
+					<div class="footer-col">
+						<h4>WeB DeV</h4>
+						<ul>
+							<li><a href="{{ path('app_home') }}">Home</a></li>
+							<li><a href="{{ path('app_blogs_index') }}">Notre Blog</a></li>
+							<li><a href="{{ path('app_contact') }}">Contactez-nous</a></li>
+							<li><a href="{{ path('app_apropos') }}">À propos de nous</a></li>
+							<li><a href="{{ path('app_privacy') }}">Politique de confidentialité</a></li>
+						</ul>
+					</div>
 					<div class="footer-col">
 						<h4>Obtenir de l'aide</h4>
 						<ul>
 							<li><a href="{{ path('app_faq') }}">FAQ</a></li>
-							<li><a href="{{path('app_certification') }}">Certification</a></li>
+							<li><a href="{{ path('app_certification') }}">Certification</a></li>
 							<li><a href="{{ path('app_financements') }}">Financements</a></li>
-							<li><a href="{{ path('app_evenements') }}">Evenements</a></li>
+							<li><a href="{{ path('app_evenements') }}">Événements</a></li>
 							<li><a href="{{ path('app_modaliteacces') }}">Modalités d'accès</a></li>
-
 						</ul>
 					</div>
-					<div class="footer-col">
-						<h4>DeV WeB</h4>
-						<ul>
-						    <li><a href="{{ path('app_home') }}">Home</a></li>
-							<li><a href="{{ path('app_blogs_index') }}">Notre Blog</a></li>
-							<li><a href="{{ path('app_contact') }}">Contactez-nous</a></li>
-							<li><a href="{{ path('app_apropos') }}">À propos de nous</a></li>
-							<li><a href="{{ path('app_privacy') }}">politique de confidentialité</a></li>
-
-						</ul>
-					</div>
-
 					<div class="footer-col">
 						<h4>Adresse</h4>
 						<ul>
@@ -155,9 +202,11 @@
 							</a>
 						</div>
 					</div>
+
+
 				</div>
 			</div>
 		</footer>
-</body>
+	</body>
 
 {% endblock %}

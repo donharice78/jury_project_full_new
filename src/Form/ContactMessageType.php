@@ -18,29 +18,37 @@ class ContactMessageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('name', TextType::class, [
-            'label' => 'Username',
-            'attr' => ['class' => 'form-control']
-        ])
-        ->add('email', EmailType::class, [
-            'label' => 'Email',
-            'attr' => ['class' => 'form-control']
-        ])
-        ->add('phone', TelType::class, [
-            'required' => false,
-            'label' => 'Phone',
-            'attr' => ['class' => 'form-control']
-        ])
-        ->add('message', TextareaType::class, [
-            'label' => 'Message',
-            'attr' => ['class' => 'form-control', 'rows' => 5]
-        ]);
+            // Ajouter le champ 'name' pour le nom d'utilisateur
+            ->add('name', TextType::class, [
+                'label' => 'Nom', // Label du champ
+                'attr' => ['class' => 'form-control'] // Classe CSS pour le style
+            ])
+
+            // Ajouter le champ 'email' pour l'adresse e-mail
+            ->add('email', EmailType::class, [
+                'label' => 'E-mail', // Label du champ
+                'attr' => ['class' => 'form-control'] // Classe CSS pour le style
+            ])
+
+            // Ajouter le champ 'phone' pour le numéro de téléphone
+            ->add('phone', TelType::class, [
+                'required' => false, // Ce champ n'est pas obligatoire
+                'label' => 'Téléphone', // Label du champ
+                'attr' => ['class' => 'form-control'] // Classe CSS pour le style
+            ])
+
+            // Ajouter le champ 'message' pour le message du contact
+            ->add('message', TextareaType::class, [
+                'label' => 'Message', // Label du champ
+                'attr' => ['class' => 'form-control', 'rows' => 5] // Classe CSS pour le style et spécifie la hauteur en lignes
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
+        // Configurer les options par défaut du formulaire
         $resolver->setDefaults([
-            'data_class' => ContactMessage::class,
+            'data_class' => ContactMessage::class, // Associe ce formulaire à l'entité ContactMessage
         ]);
     }
 }

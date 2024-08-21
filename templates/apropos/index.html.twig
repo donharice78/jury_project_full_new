@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="{{ asset ('../assets/styles/styles.css') }}">
 	<link rel="stylesheet" href="{{ asset ('../assets/styles/aboutUs.css') }}">
 
+
 {% endblock %}
 
 {% block body %}
@@ -57,105 +58,101 @@
 		<!-- ------------------------------------about us------------------------------------ -->
 
 		<!-- About Us Section -->
-<section class="container my-5">
-	<h1 class="text-center mb-4">À Propos de Nous</h1>
+		<section class="container my-5">
+			<h1 class="text-center mb-4">À Propos de Nous</h1>
 
-	<div class="row">
-		<div class="col-md-6 mb-4">
-			<div class="card">
-				<img src="{{ asset('../assets/img/workers1.jpg') }}" class="card-img-top" alt="Notre École">
-				<div class="card-body">
-					<h5 class="card-title d-flex justify-content-center">Notre Mission</h5>
-					<p class="card-text text-center">
-						Notre mission est de fournir une éducation holistique qui permet aux élèves de réussir sur le plan académique, social et personnel. Nous nous efforçons de créer un environnement bienveillant où chaque enfant peut réaliser pleinement son potentiel.
-					</p>
+			<div class="row">
+				<div class="col-md-6 mb-4">
+					<div class="card">
+						<img src="{{ asset('../assets/img/workers1.jpg') }}" class="card-img-top" alt="Notre École">
+						<div class="card-body">
+							<h5 class="card-title d-flex justify-content-center">Notre Mission</h5>
+							<p class="card-text text-center">
+								Notre mission est de fournir une éducation holistique qui permet aux élèves de réussir sur le plan académique, social et personnel. Nous nous efforçons de créer un environnement bienveillant où chaque enfant peut réaliser pleinement son potentiel.
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 mb-4">
+					<div class="card">
+						<img src="{{ asset('../assets/img/vision.jpg') }}" class="card-img-top" alt="Notre Vision">
+						<div class="card-body">
+							<h5 class="card-title  d-flex justify-content-center">Notre Vision</h5>
+							<p class="card-text text-center">
+								Nous envisageons un avenir où chaque élève devient un apprenant à vie et un citoyen global responsable. Notre objectif est de préparer les élèves à réussir dans un monde en constante évolution grâce à des méthodes d'enseignement innovantes et un engagement envers l'excellence.
+							</p>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="col-md-6 mb-4">
-			<div class="card">
-				<img src="{{ asset('../assets/img/vision.jpg') }}" class="card-img-top" alt="Notre Vision">
-				<div class="card-body">
-					<h5 class="card-title  d-flex justify-content-center">Notre Vision</h5>
-					<p class="card-text text-center">
-						Nous envisageons un avenir où chaque élève devient un apprenant à vie et un citoyen global responsable. Notre objectif est de préparer les élèves à réussir dans un monde en constante évolution grâce à des méthodes d'enseignement innovantes et un engagement envers l'excellence.
-					</p>
+
+			<div class="row">
+				<div class="col-md-4 mb-4">
+					<div class="card">
+						<img src="{{ asset('../assets/img/equipe2.jpg') }}" class="card-img-top " alt="Notre Équipe">
+						<div class="card-body">
+							<h5 class="card-title d-flex justify-content-center">Rencontrez Notre Équipe</h5>
+							<p class="card-text text-center">
+								Notre équipe dévouée d'enseignants et d'administrateurs s'engage à soutenir la croissance académique et personnelle de chaque élève. Découvrez les individus talentueux qui composent notre communauté scolaire.
+							</p>
+							<a href="{{ path('app_team') }}" class="btn btn-danger d-flex justify-content-center">En Savoir Plus</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 mb-4">
+					<div class="card">
+						<img src="{{ asset('../assets/img/installations.jpg') }}" class="card-img-top" alt="Nos Installations">
+						<div class="card-body ">
+							<h5 class="card-title d-flex justify-content-center">Nos Installations</h5>
+							<p class="card-text text-center">
+								Découvrez les installations à la pointe de la technologie qui améliorent les expériences d'apprentissage de nos élèves. De salles de classe modernes à des technologies de pointe, nous offrons un environnement d'apprentissage.
+							</p>
+							<a href="{{ path('app_home') }}#facilities" class="btn btn-danger d-flex justify-content-center ">Explorer les Installations</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 mb-4">
+					<div class="card">
+						<img src="{{ asset('../assets/img/histoire1.jpg') }}" class="card-img-top" alt="Notre Histoire">
+						<div class="card-body">
+							<h5 class="card-title d-flex justify-content-center">Notre Histoire</h5>
+							<p class="card-text d-flex text-center">
+								Découvrez l'histoire riche de notre école, de sa fondation à nos jours. Notre histoire reflète notre croissance et notre évolution en tant que pilier de l’excellence éducative dans la communauté et de la sécurité d’emploi
+							</p>
+							<a href="{{ path('app_historie') }}" class="btn btn-danger d-flex justify-content-center ">En Savoir Plus</a>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-
-	<div class="row">
-		<div class="col-md-4 mb-4">
-			<div class="card">
-				<img src="{{ asset('../assets/img/equipe2.jpg') }}" class="card-img-top " alt="Notre Équipe">
-				<div class="card-body">
-					<h5 class="card-title d-flex justify-content-center">Rencontrez Notre Équipe</h5>
-					<p class="card-text text-center">
-						Notre équipe dévouée d'enseignants et d'administrateurs s'engage à soutenir la croissance académique et personnelle de chaque élève. Découvrez les individus talentueux qui composent notre communauté scolaire.
-					</p>
-					<a href="{{ path('app_team') }}" class="btn btn-danger d-flex justify-content-center">En Savoir Plus</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4 mb-4">
-			<div class="card">
-				<img src="{{ asset('../assets/img/installations.jpg') }}" class="card-img-top" alt="Nos Installations">
-				<div class="card-body ">
-					<h5 class="card-title d-flex justify-content-center">Nos Installations</h5>
-					<p class="card-text text-center">
-						Découvrez les installations à la pointe de la technologie qui améliorent les expériences d'apprentissage de nos élèves. De salles de classe modernes à des technologies de pointe, nous offrons un environnement d'apprentissage.
-					</p>
-					<a href="{{ path('app_home') }}#facilities"  class="btn btn-danger d-flex justify-content-center ">Explorer les Installations</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4 mb-4">
-			<div class="card">
-				<img src="{{ asset('../assets/img/histoire1.jpg') }}" class="card-img-top" alt="Notre Histoire">
-				<div class="card-body">
-					<h5 class="card-title d-flex justify-content-center">Notre Histoire</h5>
-					<p class="card-text d-flex text-center">
-						Découvrez l'histoire riche de notre école, de sa fondation à nos jours. Notre histoire reflète notre croissance et notre évolution en tant que pilier de l’excellence éducative dans la communauté et de la sécurité d’emploi
-					</p>
-					<a href="{{ path('app_historie') }}" class="btn btn-danger d-flex justify-content-center ">En Savoir Plus</a>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
+		</section>
 
 
-
-		<!-- ------------------------------------footer-- -->
-
+		<!-- Footer -->
 		<footer class="footer">
 			<div class="footer-container">
-				<div class="footer-row">
-
+				<div
+					class="footer-row">
+					<!-- Colonnes du pied de page avec informations et liens -->
+					<div class="footer-col">
+						<h4>WeB DeV</h4>
+						<ul>
+							<li><a href="{{ path('app_home') }}">Home</a></li>
+							<li><a href="{{ path('app_blogs_index') }}">Notre Blog</a></li>
+							<li><a href="{{ path('app_contact') }}">Contactez-nous</a></li>
+							<li><a href="{{ path('app_apropos') }}">À propos de nous</a></li>
+							<li><a href="{{ path('app_privacy') }}">Politique de confidentialité</a></li>
+						</ul>
+					</div>
 					<div class="footer-col">
 						<h4>Obtenir de l'aide</h4>
 						<ul>
 							<li><a href="{{ path('app_faq') }}">FAQ</a></li>
-							<li><a href="{{path('app_certification') }}">Certification</a></li>
+							<li><a href="{{ path('app_certification') }}">Certification</a></li>
 							<li><a href="{{ path('app_financements') }}">Financements</a></li>
-							<li><a href="{{ path('app_evenements') }}">Evenements</a></li>
+							<li><a href="{{ path('app_evenements') }}">Événements</a></li>
 							<li><a href="{{ path('app_modaliteacces') }}">Modalités d'accès</a></li>
-
 						</ul>
 					</div>
-					<div class="footer-col">
-						<h4>DeV WeB</h4>
-						<ul>
-						    <li><a href="{{ path('app_home') }}">Home</a></li>
-							<li><a href="{{ path('app_blogs_index') }}">Notre Blog</a></li>
-							<li><a href="{{ path('app_contact') }}">Contactez-nous</a></li>
-							<li><a href="{{ path('app_apropos') }}">À propos de nous</a></li>
-							<li><a href="{{ path('app_privacy') }}">politique de confidentialité</a></li>
-
-						</ul>
-					</div>
-
 					<div class="footer-col">
 						<h4>Adresse</h4>
 						<ul>
@@ -182,10 +179,10 @@
 							</a>
 						</div>
 					</div>
+
+
 				</div>
 			</div>
 		</footer>
-
-	
-</body>
+	</body>
 {% endblock %}

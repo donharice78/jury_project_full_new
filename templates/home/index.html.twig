@@ -1,32 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}School
+{% block title %}
+	WeB DeV
 {% endblock %}
 
 {% block stylesheets %}
 	{{ parent() }}
+	<!-- Importation des fichiers CSS supplémentaires pour le style général et des cours -->
 	<link rel="stylesheet" href="{{ asset ('../assets/styles/styles.css') }}">
 	<link rel="stylesheet" href="{{ asset ('../assets/styles/courses.css') }}">
 	<style>
-	.no-underline {
-    text-decoration: none;
-	}
-	</style>
+		/* Style pour enlever la décoration des liens */
+		.no-underline {
+			text-decoration: none;
+		}
 
+		.dev-danger {
+			color: rgba(255, 49, 49, 255)
+		}
+	</style>
 {% endblock %}
 
 {% block body %}
 	<body>
+		<!-- Section d'en-tête -->
 		<section class="header">
 			<nav>
+				<!-- Logo cliquable qui redirige vers la page d'accueil -->
 				<a href="{{ path('app_home') }}">
 					<img src="{{ asset('../assets/img/Web Dev-logo.png') }}" alt="Logo">
 				</a>
-				<div class="nav-links" id="navLinks">
+				<div
+					class="nav-links" id="navLinks">
+					<!-- Icône pour fermer le menu -->
 					<i class="bi bi-x" onclick="hideMenu()"></i>
 					<ul>
+						<!-- Liens de navigation -->
 						<li>
-							<a href="{{ path('app_home') }} ">HOME</a>
+							<a href="{{ path('app_home') }}">HOME</a>
 						</li>
 						<li>
 							<a href="{{ path('app_apropos') }}">À PROPOS</a>
@@ -40,24 +51,27 @@
 						<li>
 							<a href="{{ path('app_contact') }}">CONTACT</a>
 						</li>
-
-						<li class="">
-
-							<div class="" aria-labelledby="">
+						<li>
+							<!-- Liens de connexion/déconnexion -->
+							<div aria-labelledby="">
 								{% if app.user %}
-									<a class="" href="{{ path('app_logout') }}">DÉCONNEXION</a>
+									<a href="{{ path('app_logout') }}">DÉCONNEXION</a>
 								{% else %}
-									<a class="" href="{{ path('app_login') }}">ESPACE</a>
+									<a href="{{ path('app_login') }}">ESPACE</a>
 								{% endif %}
 							</div>
 						</li>
 					</ul>
 				</div>
+				<!-- Icône pour ouvrir le menu -->
 				<i class="bi bi-list" onclick="showMenu()"></i>
 			</nav>
 
+			<!-- Texte d'accueil -->
 			<div class="text-box mt-5">
-				<h1>Bienvenue à Web Dev</h1>
+				<h1>Bienvenue à
+					<span class="dev-danger">WeB DeV</span>
+				</h1>
 				<p>
 					<strong>
 						Ici, nous vous emmenons d'une faible connaissance du développement Web
@@ -69,59 +83,57 @@
 			</div>
 		</section>
 
-
-		<!-- ------------------------------------course------------------------------ -->
-
+		<!-- Section des cours -->
 		<section class="course">
 			<h2>Les diplômes que nous proposons</h2>
 			<p>Le titre RNCP (Répertoire National des Certifications Professionnelles) pour les développeurs web.</p>
-			<div class="roow">
+			<div
+				class="roow">
+				<!-- Chaque diplôme avec un lien vers les certifications -->
 				<div class="course-col">
-					<a href="{{path('app_certification') }}" class="fw-bold text-danger mx-1 no-underline">
+					<a href="{{path('app_certification') }}" class="fw-bold dev-danger mx-1 no-underline">
 						<h3>RNCP Niveau 5</h3>
 					</a>
 					<p>
-						<strong class="fw-bold">Développeur Web et Web Mobile (BTS, DUT)
-							<br>
-						</strong>
+						<strong class="fw-bold">Développeur Web et Web Mobile (BTS, DUT)</strong>
 						<br>
 						Le niveau 5 correspond à des formations équivalentes au BTS ou au DUT. 
-											Les diplômés à ce niveau possèdent des compétences techniques de base nécessaires pour exercer le métier de développeur web et web mobile.</p>
-					<a href="{{ path('app_course_index') }}" class="hero-btn text-black">Regardez ce que nous proposons</a>
-				</div>
-				<div class="course-col">
-					<a href="{{path('app_certification') }}" class="fw-bold text-danger mx-1 no-underline">
-						<h3>RNCP Niveau 6</h3>
-					</a>
-					<p>
-						<strong class="fw-bold">
-							Développeur Web et Web Mobile (Licence, Bachelor)</strong>
-						<br>Le niveau 6 correspond à des formations équivalentes à une Licence ou un Bachelor. 
-											Les diplômés à ce niveau ont des compétences plus approfondies et une meilleure compréhension des technologies web avancées.
+						                        Les diplômés à ce niveau possèdent des compétences techniques de base nécessaires pour exercer le métier de développeur web et web mobile.
 					</p>
 					<a href="{{ path('app_course_index') }}" class="hero-btn text-black">Regardez ce que nous proposons</a>
 				</div>
 				<div class="course-col">
-					<a href="{{path('app_certification') }}" class="fw-bold text-danger mx-1 no-underline">
+					<a href="{{path('app_certification') }}" class="fw-bold dev-danger mx-1 no-underline">
+						<h3>RNCP Niveau 6</h3>
+					</a>
+					<p>
+						<strong class="fw-bold">Développeur Web et Web Mobile (Licence, Bachelor)</strong>
+						<br>Le niveau 6 correspond à des formations équivalentes à une Licence ou un Bachelor. 
+						                        Les diplômés à ce niveau ont des compétences plus approfondies et une meilleure compréhension des technologies web avancées.
+					</p>
+					<a href="{{ path('app_course_index') }}" class="hero-btn text-black">Regardez ce que nous proposons</a>
+				</div>
+				<div class="course-col">
+					<a href="{{path('app_certification') }}" class="fw-bold dev-danger mx-1 no-underline">
 						<h3>RNCP Niveau 7</h3>
 					</a>
 					<p>
-						<strong class="fw-bold">Développeur Web et Web Mobile (Master, MBA)
-							<br></strong>
-						<br>
-						Le niveau 7 correspond à des formations équivalentes à un Master ou un MBA. 
-											Les diplômés à ce niveau possèdent des compétences avancées et une expertise approfondie dans le développement web et mobile.</p>
+						<strong class="fw-bold">Développeur Web et Web Mobile (Master, MBA)</strong>
+						<br>Le niveau 7 correspond à des formations équivalentes à un Master ou un MBA. 
+						                        Les diplômés à ce niveau possèdent des compétences avancées et une expertise approfondie dans le développement web et mobile.
+					</p>
 					<a href="{{ path('app_course_index') }}" class="hero-btn text-black">Regardez ce que nous proposons</a>
 				</div>
 			</div>
 		</section>
 
-		<!-- ------------------------------------Campus------------------------------ -->
-
+		<!-- Section du campus -->
 		<section class="campus" id="campus">
 			<h1>Notre Campus</h1>
 			<p>Pour l'instant, nous avons trois campus en France</p>
-			<div class="row">
+			<div
+				class="row">
+				<!-- Campus avec images et noms -->
 				<div class="campus-col">
 					<img src="{{ asset('../assets/img/Tour_eff.jpg') }}" alt="Paris">
 					<div class="layer">
@@ -143,109 +155,68 @@
 			</div>
 		</section>
 
-		<!-- ------------------------------------Facilities------------------------------ -->
-
+		<!-- Section des installations -->
 		<section class="facilities" id="facilities">
 			<h1>Nos installations</h1>
 			<p>En tant que développeur Web, vous n'avez pas besoin de rester assis devant votre ordinateur.
 				<br>
-				Découvrez certaines de nos installations pour vous libérer du stress</p>
-			<div class="row">
+				Découvrez certaines de nos installations pour vous libérer du stress
+			</p>
+			<div
+				class="row">
+				<!-- Installations avec images et descriptions -->
 				<div class="facilities-col">
 					<img src="{{ asset('../assets/img/Bibliothèque de classe.jpg') }}" alt="Library">
 					<h3 class="text-center">Bibliothèque de classe</h3>
 					<p class="text-center">Possède une vaste collection de livres, manuscrits, archives, périodiques, 
-											et autres documents couvrant une large gamme de sujets.</p>
+						                        et autres documents couvrant une large gamme de sujets.</p>
 				</div>
 				<div class="facilities-col">
 					<img src="{{ asset('../assets/img/basketball2.jpg') }}" alt="Basketball">
 					<h3 class="text-center">Grande aire de jeux</h3>
 					<p class="text-center">Les pauses récréatives peuvent aider à recharger les batteries, ce qui conduit à une 
-											meilleure concentration et une plus grande productivité</p>
+						                        meilleure concentration et une plus grande productivité</p>
 				</div>
 				<div class="facilities-col">
 					<img src="{{ asset('../assets/img/office food canteen.jpg') }}" alt="Cafeteria">
 					<h3 class="text-center">Nourriture savoureuse</h3>
 					<p class="text-center">Proposez une sélection variée de plats pour répondre aux différents goûts et besoins alimentaires, 
-											y compris des options végétariennes, véganes.</p>
+						                        y compris des options végétariennes, véganes.</p>
 				</div>
 			</div>
 		</section>
 
-		<!-- ------------------------------------Testimonials------------------------------ -->
-
-		<section class="testimonials">
-			<h1>Ce que disent nos étudiants</h1>
-			<p>Voir ce que nos étudiants disent de nous.</p>
-			<div class="test-row">
-				<div class="testimonial-col">
-					<img src="{{ asset('../assets/img/user1.jpg') }}" alt="Christine Berkley">
-					<div>
-						<p>La formation a été exceptionnelle et m'a permis d'acquérir des compétences pratiques immédiatement applicables dans mon travail</p>
-						<h3>Christabel Mau</h3>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-					</div>
-				</div>
-				<div class="testimonial-col">
-					<img src="{{ asset('../assets/img/user2.jpg') }}" alt="David Harris">
-					<div>
-						<p>Les cours sont très bien structurés et les formateurs sont experts dans leur domaine. Je recommande vivement cette école.</p>
-						<h3>David Morris</h3>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star-half-stroke"></i>
-					</div>
-				</div>
-				<div class="testimonial-col">
-					<img src="{{ asset('../assets/img/user2.jpg') }}" alt="David Harris">
-					<div>
-						<p>Une expérience enrichissante avec des supports de cours modernes et une excellente ambiance d'apprentissage.</p>
-						<h3>Matin Benjamin</h3>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star"></i>
-						<i class="fa fa-star-half-stroke"></i>
-					</div>
-				</div>
-			</div>
+		<!-- Section des témoignages -->
+		<section class="comments-section">
+			{{ render(controller('App\\Controller\\CommentController::commentsPartial')) }}
 		</section>
 
-		<!-- ------------------------------------footer-- -->
-
+		<!-- Footer -->
 		<footer class="footer">
 			<div class="footer-container">
-				<div class="footer-row">
-
+				<div
+					class="footer-row">
+					<!-- Colonnes du pied de page avec informations et liens -->
+					<div class="footer-col">
+						<h4>WeB DeV</h4>
+						<ul>
+							<li><a href="{{ path('app_home') }}">Home</a></li>
+							<li><a href="{{ path('app_blogs_index') }}">Notre Blog</a></li>
+							<li><a href="{{ path('app_contact') }}">Contactez-nous</a></li>
+							<li><a href="{{ path('app_apropos') }}">À propos de nous</a></li>
+							<li><a href="{{ path('app_privacy') }}">Politique de confidentialité</a></li>
+						</ul>
+					</div>
 					<div class="footer-col">
 						<h4>Obtenir de l'aide</h4>
 						<ul>
 							<li><a href="{{ path('app_faq') }}">FAQ</a></li>
-							<li><a href="{{path('app_certification') }}">Certification</a></li>
+							<li><a href="{{ path('app_certification') }}">Certification</a></li>
 							<li><a href="{{ path('app_financements') }}">Financements</a></li>
-							<li><a href="{{ path('app_evenements') }}">Evenements</a></li>
+							<li><a href="{{ path('app_evenements') }}">Événements</a></li>
 							<li><a href="{{ path('app_modaliteacces') }}">Modalités d'accès</a></li>
-
 						</ul>
 					</div>
-					<div class="footer-col">
-						<h4>DeV WeB</h4>
-						<ul>
-						    <li><a href="{{ path('app_home') }}">Home</a></li>
-							<li><a href="{{ path('app_blogs_index') }}">Notre Blog</a></li>
-							<li><a href="{{ path('app_contact') }}">Contactez-nous</a></li>
-							<li><a href="{{ path('app_apropos') }}">À propos de nous</a></li>
-							<li><a href="{{ path('app_privacy') }}">politique de confidentialité</a></li>
-
-						</ul>
-					</div>
-
 					<div class="footer-col">
 						<h4>Adresse</h4>
 						<ul>
@@ -272,10 +243,11 @@
 							</a>
 						</div>
 					</div>
+
+
 				</div>
 			</div>
 		</footer>
-
 	</body>
 {% endblock %}
 

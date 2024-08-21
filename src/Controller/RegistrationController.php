@@ -26,24 +26,24 @@ class RegistrationController extends AbstractController
             $photo = $form->get('photo')->getData();
 
             if ($photo) {
-                // Génère un nouveau nom de fichier et déplace le fichier téléchargé
-                $newFileName = uniqid() . '.' . $photo->guessExtension();
+                $originalFilename = pathinfo($photo->getClientOriginalName(), PATHINFO_FILENAME);
+                $newFilename = uniqid() . '-' . $originalFilename . '.' . $photo->guessExtension();
 
                 try {
                     $photo->move(
                         $this->getParameter('kernel.project_dir') . '/public/uploads',
-                        $newFileName
+                        $newFilename
                     );
-                    // Définit le chemin de l'image pour le nouveau cours
-                    $user->setPhoto('/uploads/' . $newFileName);
+                    $user->setPhoto('/uploads/' . $newFilename);
                 } catch (FileException $e) {
-                    // Gère l'exception en cas de problème lors du téléchargement du fichier
                     $this->addFlash('error', 'Erreur lors de l\'upload de l\'image: ' . $e->getMessage());
-                    return $this->redirectToRoute('app_user');
+                    return $this->render('registration/register.html.twig', [
+                        'registrationForm' => $form,
+                    ]);
                 }
             }
-           
-            // encode the plain password
+
+            // Encode le mot de passe
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
@@ -54,16 +54,13 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // do anything else you need here, like send an email
+            $this->addFlash('success', 'Inscription réussie ! Vous pouvez maintenant vous connecter.');
 
-            return $this->redirectToRoute('app_espace');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form,
+            'registrationForm' => $form->createView(),
         ]);
     }
-
-
-
 }

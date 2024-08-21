@@ -1,0 +1,33 @@
+{# templates/home/index.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <!-- Other sections -->
+
+    <!-- Section des témoignages -->
+    <section class="testimonials">
+        <h1>Ce que disent nos étudiants</h1>
+        <h5>Voir ce que nos étudiants disent de nous.</p>
+        <div class="test-row">
+            {% for comment in comments %}
+                <div class="testimonial-col">
+                    {% if comment.user and comment.user.photo %}
+                        <img src="{{ asset('uploads/photos/' ~ comment.user.photo) }}" alt="{{ comment.user.name }}">
+                    {% else %}
+                        <img src="{{ asset('../assets/img/user.png') }}" alt="Default User">
+                    {% endif %}
+                    <div>
+                        <p>{{ comment.content }}</p>
+                        <h3>{{ comment.user ? comment.user.name : 'Anonymous' }}</h3>
+                        {% for i in 1..5 %}
+                            <i class="fa fa-star {% if i <= comment.rating %}checked{% endif %}"></i>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% else %}
+                <p>No testimonials available.</p>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

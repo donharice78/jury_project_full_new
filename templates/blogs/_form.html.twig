@@ -1,61 +1,64 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Blog{% endblock %}
+{% block title %}Modifier le Blog{% endblock %}
 
 {% block body %}
     <div class="container mt-5">
-        <!-- Form Header -->
-        <h1 class="text-center mb-4">{{ app.request.attributes.get('_route') == 'app_blogs_edit' ? 'Edit Blog' : 'Create New Blog' }}</h1>
+        <!-- En-tête du formulaire -->
+        <h1 class="text-center mb-4">{{ app.request.attributes.get('_route') == 'app_blogs_edit' ? 'Modifier le Blog' : 'Créer un Nouveau Blog' }}</h1>
 
-        <!-- Form Container -->
+        <!-- Conteneur du formulaire -->
         <div class="row justify-content-center">
             <div class="col-md-9 col-lg-9">
+                <!-- Début du formulaire -->
                 {{ form_start(form, {'attr': {'class': 'form-control-lg'}}) }}
                 <div class="mb-4">
                     {% for field in form %}
                         <div class="mb-3">
+                            <!-- Étiquette du champ de formulaire -->
                             {{ form_label(field, null, {'attr': {'class': 'form-label'}}) }}
+                            <!-- Champ de formulaire -->
                             {{ form_widget(field, {'attr': {'class': 'form-control form-control-lg'}}) }}
+                            <!-- Erreurs de validation du champ -->
                             {{ form_errors(field) }}
                         </div>
                     {% endfor %}
                 </div>
 
-                <!-- Display Blog Images if Editing -->
+                <!-- Affichage des images du blog si en mode édition -->
                 {% if app.request.attributes.get('_route') == 'app_blogs_edit' %}
-                    <h2 class="text-center mb-4">Edit Blog Images</h2>
+                    <h2 class="text-center mb-4">Modifier les Images du Blog</h2>
                     <div class="row">
                         {% for image in blog.images %}
                             <div class="col-md-4 mb-3">
-                                
-                                   <div class="card-body text-center">
-                                       <img src="{{ asset('uploads/' ~ image.name) }}" class="card-img-top" alt="Image" style="height: 300px ; width: 100%; object-fit: cover;">
-                                       <a href="{{ path('app_blogs_delete_image', {id: image.id}) }}"
-                                           class="btn btn-danger"
-                                           data-delete
-                                           data-token="{{ csrf_token('delete' ~ image.id) }}">Delete Image</a>
-                                    </div>
-                                
+                                <div class="card-body text-center">
+                                    <!-- Affichage de l'image du blog -->
+                                    <img src="{{ asset('uploads/' ~ image.name) }}" class="card-img-top" alt="Image" style="height: 300px; width: 100%; object-fit: cover;">
+                                    <!-- Bouton pour supprimer l'image -->
+                                    <a href="{{ path('app_blogs_delete_image', {id: image.id}) }}"
+                                       class="btn btn-danger"
+                                       data-delete
+                                       data-token="{{ csrf_token ('delete' ~ image.id) }}">Supprimer l'image</a>
+                                </div>
                             </div>
                         {% endfor %}
                     </div>
                 {% endif %}
 
-                <!-- Submit Button -->
+                <!-- Bouton de soumission -->
                 <div class="text-center mt-4">
-                    <button type="submit" class="btn btn-primary btn-lg">{{ button_label|default('Save') }}</button>
-                    <a href="{{ path('app_blogs_index') }}" class="btn btn-secondary btn-lg">Back to List</a>
+                    <button type="submit" class="btn btn-primary btn-lg">{{ button_label|default('Enregistrer') }}</button>
+                    <a href="{{ path('app_blogs_index') }}" class="btn btn-secondary btn-lg">Retour à la Liste</a>
                 </div>
 
-                <!-- Back to List Button -->
-               
-                
+                <!-- Fin du formulaire -->
                 {{ form_end(form) }}
             </div>
         </div>
     </div>
     
     {% block javascripts %}
+    <!-- Inclusion du script pour la gestion des images -->
     <script src="{{ asset('js/images.js') }}"></script>
     {% endblock %}
 {% endblock %}
