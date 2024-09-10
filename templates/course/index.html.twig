@@ -79,22 +79,13 @@
 							</p>
 							<!-- Détails du cours -->
 							<ul class="list-unstyled">
-								<li>
-									<strong>Durée :</strong>
-									{{ course.duration }}
-									Mois</li>
-								<li>
-									<strong>Date de début :</strong>
-									{{ course.startDate ? course.startDate|date('Y-m-d') : 'N/A' }}</li>
-								<li>
+								
 									<strong>Format :</strong>
 									{{ course.courseFormat }}</li>
 								<li>
 									<strong>Prérequis :</strong>
 									{{ course.prerequisities }}</li>
-								<li>
-									<strong>Frais :</strong>
-									{{ course.courseFee }}</li>
+								
 							</ul>
 							<!-- Boutons d'action -->
 							<a href="{{ path('app_course_show', {'id': course.id}) }}" class="btn btn-primary">Afficher</a>

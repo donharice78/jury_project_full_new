@@ -4,9 +4,11 @@ namespace App\Form;
 
 use App\Entity\Course;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
 
 class Course1Type extends AbstractType
 {
@@ -35,7 +37,9 @@ class Course1Type extends AbstractType
             ->add('start_date', null, [
                 'widget' => 'single_text', // Afficher le champ comme un seul texte
                 'label' => 'Date de Début', // Label du champ
-                'attr' => ['placeholder' => 'Sélectionnez la date de début'], // Placeholder du champ
+                'attr' => ['placeholder' => 'Sélectionnez la date de début', // Placeholder du champ
+                'min' => (new \DateTime())->format('Y-m-d'),
+            ]
             ])
             
             // Ajouter le champ 'course_format' pour le format du cours
