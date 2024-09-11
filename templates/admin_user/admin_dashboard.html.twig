@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Index des Cours
-{% endblock %}
+{% block title %}User Management{% endblock %}
 
 {% block stylesheets %}
-	{{ parent() }}
-	<link rel="stylesheet" href="{{ asset('../assets/styles/styles.css') }}">
-	<link rel="stylesheet" href="{{ asset('../assets/styles/courses.css') }}">
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('../assets/styles/styles.css') }}">
+    <link rel="stylesheet" href="{{ asset('../assets/styles/courses.css') }}">
+    <link rel="stylesheet" href="{{ asset('../assets/styles/dashboards.css') }}">
 {% endblock %}
 
 {% block body %}
-	<!-- Section d'en-tête -->
-	<section class="courses-header">
+<body >
+<section class="courses-header">
 		<nav>
 			<!-- Logo cliquable qui redirige vers la page d'accueil -->
 			<a href="{{ path('app_home') }}">
@@ -24,7 +24,7 @@
 				<ul>
 					<!-- Liens de navigation -->
 					<li>
-						<a href="{{ path('app_home') }}">ACCUEIL</a>
+						<a href="{{ path('app_home') }}">HOME</a>
 					</li>
 					<li>
 						<a href="{{ path('app_apropos') }}">À PROPOS</a>
@@ -41,16 +41,11 @@
 					<li>
 						<!-- Liens de connexion/déconnexion -->
 						<div aria-labelledby="">
-						{% if app.user %}
-    {% if 'ROLE_ADMIN' in app.user.roles %}
-        <a href="{{ path('app_admin_user_index') }}">MON ESPACE</a>
-    {% elseif 'ROLE_USER' in app.user.roles %}
-        <a href="{{ path('app_admin_user_show', { 'id': app.user.id }) }}">MON ESPACE</a>
-    {% endif %}
-{% else %}
-    <a href="{{ path('app_login') }}">Login</a>
-{% endif %}
-
+							{% if app.user %}
+								<a href="{{ path('app_admin_user_index') }}">MON ESPACE</a>
+							{% else %}
+								<a href="{{ path('app_login') }}">ESPACE</a>
+							{% endif %}
 						</div>
 					</li>
 				</ul>
@@ -59,64 +54,57 @@
 			<i class="bi bi-list" onclick="showMenu()"></i>
 		</nav>
 	</section>
+    <div class="dashboard mt-4 mb-5">
+        <aside class="sidebar">
+            <h2>Admin Panel</h2>
+            <nav>
+                <ul>
+                    <li><a href="{{ path('app_admin_user_index') }}">Dashboard</a></li>
+					
+                    <li><a href="#">Manage Courses</a></li>
+                    <li><a href="#">Manage Students</a></li>
+                    <li><a href="#">Reports</a></li>
+                    <li><a href="#">Settings</a></li>
+                    <li><a href="{{ path('app_logout') }}">Logout</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header>
+			<img src="{{ app.user.photo }}" alt="{{ app.user.username }}" class="img-fluid rounded-circle" style="height: 150px; width: 150px; object-fit: cover; border: 1px solid #ddd;">
+                <h1>Welcome, Admin {{ app.user.firstName }}</h1>
+                <p>Manage the system, students, and courses efficiently.</p>
+            </header>
+            <section class="cards">
 
-	<!-- Section du contenu principal -->
-	<div class="container mt-5">
-		<h1 class="text-center mb-4">Index des Cours</h1>
+    <div class="card">
+                    
+                        <h3>Total Students</h3>
+                        <p>{{ total_users }}</p>
+                        <a href="{{ path('app_non_admin_user_index') }}">view all</a>
+                    
+                </div>
 
-		<!-- Cartes des cours -->
-		<div class="row">
-			{% for course in courses %}
-				<div class="col-md-4 mb-4">
-					<div
-						class="card">
-						<!-- Image du cours -->
-						<img src="{{ course.image }}" class="card-img-top" alt="{{ course.title }}" style="height: 200px; object-fit: cover;"/>
-						<div
-							class="card-body">
-							<!-- Titre du cours -->
-							<h5 class="card-title">
-								{{ course.title|slice(0, 30) ~ (course.title|length > 30 ? '...' : '') }}
-							</h5>
-							<!-- Description du cours -->
-							<p class="card-text">
-								{{ course.description|slice(0, 90) ~ (course.description|length > 90 ? '...' : '') }}
-							</p>
-							<!-- Détails du cours -->
-							<ul class="list-unstyled">
-								
-									<strong>Format :</strong>
-									{{ course.courseFormat }}</li>
-								<li>
-									<strong>Prérequis :</strong>
-									{{ course.prerequisities }}</li>
-								
-							</ul>
-							<!-- Boutons d'action -->
-							<a href="{{ path('app_course_show', {'id': course.id}) }}" class="btn btn-primary">Afficher</a>
-							{% if is_granted('ROLE_ADMIN') %}
-								<a href="{{ path('app_course_edit', {'id': course.id}) }}" class="btn btn-secondary">Modifier</a>
-							{% endif %}
-						</div>
-					</div>
-				</div>
-			{% else %}
-				<!-- Message lorsqu'aucun cours n'est trouvé -->
-				<div class="col-12">
-					<div class="alert alert-info">Aucun enregistrement trouvé</div>
-				</div>
-			{% endfor %}
-		</div>
-
-		<!-- Bouton pour créer un nouveau cours -->
-		<div class="text-center m-4">
-			{% if is_granted('ROLE_ADMIN') %}
-				<a href="{{ path('app_course_new') }}" class="btn btn-success mt-4">Créer un Nouveau</a>
-			{% endif %}
-		</div>
-	</div>
-
-	<!-- Footer -->
+				    <div class="card">
+                    
+                        <h3>Total Admin</h3>
+                        <p>{{ total_admin }}</p>
+                        <a href="{{ path('app_admin_user_all') }}">view all</a>
+                    
+                </div>
+                <div class="card">
+                    <h3>Active Courses</h3>
+                    <p>{{total_courses}}</p>
+                    <a href="{{ path('app_admin_user_course') }}">view all</a>
+                </div>
+                <div class="card">
+                    <h3>Pending Reports</h3>
+                    <p>8</p>
+                </div>
+            </section>
+        </main>
+    </div>
+    	<!-- Footer -->
 	<footer class="footer">
 		<div class="footer-container">
 			<div
@@ -173,4 +161,5 @@
 			</div>
 		</div>
 	</footer>
+</body>
 {% endblock %}

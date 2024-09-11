@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Course;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use App\Repository\CourseRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,7 +14,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
-#[Route('/admin/user')]
+#[Route('/admin')]
 class AdminUserController extends AbstractController
 {
     /**
@@ -24,14 +26,96 @@ class AdminUserController extends AbstractController
      * @param UserRepository $userRepository Le dépôt des utilisateurs.
      * @return Response La réponse HTTP contenant la vue.
      */
-    #[Route('/', name: 'app_admin_user_index', methods: ['GET'])]
-    public function index(UserRepository $userRepository): Response
+    #[Route('/main', name: 'app_admin_user_index', methods: ['GET'])]
+    public function index(UserRepository $userRepository, CourseRepository $courseRepository): Response
     {
-        // Récupère tous les utilisateurs depuis la base de données et les rend dans la vue 'admin_user/index.html.twig'
-        return $this->render('admin_user/index.html.twig', [
-            'users' => $userRepository->findAll(),
-        ]);
+        $user = $this->getUser(); // Assuming the user is authenticated
+    if (!$user) {
+        throw $this->createAccessDeniedException('You need to be logged in to access this page.');
     }
+
+    // Get all users with the role of 'ROLE_USER' (not admins)
+    $users = $userRepository->findAll();
+    $nonAdminUsers = array_filter($users, function ($user) {
+        return in_array('ROLE_USER', $user->getRoles()) && !in_array('ROLE_ADMIN', $user->getRoles());
+    });
+
+    $users = $userRepository->findAll();
+    $adminUsers = array_filter($users, function ($user) {
+        return in_array('ROLE_ADMIN', $user->getRoles()) && in_array('ROLE_ADMIN', $user->getRoles());
+    });
+
+    $totalNonAdminUsers = count($nonAdminUsers);
+    $totalAdminUsers = count($adminUsers);
+    $courses = $courseRepository->findAll();
+    $totalCourses = count($courseRepository->findAll());
+
+    return $this->render('admin_user/admin_dashboard.html.twig', [
+        'total_users' => $totalNonAdminUsers,
+        'users' => $nonAdminUsers, // or all users if you want
+        'total_admin' => $totalAdminUsers,
+        'total_courses' => $totalCourses,
+        'courses' => $courses,
+    ]);
+    
+    }
+    #[Route('/non_admin_users', name: 'app_non_admin_user_index', methods: ['GET'])]
+    public function nonAdminUser(UserRepository $userRepository): Response
+    {
+         // Get total number of users
+         $users = $userRepository->findAll();
+         $nonAdminUsers = array_filter($users, function ($user) {
+             return in_array('ROLE_USER', $user->getRoles()) && !in_array('ROLE_ADMIN', $user->getRoles());
+         });
+
+         
+       
+
+        return $this->render('admin_user/non_admin_index.html.twig', [
+            'users' => $nonAdminUsers,
+        ]);
+    
+    }
+
+    #[Route('/admin_users', name: 'app_admin_user_all', methods: ['GET'])]
+    public function adminUser(UserRepository $userRepository): Response
+    {
+         // Get total number of users
+         $users = $userRepository->findAll();
+         $adminUsers = array_filter($users, function ($admin) {
+             return in_array('ROLE_ADMIN', $admin->getRoles()) && in_array('ROLE_ADMIN', $admin->getRoles());
+         });
+
+         
+         
+       
+
+        return $this->render('admin_user/index.html.twig', [
+            'users' => $adminUsers,
+        ]);
+    
+    }
+
+
+   
+
+    #[Route('/courses', name: 'app_admin_user_course', methods: ['GET'])]
+    public function courses(CourseRepository $courseRepository): Response
+    {
+         // Get total number of users
+        $courses = $courseRepository->findAll();
+       
+
+        return $this->render('course/index.html.twig', [
+            'courses' => $courses,
+        ]);
+    
+    }
+
+
+
+
+   
 
     /**
      * Crée un nouvel utilisateur.
@@ -104,11 +188,12 @@ class AdminUserController extends AbstractController
      * @param User $user L'utilisateur à afficher.
      * @return Response La réponse HTTP contenant la vue.
      */
-    #[Route('/{id}', name: 'app_admin_user_show', methods: ['GET'])]
+    #[Route('/user/{id}', name: 'app_admin_user_show', methods: ['GET'])]
     public function show(User $user): Response
     {
+        
         // Affichage des détails de l'utilisateur dans la vue 'admin_user/show.html.twig'
-        return $this->render('admin_user/show.html.twig', [
+        return $this->render('admin_user/student_dashboard.html.twig', [
             'user' => $user,
         ]);
     }

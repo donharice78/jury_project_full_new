@@ -52,7 +52,8 @@
 						<!-- Liens de connexion/déconnexion -->
 						<div aria-labelledby="">
 							{% if app.user %}
-								<a href="{{ path('app_logout') }}">DÉCONNEXION</a>
+								<a href="{{ path('app_admin_user_show', { 'id': app.user.id }) }}">MON ESPACE</a>
+
 							{% else %}
 								<a href="{{ path('app_login') }}">ESPACE</a>
 							{% endif %}

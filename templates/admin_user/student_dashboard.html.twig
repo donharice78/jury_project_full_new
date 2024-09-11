@@ -1,0 +1,191 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User Management
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{ asset('../assets/styles/styles.css') }}">
+	<link rel="stylesheet" href="{{ asset('../assets/styles/courses.css') }}">
+	<link rel="stylesheet" href="{{ asset('../assets/styles/dashboards.css') }}">
+{% endblock %}
+
+{% block body %}
+	<body>
+		<section class="courses-header">
+			<nav>
+				<!-- Logo cliquable qui redirige vers la page d'accueil -->
+				<a href="{{ path('app_home') }}">
+					<img src="{{ asset('../assets/img/Web Dev-logo.png') }}" alt="Logo">
+				</a>
+				<div
+					class="nav-links" id="navLinks">
+					<!-- Icône pour fermer le menu -->
+					<i class="bi bi-x" onclick="hideMenu()"></i>
+					<ul>
+						<!-- Liens de navigation -->
+						<li>
+							<a href="{{ path('app_home') }}">HOME</a>
+						</li>
+						<li>
+							<a href="{{ path('app_apropos') }}">À PROPOS</a>
+						</li>
+						<li>
+							<a href="{{ path('app_course_index') }}">COURS</a>
+						</li>
+						<li>
+							<a href="{{ path('app_blogs_index') }}">BLOG</a>
+						</li>
+						<li>
+							<a href="{{ path('app_contact') }}">CONTACT</a>
+						</li>
+						<li>
+							<!-- Liens de connexion/déconnexion -->
+							<div aria-labelledby="">
+								{% if app.user %}
+									{% if 'ROLE_ADMIN' in app.user.roles %}
+										<a href="{{ path('app_admin_user_index') }}">MON ESPACE</a>
+									{% elseif 'ROLE_USER' in app.user.roles %}
+										<a href="{{ path('app_admin_user_show', { 'id': app.user.id }) }}">MON ESPACE</a>
+									{% endif %}
+								{% else %}
+									<a href="{{ path('app_login') }}">Login</a>
+								{% endif %}
+
+							</div>
+						</li>
+					</ul>
+				</div>
+				<!-- Icône pour ouvrir le menu -->
+				<i class="bi bi-list" onclick="showMenu()"></i>
+			</nav>
+		</section>
+		<div class="dashboard mt-4 mb-5">
+			<aside class="sidebar">
+				<h2>Student Portal</h2>
+				<nav>
+					<ul>
+						<li><a href="#">Dashboard</a></li>
+						<li><a href="#">My Courses</a></li>
+						<li><a href="#">Assignments</a></li>
+						<li><a href="{{ path('app_admin_user_show', { 'id': user.id }) }}">Profile</a></li>
+
+						<li><a href="#">Settings</a></li>
+						<li><a href="{{ path('app_logout') }}">Logout</a></li>
+					</ul>
+				</nav>
+			</aside>
+			<main class="main-content">
+				<header>
+					<div class="card-header">
+						<img src="{{ user.photo }}" alt="{{ user.username }}" class="img-fluid rounded-circle" style="height: 150px; width: 150px; object-fit: cover; border: 1px solid #ddd;">
+						<h1>{{ user.lastName ~ ' ' ~ user.firstName }}</h1>
+					</div>
+					<p>Track your progress and continue learning.</p>
+				</header>
+				<section class="cards">
+					<div class="card">
+						<h3>Enrolled Courses</h3>
+						<p>4</p>
+					</div>
+					<div class="card">
+						<h3>Assignments Due</h3>
+						<p>3</p>
+					</div>
+					<div class="card">
+						<h3>Completed Courses</h3>
+						<p>2</p>
+					</div>
+
+					<table class="table table-borderless">
+						<tbody>
+							<tr>
+								<th>Id</th>
+								<td>{{ user.id }}</td>
+							</tr>
+							<tr>
+								<th>Email</th>
+								<td>{{ user.email }}</td>
+							</tr>
+							<tr>
+								<th>Username</th>
+								<td>{{ user.username }}</td>
+							</tr>
+							<tr>
+								<th>First Name</th>
+								<td>{{ user.firstName }}</td>
+							</tr>
+							<tr>
+								<th>Last Name</th>
+								<td>{{ user.lastName }}</td>
+							</tr>
+							<tr>
+								<th>Phone</th>
+								<td>{{ user.phone }}</td>
+							</tr>
+
+						</tbody>
+					</table>
+				</section>
+
+			</main>
+		</div>
+		<!-- Footer -->
+		<footer class="footer">
+			<div class="footer-container">
+				<div
+					class="footer-row">
+					<!-- Colonnes du pied de page avec informations et liens -->
+					<div class="footer-col">
+						<h4>WeB DeV</h4>
+						<ul>
+							<li><a href="{{ path('app_home') }}">Home</a></li>
+							<li><a href="{{ path('app_blogs_index') }}">Notre Blog</a></li>
+							<li><a href="{{ path('app_contact') }}">Contactez-nous</a></li>
+							<li><a href="{{ path('app_apropos') }}">À propos de nous</a></li>
+							<li><a href="{{ path('app_privacy') }}">Politique de confidentialité</a></li>
+						</ul>
+					</div>
+					<div class="footer-col">
+						<h4>Obtenir de l'aide</h4>
+						<ul>
+							<li><a href="{{ path('app_faq') }}">FAQ</a></li>
+							<li><a href="{{ path('app_certification') }}">Certification</a></li>
+							<li><a href="{{ path('app_financements') }}">Financements</a></li>
+							<li><a href="{{ path('app_evenements') }}">Événements</a></li>
+							<li><a href="{{ path('app_modaliteacces') }}">Modalités d'accès</a></li>
+						</ul>
+					</div>
+					<div class="footer-col">
+						<h4>Adresse</h4>
+						<ul>
+							<li><a href="">7 Avenue du General Patton</a></li>
+							<li><a href="">77000</a></li>
+							<li><a href="">Melun</a></li>
+							<li><a href="">Tel: 07 83 65 08 80</a></li>
+						</ul>
+					</div>
+					<div class="footer-col">
+						<h4>Suivez-nous</h4>
+						<div class="social-links">
+							<a href="#">
+								<i class="fab fa-facebook-f"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-twitter"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-instagram"></i>
+							</a>
+							<a href="#">
+								<i class="fab fa-linkedin-in"></i>
+							</a>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+		</footer>
+	</body>
+{% endblock %}

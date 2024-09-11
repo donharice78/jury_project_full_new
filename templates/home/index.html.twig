@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block stylesheets %}
-	{{ parent() }}
+	
 	<!-- Importation des fichiers CSS supplémentaires pour le style général et des cours -->
 	<link rel="stylesheet" href="{{ asset ('../assets/styles/styles.css') }}">
 	<link rel="stylesheet" href="{{ asset ('../assets/styles/courses.css') }}">
@@ -54,7 +54,8 @@
 							<!-- Liens de connexion/déconnexion -->
 							<div aria-labelledby="">
 								{% if app.user %}
-									<a href="{{ path('app_logout') }}">DÉCONNEXION</a>
+									<a href="{{ path('app_admin_user_show', { 'id': app.user.id }) }}">MON ESPACE</a>
+
 								{% else %}
 									<a href="{{ path('app_login') }}">ESPACE</a>
 								{% endif %}

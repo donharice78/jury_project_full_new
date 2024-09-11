@@ -1,3 +1,4 @@
+# config/packages/security.yaml
 security:
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
@@ -17,32 +18,23 @@ security:
                 login_path: app_login
                 check_path: app_login
                 enable_csrf: true
+                success_handler: App\Security\LoginSuccessHandler # Add your success handler here
             logout:
                 path: app_logout
-                # where to redirect after logout
-                # target: app_any_route
+                # Redirect after logout
+                target: app_home # Redirect to homepage or any other page after logout
 
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#the-firewall
-            # Uncomment and configure the necessary authentications
-
+            # Uncomment and configure the necessary authentications if needed
             # switch_user: true
 
     access_control:
-        # Define access control rules here
-         - { path: ^/admin, roles: ROLE_ADMIN }
-         - { path: ^/comment, roles: ROLE_ADMIN }
-         - { path: ^/course/new, roles: ROLE_ADMIN }
-         - { path: ^/course/edit, roles: ROLE_ADMIN }
-         - { path: ^/blogs/new, roles: ROLE_ADMIN }
-         - { path: ^/blogs/edit, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        # Define access control rules
+        - { path: ^/admin/main, roles: ROLE_ADMIN }
+        - { path: ^/admin/user, roles: ROLE_USER }
 
-when@test:
-    security:
-        password_hashers:
-            Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
-                algorithm: auto
-                cost: 4 # Lowest possible value for bcrypt
-                time_cost: 3 # Lowest possible value for argon
-                memory_cost: 10 # Lowest possible value for argon
+        - { path: ^/comment, roles: ROLE_ADMIN }
+        - { path: ^/course/new, roles: ROLE_ADMIN }
+        - { path: ^/course/edit, roles: ROLE_ADMIN }
+        - { path: ^/blogs/new, roles: ROLE_ADMIN }
+        - { path: ^/blogs/edit, roles: ROLE_ADMIN }
+        - { path: ^/profile, roles: ROLE_USER } # Uncomment if needed

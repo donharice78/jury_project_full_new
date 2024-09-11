@@ -1,7 +1,7 @@
 {# templates/team/index.html.twig #}
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
-	{{ parent() }}
+
 	<link rel="stylesheet" href="{{ asset ('../assets/styles/styles.css') }}">
 	<link rel="stylesheet" href="{{ asset ('../assets/styles/contact.css') }}">
 
@@ -41,7 +41,8 @@
 
 							<div class="" aria-labelledby="">
 								{% if app.user %}
-									<a class="" href="{{ path('app_logout') }}">DÉCONNEXION</a>
+                              <a href="{{ path('app_admin_user_show', { 'id': app.user.id }) }}">MON ESPACE</a>
+
 								{% else %}
 									<a class="" href="{{ path('app_login') }}">ESPACE</a>
 								{% endif %}
