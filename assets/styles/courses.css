@@ -62,10 +62,25 @@ img {
 }
 
 /* Responsivité des éléments de la liste */
+@media (max-width: 768px) {
+  .nav-links {
+  position: absolute;
+  background: #f44336;
+  height: 55%;
+  width: 200px;
+  top: 0;
+  right: -200px;
+  text-align: left;
+  z-index: 2;
+  transition: .5s ease-in-out;
+}
+
+}
 @media (min-width: 40rem) {
   .cards__item {
       width: 50%;
   }
+  
 }
 
 @media (min-width: 56rem) {

@@ -4,6 +4,16 @@
 	{{ parent() }}
 	<link rel="stylesheet" href="{{ asset ('../assets/styles/styles.css') }}">
 	<link rel="stylesheet" href="{{ asset ('../assets/styles/contact.css') }}">
+	<style>
+	@media (max-width: 768px) {
+		.container{
+			margin:50px auto;
+		}
+	}
+
+	
+	
+	</style>
 
 {% endblock %}
 
@@ -191,4 +201,6 @@
 				</div>
 			</div>
 		</footer>
+
+   
 {% endblock %}

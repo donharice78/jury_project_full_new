@@ -12,8 +12,13 @@ a {
     color: #3498db;
 }
 
-h1, h2, h3 {
+h1, h3 {
     color: #2c3e50;
+    margin: 0;
+}
+
+h2{
+    color: #ffffff;
     margin: 0;
 }
 
@@ -30,6 +35,11 @@ h1, h2, h3 {
     padding: 20px;
     color: white;
     min-height: 100vh;
+    display: flex; /* Use Flexbox layout */
+    flex-direction: column; /* Align items vertically */
+    align-items: center; /* Center items horizontally */
+  
+
 }
 
 .sidebar h2 {
