@@ -41,15 +41,13 @@
 					<li>
 						<!-- Liens de connexion/déconnexion -->
 						<div aria-labelledby="">
-						{% if app.user %}
-    {% if 'ROLE_ADMIN' in app.user.roles %}
-        <a href="{{ path('app_admin_user_index') }}">MON ESPACE</a>
-    {% elseif 'ROLE_USER' in app.user.roles %}
-        <a href="{{ path('app_admin_user_show', { 'id': app.user.id }) }}">MON ESPACE</a>
-    {% endif %}
-{% else %}
-    <a href="{{ path('app_login') }}">Login</a>
-{% endif %}
+							{% if app.user %}
+								<a href="{{ path('app_admin_user_show', { 'id': app.user.id }) }}">MON ESPACE</a>
+
+							{% else %}
+								<a href="{{ path('app_login') }}">ESPACE</a>
+							{% endif %}
+
 
 						</div>
 					</li>
@@ -84,93 +82,92 @@
 							</p>
 							<!-- Détails du cours -->
 							<ul class="list-unstyled">
-								
-									<strong>Format :</strong>
-									{{ course.courseFormat }}</li>
-								<li>
-									<strong>Prérequis :</strong>
-									{{ course.prerequisities }}</li>
-								
-							</ul>
-							<!-- Boutons d'action -->
-							<a href="{{ path('app_course_show', {'id': course.id}) }}" class="btn btn-primary">Afficher</a>
-							{% if is_granted('ROLE_ADMIN') %}
-								<a href="{{ path('app_course_edit', {'id': course.id}) }}" class="btn btn-secondary">Modifier</a>
-							{% endif %}
-						</div>
+
+								<strong>Format :</strong>
+								{{ course.courseFormat }}</li>
+							<li>
+								<strong>Prérequis :</strong>
+								{{ course.prerequisities }}</li>
+
+						</ul>
+						<!-- Boutons d'action -->
+						<a href="{{ path('app_course_show', {'id': course.id}) }}" class="btn btn-primary">Afficher</a>
+						{% if is_granted('ROLE_ADMIN') %}
+							<a href="{{ path('app_course_edit', {'id': course.id}) }}" class="btn btn-secondary">Modifier</a>
+						{% endif %}
 					</div>
 				</div>
-			{% else %}
-				<!-- Message lorsqu'aucun cours n'est trouvé -->
-				<div class="col-12">
-					<div class="alert alert-info">Aucun enregistrement trouvé</div>
-				</div>
-			{% endfor %}
-		</div>
-
-		<!-- Bouton pour créer un nouveau cours -->
-		<div class="text-center m-4">
-			{% if is_granted('ROLE_ADMIN') %}
-				<a href="{{ path('app_course_new') }}" class="btn btn-success mt-4">Créer un Nouveau</a>
-			{% endif %}
-		</div>
+			</div>
+		{% else %}
+			<!-- Message lorsqu'aucun cours n'est trouvé -->
+			<div class="col-12">
+				<div class="alert alert-info">Aucun enregistrement trouvé</div>
+			</div>
+		{% endfor %}
 	</div>
 
-	<!-- Footer -->
-	<footer class="footer">
-		<div class="footer-container">
-			<div
-				class="footer-row">
-				<!-- Colonnes du pied de page avec informations et liens -->
-				<div class="footer-col">
-					<h4>WeB DeV</h4>
-					<ul>
-						<li><a href="{{ path('app_home') }}">Home</a></li>
-						<li><a href="{{ path('app_blogs_index') }}">Notre Blog</a></li>
-						<li><a href="{{ path('app_contact') }}">Contactez-nous</a></li>
-						<li><a href="{{ path('app_apropos') }}">À propos de nous</a></li>
-						<li><a href="{{ path('app_privacy') }}">Politique de confidentialité</a></li>
-					</ul>
-				</div>
-				<div class="footer-col">
-					<h4>Obtenir de l'aide</h4>
-					<ul>
-						<li><a href="{{ path('app_faq') }}">FAQ</a></li>
-						<li><a href="{{ path('app_certification') }}">Certification</a></li>
-						<li><a href="{{ path('app_financements') }}">Financements</a></li>
-						<li><a href="{{ path('app_evenements') }}">Événements</a></li>
-						<li><a href="{{ path('app_modaliteacces') }}">Modalités d'accès</a></li>
-					</ul>
-				</div>
-				<div class="footer-col">
-					<h4>Adresse</h4>
-					<ul>
-						<li><a href="">7 Avenue du General Patton</a></li>
-						<li><a href="">77000</a></li>
-						<li><a href="">Melun</a></li>
-						<li><a href="">Tel: 07 83 65 08 80</a></li>
-					</ul>
-				</div>
-				<div class="footer-col">
-					<h4>Suivez-nous</h4>
-					<div class="social-links">
-						<a href="#">
-							<i class="fab fa-facebook-f"></i>
-						</a>
-						<a href="#">
-							<i class="fab fa-twitter"></i>
-						</a>
-						<a href="#">
-							<i class="fab fa-instagram"></i>
-						</a>
-						<a href="#">
-							<i class="fab fa-linkedin-in"></i>
-						</a>
-					</div>
-				</div>
+	<!-- Bouton pour créer un nouveau cours -->
+	<div class="text-center m-4">
+		{% if is_granted('ROLE_ADMIN') %}
+			<a href="{{ path('app_course_new') }}" class="btn btn-success mt-4">Créer un Nouveau</a>
+		{% endif %}
+	</div>
+</div>
 
-
+<!-- Footer -->
+<footer class="footer">
+	<div class="footer-container">
+		<div
+			class="footer-row">
+			<!-- Colonnes du pied de page avec informations et liens -->
+			<div class="footer-col">
+				<h4>WeB DeV</h4>
+				<ul>
+					<li><ahref="{{ path('app_home') }}">Home</a></li>
+					<li><ahref="{{ path('app_blogs_index') }}">Notre Blog</a></li>
+					<li><ahref="{{ path('app_contact') }}">Contactez-nous</a></li>
+					<li><ahref="{{ path('app_apropos') }}">À propos de nous</a></li>
+					<li><ahref="{{ path('app_privacy') }}">Politique de confidentialité</a></li>
+				</ul>
 			</div>
+			<div class="footer-col">
+				<h4>Obtenir de l'aide</h4>
+				<ul>
+					<li><ahref="{{ path('app_faq') }}">FAQ</a></li>
+					<li><ahref="{{ path('app_certification') }}">Certification</a></li>
+					<li><ahref="{{ path('app_financements') }}">Financements</a></li>
+					<li><ahref="{{ path('app_evenements') }}">Événements</a></li>
+					<li><ahref="{{ path('app_modaliteacces') }}">Modalités d'accès</a></li>
+				</ul>
+			</div>
+			<div class="footer-col">
+				<h4>Adresse</h4>
+				<ul>
+					<li><a href="">7 Avenue du General Patton</a></li>
+					<li><a href="">77000</a></li>
+					<li><a href="">Melun</a></li>
+					<li><a href="">Tel: 07 83 65 08 80</a></li>
+				</ul>
+			</div>
+			<div class="footer-col">
+				<h4>Suivez-nous</h4>
+				<div class="social-links">
+					<a href="#">
+						<i class="fab fa-facebook-f"></i>
+					</a>
+					<a href="#">
+						<i class="fab fa-twitter"></i>
+					</a>
+					<a href="#">
+						<i class="fab fa-instagram"></i>
+					</a>
+					<a href="#">
+						<i class="fab fa-linkedin-in"></i>
+					</a>
+				</div>
+			</div>
+
+
 		</div>
-	</footer>
-{% endblock %}
+	</div>
+</footer>{% endblock %}

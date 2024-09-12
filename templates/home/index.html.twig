@@ -18,6 +18,19 @@
 		.dev-danger {
 			color: rgba(255, 49, 49, 255)
 		}
+		@media (max-width: 768px) {
+		 .nav-links {
+        position: absolute;
+        background: #f44336;
+        height: 100vh;
+        width: 200px;
+        top: 0;
+        right: -200px;
+        text-align: left;
+        z-index: 2;
+        transition: 1s ease-in-out;
+    }
+	}
 	</style>
 {% endblock %}
 
