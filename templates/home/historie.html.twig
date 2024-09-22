@@ -110,6 +110,7 @@
 							<div class="card-body">
 								<h5 class="card-title">Lancement de la Plateforme en Ligne</h5>
 								<p class="card-text">En 2018, nous avons lancé notre plateforme d'apprentissage en ligne avec notre formateurs, rendant nos cours accessibles à un public mondial.</p>
+								<a href="{{ path('app_contact') }}" class="btn   d-flex justify-content-center text-black">Contactez-nous</a>
 							</div>
 						</div>
 					</div>
@@ -119,6 +120,8 @@
 							<div class="card-body">
 								<h5 class="card-title">Introduction des Certifications</h5>
 								<p class="card-text">Depuis 2015, nous proposons des certifications reconnues pour aider nos étudiants à se démarquer sur le marché du travail.</p>
+								<a href="{{ path('app_contact') }}" class="btn  d-flex justify-content-center text-black">Contactez-nous</a>
+
 							</div>
 						</div>
 					</div>
@@ -128,6 +131,8 @@
 							<div class="card-body">
 								<h5 class="card-title">Partenariats avec des Entreprises</h5>
 								<p class="card-text">Nous avons établi des partenariats avec des entreprises leaders pour offrir des opportunités de stage et d'emploi à nos étudiants.</p>
+								<a href="{{ path('app_contact') }}" class="btn   d-flex justify-content-center text-black">Contactez-nous</a>
+
 							</div>
 						</div>
 					</div>
@@ -167,7 +172,8 @@
 							<li><a href="">7 Avenue du General Patton</a></li>
 							<li><a href="">77000</a></li>
 							<li><a href="">Melun</a></li>
-							<li><a href="">Tel: 07 83 65 08 80</a></li>
+						    <li><a href="tel:+33783650880">Tel: 07 83 65 08 80</a></li>
+						    <li><a href="{{ path('app_contact') }}">Contact Us <i class="fa-regular fa-envelope"></i></a></li>
 						</ul>
 					</div>
 					<div class="footer-col">
@@ -192,6 +198,5 @@
 				</div>
 			</div>
 		</footer>
-    </body>
-	{% endblock %}
-
+	</body>
+{% endblock %}

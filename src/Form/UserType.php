@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 
 class UserType extends AbstractType
@@ -24,6 +25,12 @@ class UserType extends AbstractType
         
         // Ajouter le champ 'firstName' (prénom) de type texte
         ->add('firstName', TextType::class)
+
+        ->add('password', PasswordType::class, [
+            'label' => 'Password',
+            'mapped' => false, // Do not map directly to the entity to avoid accidental rehashing
+            'required' => true, // You can set this to false if you don't want it required in updates
+        ])
         
         // Ajouter le champ 'lastName' (nom de famille) de type texte
         ->add('lastName', TextType::class)

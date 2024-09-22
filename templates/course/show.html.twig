@@ -44,7 +44,7 @@
 							<!-- Liens de connexion/déconnexion -->
 							<div aria-labelledby="">
 								{% if app.user %}
-									<a href="{{ path('app_logout') }}">DÉCONNEXION</a>
+									<a href="{{ path('app_admin_user_show', { 'id': app.user.id }) }}">MON ESPACE</a>
 								{% else %}
 									<a href="{{ path('app_login') }}">ESPACE</a>
 								{% endif %}
@@ -140,7 +140,8 @@
 							<li><a href="">7 Avenue du General Patton</a></li>
 							<li><a href="">77000</a></li>
 							<li><a href="">Melun</a></li>
-							<li><a href="">Tel: 07 83 65 08 80</a></li>
+						    <li><a href="tel:+33783650880">Tel: 07 83 65 08 80</a></li>
+						    <li><a href="{{ path('app_contact') }}">Contact Us <i class="fa-regular fa-envelope"></i></a></li>
 						</ul>
 					</div>
 					<div class="footer-col">

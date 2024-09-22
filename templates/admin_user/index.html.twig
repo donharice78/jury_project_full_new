@@ -48,7 +48,7 @@
         <a href="{{ path('app_admin_user_show', { 'id': app.user.id }) }}">MON ESPACE</a>
     {% endif %}
 {% else %}
-    <a href="{{ path('app_login') }}">Login</a>
+    <a href="{{ path('app_login') }}">LOGIN</a>
 {% endif %}
 
 							</div>
@@ -100,15 +100,7 @@
 				{% endfor %}
 			</tbody>
 		</table>
-		<div
-			class="container mt-4">
-			<!-- Centering the button using Bootstrap's grid system -->
-			<div class="row">
-				<div class="col-12 d-flex justify-content-center mb-5">
-					<a href="{{ path('app_admin_user_new') }}" class="btn btn-primary">Create New</a>
-				</div>
-			</div>
-		</div>
+	
 	</body>
 </div>
 
@@ -145,7 +137,8 @@
 					<li><a href="">7 Avenue du General Patton</a></li>
 					<li><a href="">77000</a></li>
 					<li><a href="">Melun</a></li>
-					<li><a href="">Tel: 07 83 65 08 80</a></li>
+					<li><a href="tel:+33783650880">Tel: 07 83 65 08 80</a></li>
+					<li><a href="{{ path('app_contact') }}">Contact Us <i class="fa-regular fa-envelope"></i></a></li>
 				</ul>
 			</div>
 			<div class="footer-col">
