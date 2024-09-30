@@ -88,9 +88,12 @@
 						<td>{{ user.phone }}</td>
 						<td>{{ user.roles ? user.roles|join(', ') : '' }}</td>
 						<td>
-							<a href="{{ path('app_admin_user_show', {'id': user.id}) }}" class="btn btn-info btn-sm">Show</a>
+							<a href="{{ path('app_admin_user_show', {'lastName': user.lastName}) }}" class="btn btn-info btn-sm">Show</a>
 							<a href="{{ path('app_admin_user_edit', {'id': user.id}) }}" class="btn btn-warning btn-sm">Edit</a>
-							<a href="{{ path('app_admin_user_delete', {'id': user.id}) }}" class="btn btn-danger btn-sm">Delete</a>
+                            <form method="post" action="{{ path('app_admin_user_delete', {'id': user.id}) }}" onsubmit="return confirm('Are you sure you want to delete {{ user.lastName }} {{ user.firstName }}?');" style="display:inline;">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                                <button class="btn btn-danger btn-sm">Delete</button>
+                            </form>
 						</td>
 					</tr>
 				{% else %}

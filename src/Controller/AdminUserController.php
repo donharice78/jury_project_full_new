@@ -51,8 +51,8 @@ class AdminUserController extends AbstractController
     $totalCourses = count($courseRepository->findAll());
 
     return $this->render('admin_user/admin_dashboard.html.twig', [
-        'total_users' => $totalNonAdminUsers,
-        'users' => $nonAdminUsers, // or all users if you want
+        'total_etudiants' => $totalNonAdminUsers,
+        
         'total_admin' => $totalAdminUsers,
         'total_courses' => $totalCourses,
         'courses' => $courses,
@@ -188,15 +188,7 @@ class AdminUserController extends AbstractController
      * @param User $user L'utilisateur à afficher.
      * @return Response La réponse HTTP contenant la vue.
      */
-    #[Route('/user/{id}', name: 'app_admin_user_show', methods: ['GET'])]
-    public function show(User $user): Response
-    {
-        
-        // Affichage des détails de l'utilisateur dans la vue 'admin_user/show.html.twig'
-        return $this->render('admin_user/student_dashboard.html.twig', [
-            'user' => $user,
-        ]);
-    }
+
 
     /**
      * Modifie les informations d'un utilisateur existant.

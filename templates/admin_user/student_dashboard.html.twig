@@ -46,7 +46,7 @@
 									{% if 'ROLE_ADMIN' in app.user.roles %}
 										<a href="{{ path('app_admin_user_index') }}">MON ESPACE</a>
 									{% elseif 'ROLE_USER' in app.user.roles %}
-										<a href="{{ path('app_admin_user_show', { 'id': app.user.id }) }}">MON ESPACE</a>
+										<a href="{{ path('app_admin_user_show', { 'lastName': app.user.lastName }) }}">MON ESPACE</a>
 									{% endif %}
 								{% else %}
 									<a href="{{ path('app_login') }}">LOGIN</a>
@@ -67,7 +67,7 @@
 					<ul>
 						<li><a href="#">Dashboard</a></li>
 						<li><a href="#">My Courses</a></li>
-						<li><a href="{{ path('app_admin_user_show', { 'id': user.id }) }}">Profile</a></li>
+						<li><a href="{{ path('app_admin_user_show', { 'lastName': user.lastName }) }}">Profile</a></li>
 						<li><a href="{{ path('app_logout') }}">Logout</a></li>
 					</ul>
 				</nav>
