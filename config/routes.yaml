@@ -13,8 +13,6 @@ student_dashboard:
     methods: [GET]
 
 user_show:
-    path: /user/{id}
+    path: /user/
     controller: App\Controller\UserController::show
     methods: GET
-    requirements:
-        id: \d+

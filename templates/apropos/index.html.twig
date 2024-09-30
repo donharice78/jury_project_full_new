@@ -40,11 +40,16 @@
 
 						<li class="">
 
-							<div class="" aria-labelledby="">
+							<div aria-labelledby="">
 								{% if app.user %}
-									<a href="{{ path('app_admin_user_show', { 'id': app.user.id }) }}">MON ESPACE</a>
+									{% if 'ROLE_ADMIN' in app.user.roles %}
+										<a href="{{ path('app_admin_user_index') }}">ESPACE ADMIN
+										</a>
+									{% elseif 'ROLE_USER' in app.user.roles %}
+										<a href="{{ path('app_admin_user_show', { 'id': app.user.id }) }}">ESPACE ETUDIANT</a>
+									{% endif %}
 								{% else %}
-									<a class="" href="{{ path('app_login') }}">ESPACE</a>
+									<a href="{{ path('app_login') }}">LOGIN</a>
 								{% endif %}
 							</div>
 						</li>
@@ -136,21 +141,21 @@
 					<div class="footer-col">
 						<h4>WeB DeV</h4>
 						<ul>
-							<li><a href="{{ path('app_home') }}">Home</a></li>
-							<li><a href="{{ path('app_blogs_index') }}">Notre Blog</a></li>
-							<li><a href="{{ path('app_contact') }}">Contactez-nous</a></li>
-							<li><a href="{{ path('app_apropos') }}">À propos de nous</a></li>
-							<li><a href="{{ path('app_privacy') }}">Politique de confidentialité</a></li>
+							<li><ahref="{{ path('app_home') }}">Home</a></li>
+							<li><ahref="{{ path('app_blogs_index') }}">Notre Blog</a></li>
+							<li><ahref="{{ path('app_contact') }}">Contactez-nous</a></li>
+							<li><ahref="{{ path('app_apropos') }}">À propos de nous</a></li>
+							<li><ahref="{{ path('app_privacy') }}">Politique de confidentialité</a></li>
 						</ul>
 					</div>
 					<div class="footer-col">
 						<h4>Obtenir de l'aide</h4>
 						<ul>
-							<li><a href="{{ path('app_faq') }}">FAQ</a></li>
-							<li><a href="{{ path('app_certification') }}">Certification</a></li>
-							<li><a href="{{ path('app_financements') }}">Financements</a></li>
-							<li><a href="{{ path('app_evenements') }}">Événements</a></li>
-							<li><a href="{{ path('app_modaliteacces') }}">Modalités d'accès</a></li>
+							<li><ahref="{{ path('app_faq') }}">FAQ</a></li>
+							<li><ahref="{{ path('app_certification') }}">Certification</a></li>
+							<li><ahref="{{ path('app_financements') }}">Financements</a></li>
+							<li><ahref="{{ path('app_evenements') }}">Événements</a></li>
+							<li><ahref="{{ path('app_modaliteacces') }}">Modalités d'accès</a></li>
 						</ul>
 					</div>
 					<div class="footer-col">
@@ -160,7 +165,7 @@
 							<li><a href="">77000</a></li>
 							<li><a href="">Melun</a></li>
 							<li><a href="tel:+33783650880">Tel: 07 83 65 08 80</a></li>
-						    <li><a href="{{ path('app_contact') }}">Contact Us <i class="fa-regular fa-envelope"></i></a></li>
+							<li><ahref="{{ path('app_contact') }}">Contact Us<i class="fa-regular fa-envelope"></i></a></li>
 						</ul>
 					</div>
 					<div class="footer-col">
