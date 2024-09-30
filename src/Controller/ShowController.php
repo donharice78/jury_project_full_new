@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 #[Route('/')]
 
-class show extends AbstractController
+class ShowController extends AbstractController
 {
     #[Route('/{lastName}', name: 'app_admin_user_show', methods: ['GET'])]
     public function show(string $lastName, EntityManagerInterface $entityManager): Response
