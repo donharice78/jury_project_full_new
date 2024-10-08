@@ -28,7 +28,7 @@ class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
 
         // Redirect based on user role
         if (in_array('ROLE_ADMIN', $roles)) {
-            return new RedirectResponse($this->router->generate('app_admin_user_index'));
+            return new RedirectResponse($this->router->generate('app_admin_dashboard'));
         } elseif (in_array('ROLE_USER', $roles)) {
             return new RedirectResponse($this->router->generate('app_admin_user_show', ['username' => $user->getUsername()]));
         }

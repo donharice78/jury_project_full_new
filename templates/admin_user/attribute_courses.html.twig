@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Attribute Courses to User</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.user) }}
+        {{ form_row(form.courses) }}
+        <button class="btn btn-primary">Submit</button>
+    {{ form_end(form) }}
+{% endblock %}

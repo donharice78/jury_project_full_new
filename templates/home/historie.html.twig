@@ -51,13 +51,17 @@
 							<a href="{{ path('app_contact') }}">CONTACT</a>
 						</li>
 						<li>
-							<!-- Liens de connexion/déconnexion -->
+								<!-- Liens de connexion/déconnexion -->
 							<div aria-labelledby="">
 								{% if app.user %}
-									<a href="{{ path('app_admin_user_show', { 'id': app.user.id }) }}">MON ESPACE</a>
-
+									{% if 'ROLE_ADMIN' in app.user.roles %}
+										<a href="{{ path('app_admin_dashboard') }}">ESPACE ADMIN
+										</a>
+									{% elseif 'ROLE_USER' in app.user.roles %}
+										<a href="{{ path('app_admin_user_show', { 'username': app.user.username }) }}">ESPACE ETUDIANT</a>
+									{% endif %}
 								{% else %}
-									<a href="{{ path('app_login') }}">ESPACE</a>
+									<a href="{{ path('app_login') }}">CONNEXION</a>
 								{% endif %}
 							</div>
 						</li>

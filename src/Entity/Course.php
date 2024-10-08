@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CourseRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -36,7 +38,18 @@ class Course
     private ?int $course_fee = null; // Frais du cours
 
     #[ORM\Column(length: 255)]
-    private ?string $image = null; // Nom du fichier image associé au cours
+    private ?string $image = null;
+
+    /**
+     * @var Collection<int, User>
+     */
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'courses')]
+    private Collection $users;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    } // Nom du fichier image associé au cours
 
     public function getId(): ?int
     {
@@ -129,6 +142,33 @@ class Course
     {
         $this->image = $image; // Définit le nom du fichier image associé au cours
         return $this; // Retourne l'instance actuelle pour la chaîne de méthodes
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): static
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addCourse($this); // Make sure to keep it bidirectional
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): static
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeCourse($this);
+        }
+
+        return $this;
     }
 }
 

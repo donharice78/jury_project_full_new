@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Course;
 use App\Form\UserType;
+use App\Form\AttributeCourseType;
 use App\Repository\UserRepository;
 use App\Repository\CourseRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -158,4 +159,51 @@ class AdminUserController extends AbstractController
 
         return $this->redirectToRoute('app_admin_user_index');
     }
+
+
+    #[Route('/attribute-courses/{id}', name: 'admin_attribute_courses')]
+    public function attributeCourses(int $id, Request $request, EntityManagerInterface $entityManager): Response
+    {
+        // Fetch the user by ID
+        $user = $entityManager->getRepository(User::class)->find($id);
+    
+        if (!$user) {
+            throw $this->createNotFoundException('User not found');
+        }
+    
+        // Create form (the form does not need the user passed as an option)
+        $form = $this->createForm(AttributeCourseType::class);
+    
+        $form->handleRequest($request);
+    
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Get selected courses from the form
+            $courses = $form->get('courses')->getData();
+    
+            // Attribute courses to the user
+            foreach ($courses as $course) {
+                $user->addCourse($course); // Make sure addCourse() method works correctly
+            }
+    
+            // Persist and flush the user with their updated courses
+            try {
+                $entityManager->persist($user);
+                $entityManager->flush();
+            } catch (\Exception $e) {
+                dump($e->getMessage()); // Display any errors that occur during flush
+                exit;
+            }
+    
+            // Add flash message and redirect to admin dashboard after success
+            $this->addFlash('success', 'Courses successfully attributed to the user!');
+            return $this->redirectToRoute('app_admin_dashboard');
+        }
+    
+        return $this->render('admin_user/attribute_courses.html.twig', [
+            'form' => $form->createView(),
+            'user' => $user, // Pass the user to the template for context
+        ]);
+    }
+    
+
 }

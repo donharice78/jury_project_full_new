@@ -42,15 +42,15 @@
 							<!-- Liens de connexion/déconnexion -->
 							<div aria-labelledby="">
 								{% if app.user %}
-    {% if 'ROLE_ADMIN' in app.user.roles %}
-        <a href="{{ path('app_admin_dashboard') }}">MON ESPACE</a>
-    {% elseif 'ROLE_USER' in app.user.roles %}
-        <a href="{{ path('app_admin_user_show', { 'username': app.user.username }) }}">MON ESPACE</a>
-    {% endif %}
-{% else %}
-    <a href="{{ path('app_login') }}">LOGIN</a>
-{% endif %}
-
+									{% if 'ROLE_ADMIN' in app.user.roles %}
+										<a href="{{ path('app_admin_dashboard') }}">ESPACE ADMIN
+										</a>
+									{% elseif 'ROLE_USER' in app.user.roles %}
+										<a href="{{ path('app_admin_user_show', { 'username': app.user.username }) }}">ESPACE ETUDIANT</a>
+									{% endif %}
+								{% else %}
+									<a href="{{ path('app_login') }}">CONNEXION</a>
+								{% endif %}
 							</div>
 						</li>
 					</ul>
@@ -71,6 +71,8 @@
 					<th scope="col">Last Name</th>
 					<th scope="col">Phone</th>
 					<th scope="col">Roles</th>
+					<th scope="col">Courses Attributed</th> 
+
 					<th scope="col">Actions</th>
 				</tr>
 			</thead>
@@ -87,9 +89,18 @@
 						<td>{{ user.lastName }}</td>
 						<td>{{ user.phone }}</td>
 						<td>{{ user.roles ? user.roles|join(', ') : '' }}</td>
+						 <td>
+                            {% if app.user.courses is not empty %}
+                                <ul>
+                                    {% for course in user.courses %}
+                                        <li>{{ course.title }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                No courses attributed
+                            {% endif %}
+                        </td>
 						<td>
-							<a href="{{ path('app_admin_user_show', {'username': user.username}) }}" class="btn btn-info btn-sm">Show</a>
-							<a href="{{ path('app_admin_user_edit', {'id': user.id}) }}" class="btn btn-warning btn-sm">Edit</a>
                             <form method="post" action="{{ path('app_admin_user_delete', {'id': user.id}) }}" onsubmit="return confirm('Are you sure you want to delete {{ user.lastName }} {{ user.firstName }}?');" style="display:inline;">
                                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
                                 <button class="btn btn-danger btn-sm">Delete</button>

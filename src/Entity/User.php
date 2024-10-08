@@ -62,11 +62,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var Collection<int, Comment>
      */
     #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'name')]
-    private Collection $comments; // Commentaires associés à l'utilisateur
+    private Collection $comments;
+
+    /**
+     * @var Collection<int, Course>
+     */
+    #[ORM\ManyToMany(targetEntity: Course::class, inversedBy: 'users')]
+    private Collection $courses; // Commentaires associés à l'utilisateur
 
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->courses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -223,6 +230,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $comment->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Course>
+     */
+    
+
+    public function addCourse(Course $course): static
+    {
+        if (!$this->courses->contains($course)) {
+            $this->courses[] = $course;
+            $course->addUser($this); // Only if you have a bidirectional relation
+        }
+
+        return $this;
+    }
+
+    public function getCourses(): Collection
+    {
+        return $this->courses;
+    }
+
+    public function removeCourse(Course $course): static
+    {
+        $this->courses->removeElement($course);
 
         return $this;
     }
