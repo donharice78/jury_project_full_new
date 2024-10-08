@@ -18,22 +18,17 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 class ShowController extends AbstractController
 {
-    #[Route('/{lastName}', name: 'app_admin_user_show', methods: ['GET'])]
-    public function show(string $lastName, EntityManagerInterface $entityManager): Response
+ 
+    #[Route('/{username}', name: 'app_admin_user_show')]
+    public function show(User $user)
     {
-        // Fetch the user based on the username from the database
-        $user = $entityManager->getRepository(User::class)->findOneBy(['lastName' => $lastName]);
+      
 
-        // If no user is found, throw a 404 exception
-        if (!$user) {
-            throw $this->createNotFoundException('User not found.');
-        }
 
-        // Render the view with the fetched user
         return $this->render('admin_user/student_dashboard.html.twig', [
             'user' => $user,
+            
         ]);
     }
-
 
 }

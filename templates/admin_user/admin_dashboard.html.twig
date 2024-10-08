@@ -44,7 +44,7 @@
 							<div aria-labelledby="">
 								{% if app.user %}
 									{% if 'ROLE_ADMIN' in app.user.roles %}
-										<a href="{{ path('app_admin_user_index') }}">ESPACE ADMIN
+										<a href="{{ path('app_admin_dashboard') }}">ESPACE ADMIN
 										</a>
 									{% elseif 'ROLE_USER' in app.user.roles %}
 										<a href="{{ path('app_admin_user_show', { 'id': app.user.id }) }}">ESPACE ETUDIANT</a>
@@ -66,7 +66,7 @@
 				<h2>Admin Panel</h2>
 				<nav>
 					<ul>
-						<li><a href="{{ path('app_admin_user_index') }}">Dashboard</a></li>
+						<li><a href="{{ path('app_admin_dashboard') }}">Dashboard</a></li>
 
 						<li><a href="{{ path('app_course_index') }}">Manage Courses</a></li>
 						<li><a href="{{ path('app_non_admin_user_index') }}">Manage Students</a></li>
@@ -97,7 +97,7 @@
 
 						<h3>Total Admin</h3>
 						<p>{{ total_admin }}</p>
-						<a href="{{ path('app_admin_user_all') }}">view all</a>
+						<a href="{{ path('app_all_admin_user_index') }}">view all</a>
 
 					</div>
 					<div class="card">

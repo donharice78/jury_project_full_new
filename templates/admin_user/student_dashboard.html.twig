@@ -44,9 +44,9 @@
 							<div aria-labelledby="">
 								{% if app.user %}
 									{% if 'ROLE_ADMIN' in app.user.roles %}
-										<a href="{{ path('app_admin_user_index') }}">MON ESPACE</a>
+										<a href="{{ path('app_admin_dashboard') }}">MON ESPACE</a>
 									{% elseif 'ROLE_USER' in app.user.roles %}
-										<a href="{{ path('app_admin_user_show', { 'lastName': app.user.lastName }) }}">MON ESPACE</a>
+										<a href="{{ path('app_admin_user_show', { 'username': app.user.username }) }}">MON ESPACE</a>
 									{% endif %}
 								{% else %}
 									<a href="{{ path('app_login') }}">LOGIN</a>
@@ -67,7 +67,6 @@
 					<ul>
 						<li><a href="#">Dashboard</a></li>
 						<li><a href="#">My Courses</a></li>
-						<li><a href="{{ path('app_admin_user_show', { 'lastName': user.lastName }) }}">Profile</a></li>
 						<li><a href="{{ path('app_logout') }}">Logout</a></li>
 					</ul>
 				</nav>
@@ -75,8 +74,8 @@
 			<main class="main-content">
 				<header>
 					<div class="card-header">
-						<img src="{{ user.photo }}" alt="{{ user.username }}" class="img-fluid rounded-circle" style="height: 150px; width: 150px; object-fit: cover; border: 1px solid #ddd;">
-						<h1>{{ user.lastName ~ ' ' ~ user.firstName }}</h1>
+						<img src="{{ app.user.photo }}" alt="{{ app.user.username }}" class="img-fluid rounded-circle" style="height: 150px; width: 150px; object-fit: cover; border: 1px solid #ddd;">
+						<h1>{{ app.user.lastName ~ ' ' ~ app.user.firstName }}</h1>
 					</div>
 					<p>Track your progress and continue learning.</p>
 				</header>
@@ -96,29 +95,26 @@
 
 					<table class="table table-borderless">
 						<tbody>
-							<tr>
-								<th>Id</th>
-								<td>{{ user.id }}</td>
-							</tr>
+							
 							<tr>
 								<th>Email</th>
-								<td>{{ user.email }}</td>
+								<td>{{ app.user.email }}</td>
 							</tr>
 							<tr>
 								<th>Username</th>
-								<td>{{ user.username }}</td>
+								<td>{{ app.user.username }}</td>
 							</tr>
 							<tr>
 								<th>First Name</th>
-								<td>{{ user.firstName }}</td>
+								<td>{{ app.user.firstName }}</td>
 							</tr>
 							<tr>
 								<th>Last Name</th>
-								<td>{{ user.lastName }}</td>
+								<td>{{ app.user.lastName }}</td>
 							</tr>
 							<tr>
 								<th>Phone</th>
-								<td>{{ user.phone }}</td>
+								<td>{{ app.user.phone }}</td>
 							</tr>
 
 						</tbody>

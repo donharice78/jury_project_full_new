@@ -29,11 +29,11 @@ security:
 
     access_control:
         # Define access control rules
-        - { path: ^/admin/main, roles: ROLE_ADMIN }
-        - { path: ^/admin/user, roles: ROLE_USER }
+        - { path: ^/main, roles: ROLE_ADMIN }
+        - { path: ^/user, roles: ROLE_USER }
         - { path: ^/comment, roles: ROLE_ADMIN }
         - { path: ^/course/new, roles: ROLE_ADMIN }
         - { path: ^/course/edit, roles: ROLE_ADMIN }
         - { path: ^/blogs/new, roles: ROLE_ADMIN }
         - { path: ^/blogs/edit, roles: ROLE_ADMIN }
-        - { path: ^/profile, roles: ROLE_USER } # Uncomment if needed
+

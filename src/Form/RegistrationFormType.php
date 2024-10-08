@@ -96,14 +96,7 @@ class RegistrationFormType extends AbstractType
             ])
 
             // Ajouter le champ 'roles' (rôles) avec choix multiples
-            ->add('roles', ChoiceType::class, [
-                'choices' => [
-                    'Étudiant' => 'ROLE_USER',  // Option pour le rôle étudiant
-                    'Administrateur' => 'ROLE_ADMIN', // Option pour le rôle administrateur
-                ],
-                'expanded' => true,  // Affiche les choix sous forme de cases à cocher
-                'multiple' => true,  // Permet la sélection de plusieurs rôles
-            ])
+      
 
             // Ajouter le champ 'terms' (conditions) de type case à cocher
             ->add('terms', CheckboxType::class, [
