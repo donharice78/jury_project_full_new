@@ -1,0 +1,143 @@
+/* ===========================================
+   En-tête des sections de cours (Header)
+   =========================================== */
+   .courses-header {
+    min-height: 50vh;
+    width: 100%;
+    background-image: linear-gradient(rgba(4, 9, 3, 0.418), rgba(4, 9, 3, 0.418)), url(../img/Lyon.jpg);
+    background-position: center;
+    background-size: cover;
+  }
+  
+  /* ===========================================
+     Images générales (Styles globaux pour les images)
+     =========================================== */
+  img {
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
+  }
+  
+  /* ===========================================
+     Boutons (Bouton standard)
+     =========================================== */
+  .btn {
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 1rem;
+    color: black;
+    padding: 0.5rem;
+    text-transform: lowercase;
+  }
+  
+  /* Bouton pleine largeur */
+  .btn--block {
+    display: block;
+    width: 100%;
+  }
+  
+  /* ===========================================
+     Liste des cartes (Structure des cartes)
+     =========================================== */
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* ===========================================
+     Cartes (Style de base pour chaque carte)
+     =========================================== */
+  .card {
+    flex-basis: 31%;
+    background-color: rgba(58, 116, 179, 0.5); /* Couleur de fond avec transparence */
+    border-radius: 10px;
+    margin-bottom: 5%;
+    padding: 20px 12px;
+    box-sizing: border-box;
+    transition: 0.5s;
+    box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25); /* Ombre des cartes */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  
+  /* Effet au survol sur les cartes */
+  .card:hover {
+    box-shadow: 0 0 20px 0px rgba(58, 116, 179, 0.8); /* Accentuation de l'ombre au survol */
+  }
+  
+  /* ===========================================
+     Contenu des cartes (Texte et structure interne)
+     =========================================== */
+  .card__content {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    padding: 1rem;
+  }
+  
+  /* Titre des cartes */
+  .card__title {
+    color: darkgray;
+    font-size: 1.25rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  
+  /* Texte de description des cartes */
+  .card__text {
+    flex: 1 1 auto;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+  }
+  
+  /* ===========================================
+     Images dans les cartes (Aspect et positionnement)
+     =========================================== */
+  .card_image {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
+    filter: contrast(70%) saturate(80%);
+    overflow: hidden;
+    position: relative;
+    transition: filter 0.5s cubic-bezier(.43, .41, .22, .91);
+  }
+  
+  /* Aspect ratio pour les images dans les cartes */
+  @media (min-width: 40rem) {
+    .card_image::before {
+      padding-top: 66.6%; /* Ratio 3:2 */
+    }
+  }
+  
+  /* ===========================================
+     Élément de la liste de cartes (Card items)
+     =========================================== */
+  .cards__item {
+    display: flex;
+    padding: 1rem;
+  }
+  
+  /* Répartition des cartes selon la largeur de l'écran */
+  @media (min-width: 40rem) {
+    .cards__item {
+      width: 50%; /* La carte occupe 50% de la largeur sur écrans moyens */
+    }
+  }
+  
+  @media (min-width: 56rem) {
+    .cards__item {
+      width: 33.3333%; /* La carte occupe 33% de la largeur sur grands écrans */
+    }
+  }
+  
+
+  

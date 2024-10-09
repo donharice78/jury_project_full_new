@@ -1,0 +1,116 @@
+/* Conteneur principal du pied de page : définit une largeur maximale et un centrage */
+.footer-container {
+    max-width: 1170px;
+    margin: auto;
+}
+
+/* Organisation des colonnes du pied de page : utilisation de flexbox pour une disposition flexible */
+.footer-row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Liste des éléments dans le pied de page : suppression des puces */
+.footer ul {
+    list-style: none;
+}
+
+/* Style général du pied de page : ajout d'une couleur de fond et du padding */
+.footer {
+    background-color: rgba(69, 91, 110, 255);
+    padding: 70px 0;
+}
+
+/* Colonnes du pied de page : chaque colonne occupe 25% de la largeur */
+.footer-col {
+    width: 25%;
+}
+
+/* Titres des colonnes du pied de page : style et positionnement du titre */
+.footer-col h4 {
+    font-size: 18px;
+    color: #ffffff;
+    text-transform: capitalize;
+    margin-bottom: 35px;
+    font-weight: 500;
+    position: relative;
+}
+
+/* Ligne sous le titre de chaque colonne : effet de soulignement */
+.footer-col h4::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    background-color: #f44336;
+    height: 2px;
+    box-sizing: border-box;
+    width: 50px;
+}
+
+/* Espacement entre les éléments de la liste dans chaque colonne */
+.footer-col ul li:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+/* Liens dans les colonnes du pied de page : style des liens avec effet au survol */
+.footer-col ul li a {
+    font-size: 16px;
+    text-transform: capitalize;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 300;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.footer-col ul li a:hover {
+    color: #ffffff;
+    padding-left: 8px;
+}
+
+/* Liens des réseaux sociaux : style des icônes avec effet au survol */
+.footer-col .social-links a {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 0 10px 10px 0;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    color: #ffffff;
+    transition: all 0.5s ease;
+}
+
+.footer-col .social-links a:hover {
+    color: #24262b;
+    background-color: #f44336;
+}
+
+/* Responsivité : ajustement des colonnes pour les écrans moyens (tablettes) */
+@media (max-width: 767px) {
+    .footer-col {
+        width: 50%;
+        margin-bottom: 30px;
+    }
+}
+
+/* Responsivité : ajustement des colonnes pour les petits écrans (smartphones) */
+@media (max-width: 574px) {
+    .footer-col {
+        width: 100%;
+    }
+
+    /* Adaptation des liens pour les très petits écrans (smartphones en mode portrait) */
+    .footer-col ul li a {
+        font-size: 12px;
+    }
+}
+
+/* Réajustement des colonnes à 25% sur les très petits écrans (en ajoutant une meilleure gestion de l'espace) */
+@media (max-width: 574px) {
+    .footer-col {
+        width: 25%;
+    }
+}
